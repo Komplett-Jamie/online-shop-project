@@ -6,7 +6,7 @@ function validatePassword(){
     if(password.value.length < 8) {
         confirm_password.setCustomValidity("Passowrd must be 8 characters or more!")
     }
-     else if(password.value != confirm_password.value) {
+    else if(password.value != confirm_password.value) {
         confirm_password.setCustomValidity("Passwords Don't Match");
     } else {
         confirm_password.setCustomValidity('');

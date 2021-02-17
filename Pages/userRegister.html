@@ -86,7 +86,7 @@ async function handleAndSendDataRegisterUser(event) {
     else if (apiFetch.status === 200)    {
         document.getElementById("error_handling").innerText = "Thank you for registering, you will be redirected soon!";
         setTimeout(function(){window.location.assign("./mainPage.html")}, 3000);
-        localStorage.setItem("userLoggedIn",await apiFetch.json(Response));
+        sessionStorage.setItem("userLoggedIn",await apiFetch.json(Response));
     }
 }
 
