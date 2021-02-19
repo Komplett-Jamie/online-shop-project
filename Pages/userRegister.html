@@ -48,7 +48,7 @@
 
 async function handleAndSendDataRegisterUser(event) {
 
-    const registerUserApi =  "http://jamiestore.herokuapp.com/User/Register";
+    const registerUserUrl =  "http://jamiestore.herokuapp.com/User/Register";
 
     let emailInput = document.getElementById("email").value;
     let nameInput = document.getElementById("name").value;
@@ -75,10 +75,7 @@ async function handleAndSendDataRegisterUser(event) {
         body: convertFormDataToJson,
     };
 
-    let apiFetch = await fetch(registerUserApi, registerUserDetails)    
-    console.log(apiFetch.status);
-
-
+    let apiFetch = await fetch(registerUserUrl, registerUserDetails)    
 
     if (apiFetch.status === 400)   {
         return document.getElementById("error_handling").innerText = "This Email adress is already registered."
@@ -91,6 +88,5 @@ async function handleAndSendDataRegisterUser(event) {
 }
 
 </script>
-
 </body>
-</html>123456789
+</html>

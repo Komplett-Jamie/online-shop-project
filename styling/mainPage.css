@@ -1,0 +1,119 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+/* .user-icon-dropdown-btn {
+    background-color: gray;
+    color: white;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.user-icon-dropdown-btn-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 10px 20px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.user-icon-dropdown-btn-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.user-icon-dropdown-btn-content a:hover {background-color: #ddd;}
+
+.show {display: block;} */
+
+#header-wrapper {
+    display: flex;
+    top: 0px;
+    min-height: 100px;
+    flex-direction: row;
+    flex-grow:1;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    z-index: 100;
+    border-bottom: 1px solid red;
+}
+
+#search_input {
+    width:600px;
+    height:35px;
+    border: 1px solid red;
+    padding:10px;
+}
+
+#user_controls {
+    margin:10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#icon-container {
+    padding-left:15px;
+    line-height:40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+#user_icon {
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    background: lightgray;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+}
+
+#small_cart {
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    background: lightgray;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+}
+
+#lower-header-container {
+    position:relative;
+    flex-direction: row;
+    border-bottom:1px solid red;
+    padding:10px;
+}
+
+#lower-header-container ul {
+    display:flex;
+    list-style:none;
+    padding:10px;
+    width:100%;
+    justify-content:space-evenly;
+}
+
+.category-list-btn {
+    text-decoration: none;
+    display: flex;
+    border: none;
+    font-size: 18px;
+    user-select: none;
+    align-items: center;
+    cursor: pointer;
+    height: 0px;
+}
