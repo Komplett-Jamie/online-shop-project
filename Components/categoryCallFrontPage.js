@@ -8,44 +8,47 @@ async function getCategoriesFromApi() {
         }
     }
 
-    let apiFetch = await fetch(CategoriesUrl, curlDetails)
-
+    let apiFetch = await fetch(CategoriesUrl, curlDetails);
     var arr = await apiFetch.json();
-// var cont = document.getElementById('lower-header-container');
-// var ul = document.createElement('li');
 
-// for (i = 0; i <= arr.length - 1; i++) {
-//     var li = document.createElement('li'); 
-//     li.innerHTML = arr[i];   
-//     ul.appendChild(li);    
-// }
-// cont.appendChild(ul);
-// var arrayContainer = document.getElementById('category_list');
-// var list = document.createElement('li');
+    const mainCategories = arr.filter(category => category.parentId === null);
 
-// for (i = 0; i < arr.length; i++)    {
-//     if (arr[i].parentId === null)   {
-//         return (arrayContainer.innerHTML += );
-//     }
-// };
+        for (i = 0; i < mainCategories.length; i++) {
+        document.getElementById("category_list").innerHTML += `<li id="first_level_category_list"><button>${mainCategories[i].name}</button></li>`
+        };
 
+        //subcatergories
 
+        // var newArray = [];
 
-//         document.getElementById("lower-header-container").innerHTML += "Id: " + arr[i].id + " Name: "+ arr[i].name + " ParentId: " + arr[i].parentId + "<br>";
+        // for (j = 0; j < arr.length; j++ )   {
+        //     var id = arr[j].id;
+        //     var parentId = arr[j].parentid;
+            
+        //     if (id === parentId)    {
+        //         newArray.push(arr);
+        //     }
+        // }
+        // console.log(newArray);
 
+        var map = {};
+        var node = {};
+        var roots = [];
+ 
+        for (j = 0; j < arr.length; j += 1) {
+            map[arr[j].id] = j;
+            arr[j].children = [];
+        }
 
-//     }
-
-
-const mainCategories = arr.filter(category => category.parentId === null);
-for (i = 0; i < mainCategories.length; i++) {
-    document.getElementById("category_list").innerHTML += `<li>${mainCategories[i].name}</li>`
-}
-
-// document.getElementById("category_list").innerHTML = mainCategories.map(mainCategorie =>
-    
-//     `<li>${mainCategorie.name}</li>`
-// )
+        for (j = 0; j < arr.length; j += 1) {
+            node = arr[j];
+            if (node.parentId !== null) {
+            arr[map[node.parentId]].children.push(node);
+            } else {
+                roots.push(node);
+            }
+        }
+        console.log(node);
 
 
 }
