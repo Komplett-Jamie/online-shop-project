@@ -5,11 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./../styling/registerUser.css">
+    <link rel="stylesheet" href="./../styling/register-login-logout.css">
+    <link rel="stylesheet" href="./../styling/mainPage.css">
 </head>
 <body>
+    <header>
+        <div id="header-container">
+            <div id="header-wrapper">
+                <div id="logo">
+                    <a href="./mainPage.html">
+                        <img src="https://i.ibb.co/fNbvdZw/logo-b2c-svg.gif" alt="logo-b2c-svg" href="#">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
     <div class="register-page">
-        <div class="register-form-container">
+        <div class="form-container">
             <form onsubmit="handleAndSendDataRegisterUser(event)" id="registerNewUserForm" class="register-form">
                 <label for="name">Name</label>
                     <input 
@@ -43,7 +55,22 @@
             </form>
         </div>
     </div>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-wrapper">
+                <div class="footer-social-contact">
+                    FACEBOOK - INSTAGRAM - LINKEDIN
+                </div>
+                <div class="footer-site-info">
+                    All rights reserved © 2021 komplett.no
+                </div>
+                <a href="https://codepen.io/jamie-kielland">Jamie Kielland</a>
+            </div>
+        </div>
+        </footer>
 <script src="./../Components/validation.js"></script>
+<script src="./../Components/state.js"></script>
+<script src="./../Components/userApi.js"></script>
 <script>
 
 async function handleAndSendDataRegisterUser(event) {
@@ -77,13 +104,19 @@ async function handleAndSendDataRegisterUser(event) {
 
     let apiFetch = await fetch(registerUserUrl, registerUserDetails)    
 
+    let response = await apiFetch.json()
+
+    console.log(response.authToken);
+
     if (apiFetch.status === 400)   {
         return document.getElementById("error_handling").innerText = "This Email adress is already registered."
     }
     else if (apiFetch.status === 200)    {
         document.getElementById("error_handling").innerText = "Thank you for registering, you will be redirected soon!";
-        setTimeout(function(){window.location.assign("./mainPage.html")}, 3000);
-        sessionStorage.setItem("userLoggedIn",await apiFetch.json(Response));
+        updateAuthToken(response.authToken);
+        let userInfo = await fetchUser(response.authToken);
+        updateUser(userInfo);
+        // setTimeout(function(){window.location.assign("./mainPage.html")}, 3000);
     }
 }
 

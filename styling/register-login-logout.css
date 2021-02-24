@@ -4,7 +4,13 @@
     margin: auto;
 }
 
-.register-form-container {
+.login-page {
+    width: 360px;
+    padding: 8% 0 0;
+    margin: auto;
+}
+
+.form-container {
     position: relative;
     z-index: 1;
     background: #FFFFFF;
@@ -14,11 +20,11 @@
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
-.register-form-container label  {
+.form-container label  {
     font-size: 20px;
 }
 
-.register-form-container input {
+.form-container input {
     outline: 0;
     background: white;
     width: 100%;

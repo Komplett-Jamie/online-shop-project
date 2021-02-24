@@ -4,11 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./../styling/register-login-logout.css">
+    <link rel="stylesheet" href="./../styling/mainPage.css">
     <title>Document</title>
 </head>
 <body>
+    <header>
+        <div id="header-container">
+            <div id="header-wrapper">
+                <div id="logo">
+                    <a href="./mainPage.html">
+                        <img src="https://i.ibb.co/fNbvdZw/logo-b2c-svg.gif" alt="logo-b2c-svg" href="#">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
     <div class="login-page">
-        <div class="login-form-container">
+        <div class="form-container">
             <form onsubmit="handleAndSendDataLoginUser(event)" id="loginForm" class="login-form">
                 <label for="email">Email</label>
                 <input 
@@ -29,7 +42,21 @@
             </form>
         </div>
     </div>
-
+    <footer>
+        <div class="footer-container">
+            <div class="footer-wrapper">
+                <div class="footer-social-contact">
+                    FACEBOOK - INSTAGRAM - LINKEDIN
+                </div>
+                <div class="footer-site-info">
+                    All rights reserved © 2021 komplett.no
+                </div>
+                <a href="https://codepen.io/jamie-kielland">Jamie Kielland</a>
+            </div>
+        </div>
+        </footer>
+<script src="./../Components/state.js"></script>
+<script src="./../Components/userApi.js"></script>
 <script>
 
 async function handleAndSendDataLoginUser(event) {
@@ -57,15 +84,20 @@ async function handleAndSendDataLoginUser(event) {
     };
 
     let apiFetch = await fetch(loginUserApi, loginUserDetails);
-    let apiResponse = await apiFetch.json();
 
-    if(apiResponse.status === 401)  {
-        return document.getElementById("error_handling").innerText = "Please sign up or check your password.";
-    };
+    let response = await apiFetch.json()
+
+    if(apiFetch.status === 401)  {
+        return document.getElementById("error_handling").innerText = "Please check your password or register for a free account!";
+    }     
+    else if (apiFetch.status === 200)    {
+        document.getElementById("error_handling").innerText = "Thank you for loging in, you will be redirected soon!";
+        updateAuthToken(response.authToken);
+        let userInfo = await fetchUser(response.authToken);
+        updateUser(userInfo);
+        // setTimeout(function(){window.location.assign("./mainPage.html")}, 3000);
+    }  
 }
-
-
-//Check if email exists in database
 </script>
 </body>
 </html>
