@@ -11,8 +11,7 @@ async function getCategoriesFromApi() {
     let apiFetch = await fetch(CategoriesUrl, curlDetails);
     var arr = await apiFetch.json();
     var fetchedArray = arr;
-    makeCategoryTree(fetchedArray)
-
+    makeCategoryTree(fetchedArray);
 }
 
 function makeCategoryTree(fetchedArray) {
@@ -38,6 +37,7 @@ function makeCategoryTree(fetchedArray) {
     for (var i = 0; i < categoryTree.length; i++)  {
         extractedCategory = categoryTree[i];
         renderCategory(extractedCategory, document.getElementById("category_list"));
+        console.log(extractedCategory);
     }
 }
 
@@ -70,7 +70,6 @@ async function getRandomProducts()  {
     let apiFetch = await fetch(CategoriesUrl, curlDetails);
     let randomProductObject = await apiFetch.json();
     createRandomProductsHtml(randomProductObject);
-    console.log(randomProductObject)
 }
 
 function createRandomProductsHtml(randomProductObject) {
@@ -78,14 +77,17 @@ function createRandomProductsHtml(randomProductObject) {
     let placing = document.getElementById("random-products");
 
     for (var i = 0; i < object.length; i++) {
-        // let productBox = document.createElement("div");
-        placing.innerHTML = 
-        `<div>
-            <p>${object[i].name}</p>
-            <p>${object[i].description}</p>
-            <p>${object[i].price},-</p>
-            <img src="${object[i].imageUrl}">
-        </div>
+        placing.innerHTML += 
+        `<a href="./../pages/productPage.html?id=${object[i].id}">
+            <div class="product">
+                <div class="product-name">
+                    <p>${object[i].name}</p>
+                </div>
+                <br>
+                <img alt="${object[i].description}" src="${object[i].imageUrl}">
+                <p>Nå: <b>${object[i].price},-</b></p>
+            </div>
+            </a>
         `
     }
 }

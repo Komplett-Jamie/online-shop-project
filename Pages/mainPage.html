@@ -10,6 +10,7 @@
 <script src="./../Components/categoryCallFrontPage.js"></script>
 <script src="./../Components/state.js"></script>
 <body onload="getCategoriesFromApi(), getRandomProducts()">
+<div class="main-page-container">
 <header>
     <div id="header-container">
         <div id="header-wrapper">
@@ -46,38 +47,33 @@
         </ul>
     </div>
 </header>
-<div id="random-products-container">
+<section id="random-products-container">
     <div id="random-products">
 
     </div>
-</div>
-<footer>
-<div class="footer-container">
-    <div class="footer-wrapper">
-        <div class="footer-social-contact">
-            FACEBOOK - INSTAGRAM - LINKEDIN
+</section>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-wrapper">
+                <div class="footer-social-contact">
+                    FACEBOOK - INSTAGRAM - LINKEDIN
+                </div>
+                <div class="footer-site-info">
+                All rights reserved © 2021 komplett.no
+                </div>
+                <a href="https://codepen.io/jamie-kielland">Jamie Kielland</a>
+            </div>
         </div>
-        <div class="footer-site-info">
-            All rights reserved © 2021 komplett.no
-        </div>
-        <a href="https://codepen.io/jamie-kielland">Jamie Kielland</a>
-    </div>
+    </footer>
 </div>
-</footer>
 
 </body>
 
 <script>
+showUserNameUserIcon();
 
-let state = getState();
-let usernameDiv = document.getElementById("user_name_toggle");
-let toggleLoginLogout
 
-if (state.isLoggedIn === true)  {
-    usernameDiv.innerHTML = state.user.name;
-    
-}   else usernameDiv.innerHTML = "User";
-
+//This function should be moved into a seperate file so cross pages can acess and use it ( currently only functions on main page)//
 function dropdownMenu() {
 
     let dropdownBtn = document.querySelector('.user_icon');

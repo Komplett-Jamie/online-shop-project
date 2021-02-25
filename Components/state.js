@@ -28,3 +28,15 @@ function updateUser(user)   {
     state.user = user;
     saveState(state);
 }
+
+function showUserNameUserIcon() {
+    let state = getState();
+    let usernameDiv = document.getElementById("user_name_toggle");
+    
+    if (state.isLoggedIn === true)  {
+        usernameDiv.innerHTML = state.user.name;
+        
+    }   else usernameDiv.innerHTML = "User";
+    
+}
+
