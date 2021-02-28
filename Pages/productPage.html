@@ -8,7 +8,9 @@
     <title>Document</title>
 </head>
 <script src="./../Components/state.js"></script>
+<script src="./../Components/cartApi.js"></script>
 <script src="./../Components/productApi.js"></script>
+
 <body onload="fetchProduct()">
     <div class="main-page-container">
         <header>
@@ -61,6 +63,7 @@
                     <div id="product-buy-section">
                     <p>Price: </p><span id="product-price"></span>
                     </div>
+                    <button onclick="addProductToCart()">Add to Cart</button>
                 </div>
             </div>
         </section>
@@ -82,12 +85,12 @@
 <script>
 
 showUserNameUserIcon();
+var productResponse;
 
 function renderProduct(response)    {
 
-    let productResponse = response;
+    productResponse = response;
 
-    //This should be done using another way or ok like this?...
     document.getElementById("product-Id").innerHTML = productResponse.id;
     document.getElementById("product-name").innerHTML = productResponse.name;
     document.getElementById("product-description").innerHTML = productResponse.description;
@@ -95,5 +98,6 @@ function renderProduct(response)    {
     document.getElementById("product-price").innerHTML = productResponse.price;
 
 };
+
 </script>
 </html>

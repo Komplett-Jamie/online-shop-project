@@ -1,4 +1,4 @@
-async function fetchUser(authToken)    {
+export async function fetchUser(authToken)    {
 
     const userApi = "http://jamiestore.herokuapp.com/User/Current";
 

@@ -72,8 +72,10 @@
 </div>
 <script src="./../Components/validation.js"></script>
 <script src="./../Components/state.js"></script>
-<script src="./../Components/userApi.js"></script>
-<script>
+<!-- <script src="./../Components/userApi.js"></script> -->
+<script type="module">
+import {fetchUser} from './../Components/userApi.js';
+console.log(fetchUser);
 
 async function handleAndSendDataRegisterUser(event) {
 
@@ -118,6 +120,7 @@ async function handleAndSendDataRegisterUser(event) {
         updateAuthToken(response.authToken);
         let userInfo = await fetchUser(response.authToken);
         updateUser(userInfo);
+
         // setTimeout(function(){window.location.assign("./mainPage.html")}, 3000);
     }
 }

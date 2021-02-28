@@ -37,7 +37,6 @@ function makeCategoryTree(fetchedArray) {
     for (var i = 0; i < categoryTree.length; i++)  {
         extractedCategory = categoryTree[i];
         renderCategory(extractedCategory, document.getElementById("category_list"));
-        console.log(extractedCategory);
     }
 }
 
@@ -69,10 +68,10 @@ async function getRandomProducts()  {
 
     let apiFetch = await fetch(CategoriesUrl, curlDetails);
     let randomProductObject = await apiFetch.json();
-    createRandomProductsHtml(randomProductObject);
+    renderRandomProducts(randomProductObject);
 }
 
-function createRandomProductsHtml(randomProductObject) {
+function renderRandomProducts(randomProductObject) {
     let object = randomProductObject;
     let placing = document.getElementById("random-products");
 
@@ -86,8 +85,9 @@ function createRandomProductsHtml(randomProductObject) {
                 <br>
                 <img alt="${object[i].description}" src="${object[i].imageUrl}">
                 <p>Nå: <b>${object[i].price},-</b></p>
+                </a>
+                <button>Add to cart</button>
             </div>
-            </a>
         `
     }
 }
