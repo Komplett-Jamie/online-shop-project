@@ -9,7 +9,7 @@
 </head>
 <script src="./../Components/categoryCallFrontPage.js"></script>
 <script src="./../Components/state.js"></script>
-<body onload="getCategoriesFromApi(), getProductList()">
+<body onload="getCategoriesFromApi(), getProductList(), checkCartItems()">
     <header>
         <div id="header-container">
             <div id="header-wrapper">
@@ -73,6 +73,18 @@ const curlDetails = {
 
 let apiFetch = await fetch(CategoriesUrl, curlDetails);
 var arr = await apiFetch.json();
+}
+
+function dropdownMenu() {
+
+let dropdownBtn = document.querySelector('.user_icon');
+let menuContent = document.querySelector('.dropdown-content');
+
+if(menuContent.style.display===""){
+    menuContent.style.display="flex";
+} else {
+    menuContent.style.display="";
+}
 }
 
 </script>

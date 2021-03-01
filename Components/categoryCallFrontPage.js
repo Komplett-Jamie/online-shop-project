@@ -86,7 +86,7 @@ function renderRandomProducts(randomProductObject) {
                 <img alt="${object[i].description}" src="${object[i].imageUrl}">
                 <p>Nå: <b>${object[i].price},-</b></p>
                 </a>
-                <button>Add to cart</button>
+                <button class="add-to-cart-button" id="addToCart" onclick="addProductToCart()">Add to Cart</button>
             </div>
         `
     }

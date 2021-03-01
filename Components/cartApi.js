@@ -1,14 +1,18 @@
+let userAuthToken = getState();
+
+let token = userAuthToken.authToken;
+
+
 async function addProductToCart()    {
 
-    const productApi = "http://jamiestore.herokuapp.com/Cart/AddProduct";
-    
-    let userAuthToken = getState();
+    const urlParams = new URLSearchParams(location.search);
+    let productId = urlParams.get("id");
 
-    let token = userAuthToken.authToken;
+    const productApi = "http://jamiestore.herokuapp.com/Cart/AddProduct";
 
     let chosenProduct =   {
-        "productId": 100,
-        "quantity": 3
+        "productId": productId,
+        "quantity": 1,
     }
 
     const UserDetails = {
@@ -22,5 +26,48 @@ async function addProductToCart()    {
     }
 
     let response = await fetch(productApi, UserDetails);
-    console.log(response);
 }
+
+async function checkCartItems() {
+    const productApi = "http://jamiestore.herokuapp.com/Cart";
+
+    const cartDetails = {
+        method: 'GET',
+        headers:    {
+            AuthToken: token,
+            "accept": "text/plain",
+        },
+    }
+    let response = await fetch(productApi, cartDetails);
+    let cartNumber = await response.json();
+
+countCartItems(cartNumber.items);
+}
+
+function countCartItems(value)   {
+    let numberOfCartItems = [];
+    let object = value;
+
+    for (var i = 0; i < object.length; i++)    {
+        numberOfCartItems.push(object[i].quantity);
+    }
+    let totalCartItems = numberOfCartItems.reduce((total, n) => total + n, 0);
+    document.getElementById("small_cart").innerHTML = `<span>${totalCartItems}</span>`;
+    return renderCartBigCart(object);
+}
+
+function renderCartBigCart(object)    {
+    console.log(object);
+  
+
+//MAKE THIS TO SHOW PRODUCTS AS LIST ON CART PAGE.
+    for (var i = 0; i < object.length; i++) {
+        document.getElementById("cartList").innerHTML += object[i].productId;
+    }
+
+}
+
+
+
+
+

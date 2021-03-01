@@ -10,8 +10,7 @@
 <script src="./../Components/state.js"></script>
 <script src="./../Components/cartApi.js"></script>
 <script src="./../Components/productApi.js"></script>
-
-<body onload="fetchProduct()">
+<body onload="fetchProduct(), checkCartItems()">
     <div class="main-page-container">
         <header>
             <div id="header-container">
@@ -63,7 +62,7 @@
                     <div id="product-buy-section">
                     <p>Price: </p><span id="product-price"></span>
                     </div>
-                    <button onclick="addProductToCart()">Add to Cart</button>
+                    <button class="add-to-cart-button" id="addToCart" onclick="checkCart()">Add to Cart</button>
                 </div>
             </div>
         </section>
@@ -84,6 +83,12 @@
 </body>
 <script>
 
+async function checkCart()    {
+    await addProductToCart()
+    checkCartItems()
+
+}
+
 showUserNameUserIcon();
 var productResponse;
 
@@ -98,6 +103,19 @@ function renderProduct(response)    {
     document.getElementById("product-price").innerHTML = productResponse.price;
 
 };
+
+function dropdownMenu() {
+
+let dropdownBtn = document.querySelector('.user_icon');
+let menuContent = document.querySelector('.dropdown-content');
+
+if(menuContent.style.display===""){
+    menuContent.style.display="flex";
+} else {
+    menuContent.style.display="";
+}
+}
+
 
 </script>
 </html>
