@@ -49,7 +49,9 @@
             </ul>
         </div>
     </header>
-    <div id="cartList">HELLO</div>
+    <div id="cart-items">
+
+    </div>
     <footer>
         <div class="footer-container">
             <div class="footer-wrapper">
@@ -67,6 +69,19 @@
     <script src="./../Components/cartApi.js"></script>
 </body>
 <script>
-    showUserNameUserIcon();
+
+showUserNameUserIcon();
+
+function dropdownMenu() {
+
+    let dropdownBtn = document.querySelector('.user_icon');
+    let menuContent = document.querySelector('.dropdown-content');
+
+    if(menuContent.style.display===""){
+        menuContent.style.display="flex";
+    } else {
+        menuContent.style.display="";
+    }
+}
 </script>
 </html>

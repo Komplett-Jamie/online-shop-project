@@ -35,13 +35,19 @@
                             <span id="user_name_toggle" class="user_name"></span>
                         </div>
                         <div id="icon-container">
+                            <a href="./../Pages/cart.html">
                             <div id="small_cart">
                                 <svg width="20" height="20" viewBox="0 0 16 16"><path fill="#333" d="M6 14.5c0 0.828-0.672 1.5-1.5 1.5s-1.5-0.672-1.5-1.5c0-0.828 0.672-1.5 1.5-1.5s1.5 0.672 1.5 1.5z"></path><path fill="#333" d="M16 14.5c0 0.828-0.672 1.5-1.5 1.5s-1.5-0.672-1.5-1.5c0-0.828 0.672-1.5 1.5-1.5s1.5 0.672 1.5 1.5z"></path><path fill="#333" d="M16 8v-6h-12c0-0.552-0.448-1-1-1h-3v1h2l0.751 6.438c-0.458 0.367-0.751 0.93-0.751 1.562 0 1.105 0.895 2 2 2h12v-1h-12c-0.552 0-1-0.448-1-1 0-0.003 0-0.007 0-0.010l13-1.99z"></path></svg>
                             </div>
                             <span>Cart</span>
+                            </a>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div id="lower-header-container">
+                <ul id="category_list">
+                </ul>
             </div>
         </header>
         <section>
@@ -86,7 +92,6 @@
 async function checkCart()    {
     await addProductToCart()
     checkCartItems()
-
 }
 
 showUserNameUserIcon();
@@ -101,7 +106,6 @@ function renderProduct(response)    {
     document.getElementById("product-description").innerHTML = productResponse.description;
     document.getElementById("product-image").innerHTML = `<img src="${productResponse.imageUrl.replace(/200/,600)}">`
     document.getElementById("product-price").innerHTML = productResponse.price;
-
 };
 
 function dropdownMenu() {
