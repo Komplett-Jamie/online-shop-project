@@ -56,61 +56,67 @@ async function countCartItems(value)   {
     renderCartBigCart(objectCart);
 }
 
-function renderCartBigCart(objectCart)    {
-console.log(objectCart);
-let placing = document.getElementById("cart-items");
 
+async function renderCartBigCart(objectCart)    {
+    let placing = document.getElementById("cart-items");
     for (var i = 0; i < objectCart.length; i++) {
-        console.log(objectCart[i].productName)
         placing.innerHTML += `
         <div class="cart-item">
             <div class="cart-item-image">
                 <div class="item-image">
-                    <img src="https://komplett.no/img/p/200/1155451.jpg">
+                    <img src="${objectCart[i].imageUrl}">
                 </div>
             </div>
             <div class="cart-item-name">${objectCart[i].productName}</div>
             <div class="cart-item-change-amount">
                 <a class="cart-item-add-reduce">+</a>
-                <input type="tel" placeholder="${objectCart[i].quantity}">
+                <input class="cart-amount-visual-input" type="tel" placeholder="${objectCart[i].quantity}">
                 <a class="cart-item-add-reduce">-</a>
             </div>
             <div class="cart-item-total">
-                <span class="cart-item-total-for-product">${objectCart[i].price}</span>
-            <a class="cart-delete-item">X</a>
+                <span class="cart-item-total-for-product">${objectCart[i].pricePerItem} ,-</span>
+            <a onclick="deleteCartItem(${objectCart[i].productId})" class="cart-delete-item">X</a>
             </div>
         </div>
         `;
     }
 
+    let totalItemsCartPrice = document.getElementById("cart-total-price");
+    let totalItemsInCart = document.getElementById("cart-total-items");
+    let cartTax = document.getElementById("cart-total-tax");
+    let cartTotal = document.getElementById("cart-total");
+
+    let totalCartSumArray = [];
+    let totalItemsInCartArray = [];
+        for (var i = 0; i < objectCart.length; i++) {
+            totalCartSumArray.push(objectCart[i].pricePerItem * objectCart[i].quantity)
+            totalItemsInCartArray.push(objectCart[i].quantity)
+        }
+    let totalCartSum = totalCartSumArray.reduce((a, b) => a + b, 0);
+    let totalItemsInCartSum = totalItemsInCartArray.reduce((a, b) => a + b, 0);
+
+    totalItemsCartPrice.innerText = JSON.stringify(totalCartSum - (totalCartSum * 0.15));
+    totalItemsInCart.innerText = JSON.stringify(totalItemsInCartSum);
+    cartTax.innerText = JSON.stringify(totalCartSum * 0.15);
+
+    // cartTotal.innerText = JSON.stringify(totalCartSum + (totalCartSum * 0.15));
 }
 
+async function deleteCartItem(productId)   {
 
+    const removeProductApi = `http://jamiestore.herokuapp.com/Cart/RemoveProduct?productId=${productId}`;
 
-
-//------------------------------------
-
-function renderRandomProducts(randomProductObject) {
-    let object = randomProductObject;
-    let placing = document.getElementById("random-products");
-
-    for (var i = 0; i < object.length; i++) {
-        placing.innerHTML += 
-        `<a href="./../pages/productPage.html?id=${object[i].id}">
-            <div class="product">
-                <div class="product-name">
-                    <p>${object[i].name}</p>
-                </div>
-                <br>
-                <img alt="${object[i].description}" src="${object[i].imageUrl}">
-                <p>Nå: <b>${object[i].price},-</b></p>
-                </a>
-                <button class="add-to-cart-button" id="addToCart" onclick="addProductToCart()">Add to Cart</button>
-            </div>
-        `
+    const removeDetails = {
+        method: 'DELETE',
+        headers:    {
+            AuthToken: token,
+            "accept": "text/plain",
+            'accept': '*/*',
+        },
     }
+    let response = await fetch(removeProductApi, removeDetails);
+    location.reload();
 }
-
 
 
 

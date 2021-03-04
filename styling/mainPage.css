@@ -88,32 +88,6 @@
     border: 1px solid blue;
 }
 
-#lower-header-container {
-    background:#fafafa;
-    position:relative;
-    flex-direction: row;
-    border-bottom:1px solid blue;
-    padding:10px;
-}
-
-#lower-header-container ul {
-    display:flex;
-    list-style:none;
-    padding:10px;
-    width:100%;
-    justify-content:space-evenly;
-}
-
-.category-list-btn {
-    text-decoration: none;
-    display: flex;
-    border: none;
-    font-size: 18px;
-    user-select: none;
-    align-items: center;
-    cursor: pointer;
-    height: 0px;
-}
 /* ----------------------------------- */
 /* -------------FOOTER---------------- */
 
@@ -149,30 +123,37 @@
 
 #random-products-container {
     background-color:#fafafa;
-    padding: 20px;
     font-family: 'Open Sans', sans-serif;
 }   
+
+.random-product-cointainer  {
+    padding:10px;
+    display: flex;
+    flex-direction: column;
+    height:100%;
+    background-color:white;
+    border:1px solid #e0e0e0;
+
+}
 #random-products  {
+    padding:25px;
     display: grid;
     align-items: center;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(5, 1fr);
     background-color:white;
-    border-radius: 5px;
-    padding: 50px;
+    gap: 10px;;
+    /* padding: 50px; */
 }
 
 #random-products a{
     text-decoration: none;
+    display: flex;
 }
 
 .product  {
-    border: 1.5px solid #ccc;
-    padding: 5px;
-    margin:5px;
-    flex-grow: 1;
-    background-color: #fafafa;
-    width:200px;
-    min-height:225px;
+    flex: 1 1 auto;
+    width:100%;
+    padding:10px;
     cursor: pointer;
 }
 
@@ -181,20 +162,20 @@
     font-weight: 600;
 }
 
-.product img{
+.random-product-image{
     max-width: 100%;
     margin: 0 auto;
-    border: 1.5px solid #ccc;
+
 }
 
 .product p  {
     padding:2px;
 }
 
-.product:hover{
+/* .product:hover{
     box-shadow: 0 1px 10px rgba(0,0,0,.3);
     transform: scale(1.05);
     border: none;
     transition: box-shadow 0.5s ease, transform 0.5s ease;
     z-index: 1;
-}
+} */

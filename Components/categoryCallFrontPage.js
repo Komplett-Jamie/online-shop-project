@@ -43,8 +43,10 @@ function makeCategoryTree(fetchedArray) {
 function renderCategory(category, parent)   {
     var listItem = document.createElement("li");
     listItem.innerHTML = category.name;
+
     var categoryLink = document.createElement("a");
     categoryLink.innerHTML = category.name;
+    
     categoryLink.setAttribute("href", `/Pages/categoryPage.html?categoryId=${category.id}`);
 
 
@@ -71,23 +73,28 @@ async function getRandomProducts()  {
     renderRandomProducts(randomProductObject);
 }
 
-function renderRandomProducts(randomProductObject) {
+async function renderRandomProducts(randomProductObject) {
+
+    console.log(randomProductObject)
     let object = randomProductObject;
     let placing = document.getElementById("random-products");
-
     for (var i = 0; i < object.length; i++) {
         placing.innerHTML += 
-        `<a href="./../pages/productPage.html?id=${object[i].id}">
+        `   
+        <div class="random-product-cointainer">
+            <a href="./../pages/productPage.html?id=${object[i].id}">
+                <img class="random-product-image" alt="${object[i].description}" src="${object[i].imageUrl}">
+            </a>
             <div class="product">
                 <div class="product-name">
                     <p>${object[i].name}</p>
                 </div>
-                <br>
-                <img alt="${object[i].description}" src="${object[i].imageUrl}">
-                <p>Nå: <b>${object[i].price},-</b></p>
-                </a>
-                <button class="add-to-cart-button" id="addToCart" onclick="addProductToCart()">Add to Cart</button>
             </div>
+            <div class="random-product-price-button-container">
+                <p>Nå: <b>${object[i].price},-</b></p>
+                <button class="add-to-cart-button" id="addToCart" onclick="checkCart(${JSON.stringify(object[i].id)})">Add to Cart</button>
+            </div>
+        </div>  
         `
     }
 }

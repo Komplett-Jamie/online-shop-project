@@ -10,7 +10,8 @@
 </head>
 <script src="./../Components/categoryCallFrontPage.js"></script>
 <script src="./../Components/state.js"></script>
-<body onload="checkCartItems()">
+<body onload="checkCartItems(), showUserNameUserIcon(), freightOptions()">
+<div class="main-page-container">
     <header>
         <div id="header-container">
             <div id="header-wrapper">
@@ -52,6 +53,37 @@
     <div id="cart-items">
 
     </div>
+    <div class="cart-info-container">
+        <div id="cart-freight-options">
+            <span>Freight Options</span>
+
+        </div>
+        <div id="cart-summary">
+            <span>Cart Summary</span>
+            <table>
+                <tr>
+                    <td class="cart-summary-description">Cart total: </td>
+                    <td><span class="cart-summary-call" id="cart-total-price"></span> ,-</td>
+                </tr>
+                <tr>
+                    <td class="cart-summary-description">Total items: </td>
+                    <td><span class="cart-summary-call" id="cart-total-items"></span></span></td>
+                </tr>
+                <tr>
+                    <td class="cart-summary-description">Tax: </td>
+                    <td><span class="cart-summary-call" id="cart-total-tax"></span>,-</span></td>
+                </tr>
+                <tr>
+                    <td class="cart-summary-description">Shipping: </td>
+                    <td><span class="cart-summary-call" id="cart-shipping"></span>,-</span></td>
+                </tr>
+                <tr>
+                    <td class="cart-summary-description">Total Price: </td>
+                    <td><span class="cart-summary-call" id="cart-total"></span>,-</span></td>
+                </tr>
+            </table>
+        </div>
+    </div>
     <footer>
         <div class="footer-container">
             <div class="footer-wrapper">
@@ -65,8 +97,9 @@
             </div>
         </div>
     </footer>
-
+</div>
     <script src="./../Components/cartApi.js"></script>
+    <script src="./../Components/freightApi.js"></script>
 </body>
 <script>
 
