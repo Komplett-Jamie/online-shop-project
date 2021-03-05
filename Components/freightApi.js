@@ -34,12 +34,10 @@ function renderFreightOptions(response) {
         }
         placing.innerHTML += 
         `
-        <ul>
             <li>
             <input onclick="sendValueFromRadioToCartSummary(${response[i].price})" name="radio-input" class="radio-input" type="radio" id="${response[i].name}" value="${response[i].name}-radio-value">
             <label class="radio-label" for="${response[i].name}"><span>${freightName}:</span> ${response[i].price},-</label>
             </li>
-        </ul>
         `
     }
 }

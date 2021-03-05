@@ -2,7 +2,6 @@ let userAuthToken = getState();
 
 let token = userAuthToken.authToken;
 
-
 async function addProductToCart()    {
 
     const urlParams = new URLSearchParams(location.search);
@@ -69,9 +68,9 @@ async function renderCartBigCart(objectCart)    {
             </div>
             <div class="cart-item-name">${objectCart[i].productName}</div>
             <div class="cart-item-change-amount">
-                <a class="cart-item-add-reduce">+</a>
+                <a id="cart_item_add_button" class="cart-item-add-button">+</a>
                 <input class="cart-amount-visual-input" type="tel" placeholder="${objectCart[i].quantity}">
-                <a class="cart-item-add-reduce">-</a>
+                <a class="cart-item-remove-button">-</a>
             </div>
             <div class="cart-item-total">
                 <span class="cart-item-total-for-product">${objectCart[i].pricePerItem} ,-</span>
@@ -95,11 +94,10 @@ async function renderCartBigCart(objectCart)    {
     let totalCartSum = totalCartSumArray.reduce((a, b) => a + b, 0);
     let totalItemsInCartSum = totalItemsInCartArray.reduce((a, b) => a + b, 0);
 
-    totalItemsCartPrice.innerText = JSON.stringify(totalCartSum - (totalCartSum * 0.15));
+    totalItemsCartPrice.innerText = JSON.stringify(totalCartSum);
     totalItemsInCart.innerText = JSON.stringify(totalItemsInCartSum);
     cartTax.innerText = JSON.stringify(totalCartSum * 0.15);
-
-    // cartTotal.innerText = JSON.stringify(totalCartSum + (totalCartSum * 0.15));
+    // cartTotal.innerText = JSON.stringify(totalCartSum + (totalCartSum * 0.15)) + document.getElementById("cart-shipping").textContent;
 }
 
 async function deleteCartItem(productId)   {
@@ -117,6 +115,16 @@ async function deleteCartItem(productId)   {
     let response = await fetch(removeProductApi, removeDetails);
     location.reload();
 }
+
+
+// let addButtonElement = document.getElementById("cart_item_add_button");
+
+// addButtonElement.addEventListener('click', function(e)  {
+//     var value = parseInt(document.getElementById("cart-item-input").value, 10);
+//     value = isNaN(value) ? 0 : value;
+//     value++;
+//     document.getElementById("cart-item-input").value = value;
+// })
 
 
 
