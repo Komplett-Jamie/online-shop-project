@@ -4,28 +4,31 @@ async function checkoutApiCall(event) {
 
     const checkoutUrl =  "http://jamiestore.herokuapp.com/Cart/Checkout";
 
-    // let emailInput = document.getElementById("email").value;
-    // let nameInput = document.getElementById("name").value;
-    // let passwordInput = document.getElementById("password").value;
-    // let repeatPasswordInput = document.getElementById("confirm_password").value;
+    let cityInput = document.getElementById("addressLineTwo").value;
+    let streetInput = document.getElementById("address").value;
+    let creditcardNumberInput = document.getElementById("cardNumber").value;
+    let expireMonthInput = document.getElementById("expirationDateMonth").value;
+    let expireYearInput = document.getElementById("expirationDateYear").value;
+    let creditcardCvcInput = document.getElementById("cardCVC").value;
 
     event.preventDefault();
 
     let formObject = {
         address:    {
-            country: "string",
-            city: "string",
-            street: "string", 
+            country: "Norway",
+            city: cityInput,
+            street: streetInput, 
         },
         creditCard: {
-            creditCardNumber: "4635254347658465",
-            expireMonth: 3,
-            expireYear: 2022,
-            ccv: 123
+            creditCardNumber: "4756-2653-8365-2432",
+            expireMonth: expireMonthInput,
+            expireYear: expireYearInput,
+            ccv: creditcardCvcInput,
         },
-        freightOption: "string"
+        freightOption: "PickupInStore"
     }
 
+    console.log(formObject);
     let convertFormDataToJson = JSON.stringify(formObject);
 
     const apiInfo = {
