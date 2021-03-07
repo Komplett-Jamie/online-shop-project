@@ -1,7 +1,7 @@
 let userAuthToken = getState();
 
 let token = userAuthToken.authToken;
-
+let objectCart;
 async function addProductToCart()    {
 
     const urlParams = new URLSearchParams(location.search);
@@ -56,7 +56,7 @@ async function countCartItems(value)   {
 }
 
 
-async function renderCartBigCart(objectCart)    {
+async function renderCartBigCart(objectCart, radioPrice)    {
     let placing = document.getElementById("cart-items");
     for (var i = 0; i < objectCart.length; i++) {
         placing.innerHTML += `
@@ -96,8 +96,8 @@ async function renderCartBigCart(objectCart)    {
 
     totalItemsCartPrice.innerText = JSON.stringify(totalCartSum);
     totalItemsInCart.innerText = JSON.stringify(totalItemsInCartSum);
-    cartTax.innerText = JSON.stringify(totalCartSum * 0.15);
-    // cartTotal.innerText = JSON.stringify(totalCartSum + (totalCartSum * 0.15)) + document.getElementById("cart-shipping").textContent;
+    cartTax.innerText = JSON.stringify((Math.round((totalCartSum * 0.15) * 100) / 100).toFixed(2));
+    cartTotal.innerText = JSON.stringify(totalCartSum + (totalCartSum * 0.15)) + document.getElementById("cart-shipping").textContent;
 }
 
 async function deleteCartItem(productId)   {
@@ -115,16 +115,3 @@ async function deleteCartItem(productId)   {
     let response = await fetch(removeProductApi, removeDetails);
     location.reload();
 }
-
-
-// let addButtonElement = document.getElementById("cart_item_add_button");
-
-// addButtonElement.addEventListener('click', function(e)  {
-//     var value = parseInt(document.getElementById("cart-item-input").value, 10);
-//     value = isNaN(value) ? 0 : value;
-//     value++;
-//     document.getElementById("cart-item-input").value = value;
-// })
-
-
-

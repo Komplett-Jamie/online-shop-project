@@ -79,12 +79,12 @@
                     <td><span class="cart-summary-call" id="cart-total-tax"></span>,-</span></td>
                 </tr>
                 <tr>
-                    <td class="cart-summary-description">Shipping: </td>
+                    <td  class="cart-summary-description">Shipping: </td>
                     <td><span class="cart-summary-call" id="cart-shipping"></span>,-</span></td>
                 </tr>
                 <tr>
                     <td class="cart-summary-description">Total Price: </td>
-                    <td><span class="cart-summary-call" id="cart-total"></span>,-</span></td>
+                    <td><span class="cart-summary-call" id="cart-total" ></span>,-</span></td>
                 </tr>
             </table>
             </div>
@@ -182,9 +182,12 @@
                         id="phoneNumber" 
                         type="tel" 
                         name="phoneNumber">
-                    <!-- <select id="country-options" name="country">
+                        <label for="country-options">Country</label>
+                    <select id="country-options" name="country" required>
+                        <option value="" disabled selected>Country of residence</option>
                         
-                    </select> -->
+                    </select>
+                    <br>
                     <label for="orderNotes">Order info / delivery messages</label>
                         <textarea
                         name="orderNotes"

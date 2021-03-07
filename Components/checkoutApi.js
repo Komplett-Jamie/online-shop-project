@@ -10,12 +10,13 @@ async function checkoutApiCall(event) {
     let expireMonthInput = document.getElementById("expirationDateMonth").value;
     let expireYearInput = document.getElementById("expirationDateYear").value;
     let creditcardCvcInput = document.getElementById("cardCVC").value;
+    let countryInput = document.getElementById("country-options").value;
 
     event.preventDefault();
 
     let formObject = {
         address:    {
-            country: "Norway",
+            country: countryInput,
             city: cityInput,
             street: streetInput, 
         },
@@ -39,6 +40,6 @@ async function checkoutApiCall(event) {
         body: convertFormDataToJson,
     };
 
-    let apiFetch = await fetch(checkoutUrl, apiInfo)
-    let response = await apiFetch.json()
+    await fetch(checkoutUrl, apiInfo);
+
 }
