@@ -17,7 +17,7 @@
             <div id="header-wrapper">
                 <div id="logo">
                     <a href="./mainPage.html">
-                        <img src="https://i.ibb.co/fNbvdZw/logo-b2c-svg.gif" alt="logo-b2c-svg" href="#">
+                        <img src="https://logos.textgiraffe.com/logos/logo-name/Jamie-designstyle-kiddo-m.png" style="width: 50%;" alt="logo-b2c-svg" href="#">
                     </a>
                 </div>
                 <div id="searchBar">
@@ -98,10 +98,10 @@
                         id="cardNumber" 
                         type="tel" 
                         inputmode="numeric" 
-                        pattern="[0-9\s]{16}" 
                         autocomplete="cc-number" 
-                        maxlength="16" 
-                        placeholder="xxxx xxxx xxxx xxxx">
+                        maxlength="19" 
+                        placeholder="xxxx-xxxx-xxxx-xxxx"
+                        onkeyup="formatCreditCard()">
                         <br>
                         <label>Expiration Date</label>
                     <select name='expirationDateMonth' id='expirationDateMonth'>
@@ -132,7 +132,7 @@
                     <label for="cardCVC">CVC</label>
                         <input 
                         required
-                        placeholder="123"
+                        placeholder="xxx"
                         id="cardCVC" 
                         type="tel" 
                         name="cardCVC"
@@ -228,6 +228,14 @@ function dropdownMenu() {
     } else {
         menuContent.style.display="";
     }
+}
+
+function formatCreditCard() {
+    var x = document.getElementById("cardNumber");
+    var index = x.value.lastIndexOf('-');
+    var test = x.value.substr(index + 1);
+    if  (test.length === 4 && x.value.length<19)
+        x.value = x.value + '-';
 }
 </script>
 </html>

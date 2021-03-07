@@ -74,8 +74,6 @@ async function getRandomProducts()  {
 }
 
 async function renderRandomProducts(randomProductObject) {
-
-    console.log(randomProductObject)
     let object = randomProductObject;
     let placing = document.getElementById("random-products");
     for (var i = 0; i < object.length; i++) {

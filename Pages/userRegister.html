@@ -15,7 +15,7 @@
             <div id="header-wrapper">
                 <div id="logo">
                     <a href="./mainPage.html">
-                        <img src="https://i.ibb.co/fNbvdZw/logo-b2c-svg.gif" alt="logo-b2c-svg" href="#">
+                        <img src="https://logos.textgiraffe.com/logos/logo-name/Jamie-designstyle-kiddo-m.png" style="width: 50%;" alt="logo-b2c-svg" href="#">
                     </a>
                 </div>
             </div>
@@ -109,8 +109,6 @@ async function handleAndSendDataRegisterUser(event) {
 
     let response = await apiFetch.json()
 
-    console.log(response.authToken);
-
     if (apiFetch.status === 400)   {
         return document.getElementById("error_handling").innerText = "This Email adress is already registered."
     }
@@ -120,7 +118,7 @@ async function handleAndSendDataRegisterUser(event) {
         let userInfo = await fetchUser(response.authToken);
         updateUser(userInfo);
 
-        // setTimeout(function(){window.location.assign("./mainPage.html")}, 3000);
+        setTimeout(function(){window.location.assign("./mainPage.html")}, 3000);
     }
 }
 </script>

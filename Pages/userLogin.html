@@ -15,7 +15,7 @@
             <div id="header-wrapper">
                 <div id="logo">
                     <a href="./mainPage.html">
-                        <img src="https://i.ibb.co/fNbvdZw/logo-b2c-svg.gif" alt="logo-b2c-svg" href="#">
+                        <img src="https://logos.textgiraffe.com/logos/logo-name/Jamie-designstyle-kiddo-m.png" style="width: 50%;" alt="logo-b2c-svg" href="#">
                     </a>
                 </div>
             </div>
@@ -97,7 +97,7 @@ async function handleAndSendDataLoginUser(event) {
         updateAuthToken(response.authToken);
         let userInfo = await fetchUser(response.authToken);
         updateUser(userInfo);
-        // setTimeout(function(){window.location.assign("./mainPage.html")}, 3000);
+        setTimeout(function(){window.location.assign("./mainPage.html")}, 3000);
     }  
 }
 </script>

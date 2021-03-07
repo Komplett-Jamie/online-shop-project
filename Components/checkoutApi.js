@@ -20,15 +20,13 @@ async function checkoutApiCall(event) {
             street: streetInput, 
         },
         creditCard: {
-            creditCardNumber: "4756-2653-8365-2432",
+            creditCardNumber: creditcardNumberInput,
             expireMonth: expireMonthInput,
             expireYear: expireYearInput,
             ccv: creditcardCvcInput,
         },
         freightOption: "PickupInStore"
     }
-
-    console.log(formObject);
     let convertFormDataToJson = JSON.stringify(formObject);
 
     const apiInfo = {
