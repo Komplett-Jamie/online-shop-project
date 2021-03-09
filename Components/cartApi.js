@@ -24,7 +24,7 @@ async function addProductToCart()    {
         body: JSON.stringify(chosenProduct),
     }
 
-    let response = await fetch(productApi, UserDetails);
+    await fetch(productApi, UserDetails);
 }
 
 async function checkCartItems() {
@@ -56,7 +56,7 @@ async function countCartItems(value)   {
 }
 
 
-async function renderCartBigCart(objectCart, radioPrice)    {
+async function renderCartBigCart(objectCart)    {
     let placing = document.getElementById("cart-items");
     for (var i = 0; i < objectCart.length; i++) {
         placing.innerHTML += `
@@ -112,6 +112,6 @@ async function deleteCartItem(productId)   {
             'accept': '*/*',
         },
     }
-    let response = await fetch(removeProductApi, removeDetails);
+    await fetch(removeProductApi, removeDetails);
     location.reload();
 }
