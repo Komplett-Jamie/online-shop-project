@@ -40,3 +40,13 @@ function showUserNameUserIcon() {
     
 }
 
+function checkIfUserLoggedIn()  {
+    let errorhandling = document.getElementById("cart_no_login_error");
+    let state = getState();
+    if (state.isLoggedIn === true)  {
+        return true;
+}   else
+        errorhandling.innerText = " please log in";
+        return false;
+}
+

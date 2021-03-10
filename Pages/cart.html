@@ -10,7 +10,7 @@
 </head>
 <script src="./../Components/categoryCallFrontPage.js"></script>
 <script src="./../Components/state.js"></script>
-<body onload="checkCartItems(), showUserNameUserIcon(), freightOptions()">
+<body onload="onLoadCart()">
 <div class="main-page-container">
     <header>
         <div id="header-container">
@@ -219,7 +219,14 @@
     <script src="./../Components/countrySelect.js"></script>
 </body>
 <script>
-showUserNameUserIcon();
+
+async function onLoadCart()  {
+    let cartItems = await checkCart();
+    showUserNameUserIcon(); 
+    freightOptions();
+    renderCartBigCart(cartItems);
+    countCartItems(cartItems);
+}
 
 function dropdownMenu() {
 

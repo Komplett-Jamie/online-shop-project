@@ -10,7 +10,7 @@
 <script src="./../Components/state.js"></script>
 <script src="./../Components/cartApi.js"></script>
 <script src="./../Components/productApi.js"></script>
-<body onload="fetchProduct(), checkCartItems()">
+<body onload="productOnLoad()">
     <div class="main-page-container">
         <header>
             <div id="header-container">
@@ -68,7 +68,7 @@
                     <div id="product-buy-section">
                     <p>Price: </p><span id="product-price"></span>
                     </div>
-                    <button class="add-to-cart-button" id="addToCart" onclick="checkCart()">Add to Cart</button>
+                    <button class="add-to-cart-button" id="addToCart" onclick="addProductToCart()">Add to Cart</button>
                 </div>
             </div>
         </section>
@@ -89,9 +89,10 @@
 </body>
 <script>
 
-async function checkCart()    {
-    await addProductToCart()
-    checkCartItems()
+async function productOnLoad()  {
+    let cartItems = await checkCart();
+    fetchProduct(), 
+    countCartItems(cartItems)
 }
 
 showUserNameUserIcon();

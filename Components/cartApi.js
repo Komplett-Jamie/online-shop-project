@@ -1,7 +1,6 @@
 let userAuthToken = getState();
-
 let token = userAuthToken.authToken;
-let objectCart;
+
 async function addProductToCart()    {
 
     const urlParams = new URLSearchParams(location.search);
@@ -27,7 +26,7 @@ async function addProductToCart()    {
     await fetch(productApi, UserDetails);
 }
 
-async function checkCartItems() {
+async function checkCart() {
     const productApi = "http://jamiestore.herokuapp.com/Cart";
 
     const cartDetails = {
@@ -39,11 +38,10 @@ async function checkCartItems() {
     }
     let response = await fetch(productApi, cartDetails);
     let cartNumber = await response.json();
-
-countCartItems(cartNumber.items);
+    return cartNumber.items
 }
 
-async function countCartItems(value)   {
+function countCartItems(value)   {
     let numberOfCartItems = [];
     let objectCart = value;
 
@@ -52,11 +50,9 @@ async function countCartItems(value)   {
     }
     let totalCartItems = numberOfCartItems.reduce((total, n) => total + n, 0);
     document.getElementById("small_cart").innerHTML = `<span>${totalCartItems}</span>`;
-    renderCartBigCart(objectCart);
 }
 
-
-async function renderCartBigCart(objectCart)    {
+async function renderCartBigCart(objectCart) {
     let placing = document.getElementById("cart-items");
     for (var i = 0; i < objectCart.length; i++) {
         placing.innerHTML += `
@@ -98,6 +94,14 @@ async function renderCartBigCart(objectCart)    {
     totalItemsInCart.innerText = JSON.stringify(totalItemsInCartSum);
     cartTax.innerText = JSON.stringify((Math.round((totalCartSum * 0.15) * 100) / 100).toFixed(2));
     cartTotal.innerText = JSON.stringify(totalCartSum + (totalCartSum * 0.15)) + document.getElementById("cart-shipping").textContent;
+}
+
+
+function  checkCartItemsTwo()   {
+    let state = getState();
+    if (state.isLoggedIn === true)  {
+        checkCart();
+}   else return false;
 }
 
 async function deleteCartItem(productId)   {
