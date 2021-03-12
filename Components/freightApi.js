@@ -16,6 +16,7 @@ async function freightOptions() {
     apiCallFreight = response;
 }
 
+
 function renderFreightOptions(response) {
     let placing = document.getElementById("cart-freight-options");
 

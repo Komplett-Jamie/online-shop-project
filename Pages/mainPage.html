@@ -10,7 +10,7 @@
 </head>
 <script src="./../Components/categoryCallFrontPage.js"></script>
 <script src="./../Components/state.js"></script>
-<body onload="onLoadMain()">
+<body onload="onLoadMain(), cartUserLogin()">
 <div class="main-page-container">
 <header>
     <div id="header-container">
@@ -79,12 +79,18 @@
 <script>
 
 async function onLoadMain()  {
-    let cartItems = await checkCart();
-    getCategoriesFromApi(), 
-    getRandomProducts(), 
-    showUserNameUserIcon(), 
-    countCartItems(cartItems)
+    getCategoriesFromApi(); 
+    getRandomProducts();
+    showUserNameUserIcon();
+}
 
+async function cartUserLogin()  {
+    let state = getState();
+    if (state.isLoggedIn === true)  {
+        let cartItems = await checkCart();
+        countCartItems(cartItems);
+}   else
+        return false;
 }
 
 function dropdownMenu() {

@@ -8,10 +8,14 @@
     <link rel="stylesheet" href="./../styling/mainPage.css">
 </head>
 <script src="./../Components/categoryCallFrontPage.js"></script>
+<!-- <script src="./../Components/categoryPage.js"></script> -->
 <script src="./../Components/state.js"></script>
 <script src="./../Components/cartApi.js"></script>
 <script src="./../Components/productApi.js"></script>
-<body onload="getCategoriesFromApi(), getProductList(), checkCartItems(), fetchProduct()">
+
+<script src="./../Components/catTEST.js"></script>
+
+<body onload="onLoadCategoryPage(), cartUserLogin()">
         <div class="main-page-container">
             <header>
                 <div id="header-container">
@@ -36,12 +40,13 @@
                                 <span id="user_name_toggle" class="user_name"></span>
                             </div>
                             <div id="icon-container">
-                                <a href="./../Pages/cart.html">
+                                <a href="./../Pages/cart.html" onclick=" return checkIfUserLoggedIn()">
                                 <div id="small_cart">
                                     <svg width="20" height="20" viewBox="0 0 16 16"><path fill="#333" d="M6 14.5c0 0.828-0.672 1.5-1.5 1.5s-1.5-0.672-1.5-1.5c0-0.828 0.672-1.5 1.5-1.5s1.5 0.672 1.5 1.5z"></path><path fill="#333" d="M16 14.5c0 0.828-0.672 1.5-1.5 1.5s-1.5-0.672-1.5-1.5c0-0.828 0.672-1.5 1.5-1.5s1.5 0.672 1.5 1.5z"></path><path fill="#333" d="M16 8v-6h-12c0-0.552-0.448-1-1-1h-3v1h2l0.751 6.438c-0.458 0.367-0.751 0.93-0.751 1.562 0 1.105 0.895 2 2 2h12v-1h-12c-0.552 0-1-0.448-1-1 0-0.003 0-0.007 0-0.010l13-1.99z"></path></svg>
                                 </div>
                                 <span>Cart</span>
                                 </a>
+                                <span id="cart_no_login_error"></span>
                             </div>
                         </div>
                     </div>
@@ -55,6 +60,7 @@
                 <div id="random-products">
             
                 </div>
+                <div id="output"></div>
             </section>
                 <footer>
                     <div class="footer-container">
@@ -72,51 +78,65 @@
             </div>
     </body>
 <script>
-showUserNameUserIcon();
 
-async function getProductList()  {
-
-    const urlParams = new URLSearchParams(location.search);
-    let categoryId = urlParams.get("categoryId");
-
-    const CategoriesUrl = `http://jamiestore.herokuapp.com/Products/ByCategory/${categoryId}`;
-
-const curlDetails = {
-    method: 'GET',
-    headers: {
-        'accept': 'text/plain'
-    }
+async function onLoadCategoryPage()  {
+    getCategoriesFromApi(); 
+    showUserNameUserIcon();
+    getProductList()
 }
 
-let apiFetch = await fetch(CategoriesUrl, curlDetails);
-var arr = await apiFetch.json();
-renderCategoryList(arr);
+async function cartUserLogin()  {
+    let state = getState();
+    if (state.isLoggedIn === true)  {
+        let cartItems = await checkCart();
+        countCartItems(cartItems);
+}   else
+        return false;
 }
 
-async function renderCategoryList(arr) {
+// async function getProductList()  {
 
-let object = arr;
-let placing = document.getElementById("random-products");
-for (var i = 0; i < object.length; i++) {
-    placing.innerHTML += 
-    `   
-    <div class="random-product-cointainer">
-        <a href="./../pages/productPage.html?id=${object[i].id}">
-            <img class="random-product-image" alt="${object[i].description}" src="${object[i].imageUrl}">
-        </a>
-        <div class="product">
-            <div class="product-name">
-                <p>${object[i].name}</p>
-            </div>
-        </div>
-        <div class="random-product-price-button-container">
-            <p>Nå: <b>${object[i].price},-</b></p>
-            <button class="add-to-cart-button" id="addToCart" onclick="checkCart(${JSON.stringify(object[i].id)})">Add to Cart</button>
-        </div>
-    </div>  
-    `
-}
-}
+//     const urlParams = new URLSearchParams(location.search);
+//     let categoryId = urlParams.get("categoryId");
+
+//     const CategoriesUrl = `http://jamiestore.herokuapp.com/Products/ByCategory/${categoryId}`;
+
+// const curlDetails = {
+//     method: 'GET',
+//     headers: {
+//         'accept': 'text/plain'
+//     }
+// }
+
+// let apiFetch = await fetch(CategoriesUrl, curlDetails);
+// var arr = await apiFetch.json();
+// renderCategoryList(arr);
+// }
+
+// async function renderCategoryList(arr) {
+
+// let object = arr;
+// let placing = document.getElementById("random-products");
+// for (var i = 0; i < object.length; i++) {
+//     placing.innerHTML += 
+//     `   
+//     <div class="random-product-cointainer">
+//         <a href="./../pages/productPage.html?id=${object[i].id}">
+//             <img class="random-product-image" alt="${object[i].description}" src="${object[i].imageUrl}">
+//         </a>
+//         <div class="product">
+//             <div class="product-name">
+//                 <p>${object[i].name}</p>
+//             </div>
+//         </div>
+//         <div class="random-product-price-button-container">
+//             <p>Nå: <b>${object[i].price},-</b></p>
+//             <button class="add-to-cart-button" id="addToCart" onclick="checkCart(${JSON.stringify(object[i].id)})">Add to Cart</button>
+//         </div>
+//     </div>  
+//     `
+// }
+// }
 
 function dropdownMenu() {
 
