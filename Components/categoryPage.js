@@ -35,7 +35,7 @@ for (var i = baseCount; i <= (amountOfProductsPerPage + baseCount - 1) ; i++) {
     console.log(i);
     let productElement = document.createElement("div");
     productElement.innerHTML = `
-        <a href="./../pages/productPage.html?id=${fetchedProducts[i].id}">
+        <a href="./../Pages/productPage.html?id=${fetchedProducts[i].id}">
             <img class="random-product-image" alt="${fetchedProducts[i].description}" src="${fetchedProducts[i].imageUrl}">
         </a>
         <div class="product">
