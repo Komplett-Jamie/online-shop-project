@@ -1,7 +1,7 @@
 let tokenCheckout = userAuthToken.authToken;
 async function checkoutApiCall(event) {
 
-    const checkoutUrl =  "http://jamiestore.herokuapp.com/Cart/Checkout";
+    const checkoutUrl =  "https://jamiestore.herokuapp.com/Cart/Checkout";
 
     let cityInput = document.getElementById("addressLineTwo").value;
     let streetInput = document.getElementById("address").value;

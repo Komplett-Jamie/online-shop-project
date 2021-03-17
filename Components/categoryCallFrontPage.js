@@ -1,5 +1,5 @@
 async function getCategoriesFromApi() {
-    const CategoriesUrl = "http://jamiestore.herokuapp.com/Categories";
+    const CategoriesUrl = "https://jamiestore.herokuapp.com/Categories";
 
     const curlDetails = {
         method: 'GET',
@@ -61,7 +61,7 @@ function renderCategory(category, parent)   {
 }
 
 async function getRandomProducts()  {
-    const CategoriesUrl = "http://jamiestore.herokuapp.com/Products/Random/10";
+    const CategoriesUrl = "https://jamiestore.herokuapp.com/Products/Random/10";
 
     const curlDetails = 
     {

@@ -1,7 +1,7 @@
 let apiCallFreight;
 
 async function freightOptions() {
-    const freightApi = "http://jamiestore.herokuapp.com/Freight/FreightOptions";
+    const freightApi = "https://jamiestore.herokuapp.com/Freight/FreightOptions";
 
     const freightDetails = {
         method: 'GET',

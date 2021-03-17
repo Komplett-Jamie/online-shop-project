@@ -5,7 +5,7 @@ async function getProductList()  {
     const urlParams = new URLSearchParams(location.search);
     let categoryId = urlParams.get("categoryId");
 
-    const CategoriesUrl = `http://jamiestore.herokuapp.com/Products/ByCategory/${categoryId}`;
+    const CategoriesUrl = `https://jamiestore.herokuapp.com/Products/ByCategory/${categoryId}`;
 
     const curlDetails = {
         method: 'GET',

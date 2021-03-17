@@ -1,6 +1,6 @@
 async function fetchUser(authToken)    {
 
-    const userApi = "http://jamiestore.herokuapp.com/User/Current";
+    const userApi = "https://jamiestore.herokuapp.com/User/Current";
 
     let userAuthToken = authToken;
 

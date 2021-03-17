@@ -3,7 +3,7 @@ let token = userAuthToken.authToken;
 
 async function addProductToCart(product)    {
 
-    const productApi = "http://jamiestore.herokuapp.com/Cart/AddProduct";
+    const productApi = "https://jamiestore.herokuapp.com/Cart/AddProduct";
 
     let chosenProduct =   {
         "productId": product,
@@ -25,7 +25,7 @@ async function addProductToCart(product)    {
 }
 
 async function checkCart() {
-    const productApi = "http://jamiestore.herokuapp.com/Cart";
+    const productApi = "https://jamiestore.herokuapp.com/Cart";
 
     const cartDetails = {
         method: 'GET',
@@ -101,7 +101,7 @@ function testing()  {
 
 async function deleteCartItem(productId)   {
 
-    const removeProductApi = `http://jamiestore.herokuapp.com/Cart/RemoveProduct?productId=${productId}`;
+    const removeProductApi = `https://jamiestore.herokuapp.com/Cart/RemoveProduct?productId=${productId}`;
 
     const removeDetails = {
         method: 'DELETE',
@@ -135,7 +135,7 @@ async function increment(productId, increment, productPrice)   {
         body: JSON.stringify(product),
     }
 
-    await fetch ("http://jamiestore.herokuapp.com/Cart/UpdateQuantity", productDetails );
+    await fetch ("https://jamiestore.herokuapp.com/Cart/UpdateQuantity", productDetails );
     productIncDecInput.value = parsedValue + increment;
     cartProductPriceSeperateTotal(productId, productPrice);
     checkCart()
@@ -161,7 +161,7 @@ async function userManualyChangeProductAmount(inputValue, productId)   {
         body: JSON.stringify(product),
     }
 
-    await fetch ("http://jamiestore.herokuapp.com/Cart/UpdateQuantity", productDetails );
+    await fetch ("https://jamiestore.herokuapp.com/Cart/UpdateQuantity", productDetails );
     checkCart()
 }
 
