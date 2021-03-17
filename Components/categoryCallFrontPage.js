@@ -47,7 +47,7 @@ function renderCategory(category, parent)   {
     var categoryLink = document.createElement("a");
     categoryLink.innerHTML = category.name;
     
-    categoryLink.setAttribute("href", `Pages/categoryPage.html?categoryId=${category.id}`);
+    categoryLink.setAttribute("href", `categoryPage.html?categoryId=${category.id}`);
 
 
     if (category.children.length > 0)   {
