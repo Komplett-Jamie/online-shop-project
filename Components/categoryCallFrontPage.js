@@ -47,7 +47,7 @@ function renderCategory(category, parent)   {
     var categoryLink = document.createElement("a");
     categoryLink.innerHTML = category.name;
     
-    categoryLink.setAttribute("href", `/Pages/categoryPage.html?categoryId=${category.id}`);
+    categoryLink.setAttribute("href", `Pages/categoryPage.html?categoryId=${category.id}`);
 
 
     if (category.children.length > 0)   {
@@ -80,7 +80,7 @@ async function renderRandomProducts(randomProductObject) {
         placing.innerHTML += 
         `   
         <div class="random-product-cointainer">
-            <a href="./../pages/productPage.html?id=${object[i].id}">
+            <a href="./../Pages/productPage.html?id=${object[i].id}">
                 <img class="random-product-image" alt="${object[i].description}" src="${object[i].imageUrl}">
             </a>
             <div class="product">
