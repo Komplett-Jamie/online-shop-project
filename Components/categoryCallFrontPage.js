@@ -90,7 +90,7 @@ async function renderRandomProducts(randomProductObject) {
             </div>
             <div class="random-product-price-button-container">
                 <p>Nå: <b>${object[i].price},-</b></p>
-                <button class="add-to-cart-button" id="addToCart" onclick="checkCart(${JSON.stringify(object[i].id)})">Add to Cart</button>
+                <button class="add-to-cart-button" id="addToCart" onclick="addProductToCart(${(object[i].id)})">Add to Cart</button>
             </div>
         </div>  
         `

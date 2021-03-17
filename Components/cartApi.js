@@ -1,15 +1,12 @@
 let userAuthToken = getState();
 let token = userAuthToken.authToken;
 
-async function addProductToCart()    {
-
-    const urlParams = new URLSearchParams(location.search);
-    let productId = urlParams.get("id");
+async function addProductToCart(product)    {
 
     const productApi = "http://jamiestore.herokuapp.com/Cart/AddProduct";
 
     let chosenProduct =   {
-        "productId": productId,
+        "productId": product,
         "quantity": 1,
     }
 
@@ -24,6 +21,7 @@ async function addProductToCart()    {
     }
 
     await fetch(productApi, UserDetails);
+    checkCart()
 }
 
 async function checkCart() {
@@ -38,7 +36,9 @@ async function checkCart() {
     }
     let response = await fetch(productApi, cartDetails);
     let cartNumber = await response.json();
+    countCartItems(cartNumber.items);
     return cartNumber.items
+    
 }
 
 function countCartItems(value)   {
@@ -48,6 +48,7 @@ function countCartItems(value)   {
     for (var i = 0; i < objectCart.length; i++)    {
         numberOfCartItems.push(objectCart[i].quantity);
     }
+
     let totalCartItems = numberOfCartItems.reduce((total, n) => total + n, 0);
     document.getElementById("small_cart").innerHTML = `<span>${totalCartItems}</span>`;
 }
@@ -64,18 +65,20 @@ async function renderCartBigCart(objectCart) {
             </div>
             <div class="cart-item-name">${objectCart[i].productName}</div>
             <div class="cart-item-change-amount">
-                <a id="cart_item_add_button" class="cart-item-add-button">+</a>
-                <input class="cart-amount-visual-input" type="tel" placeholder="${objectCart[i].quantity}">
-                <a class="cart-item-remove-button">-</a>
+                <a onclick="increment(${objectCart[i].productId}, 1, ${objectCart[i].pricePerItem})" class="cart-item-add-button">+</a>
+                <input id="product-amount-${objectCart[i].productId}" class="cart-amount-visual-input" type="tel" value="${objectCart[i].quantity}" onchange="userManualyChangeProductAmount(this, ${objectCart[i].productId}), cartProductPriceSeperateTotal(${objectCart[i].productId}, ${objectCart[i].pricePerItem} )">
+                <a onclick="increment(${objectCart[i].productId}, -1, ${objectCart[i].pricePerItem})" class="cart-item-remove-button">-</a>
             </div>
             <div class="cart-item-total">
-                <span class="cart-item-total-for-product">${objectCart[i].pricePerItem} ,-</span>
+                <input id="product-total-${objectCart[i].productId}" class="total-amount-products-seperate" value="${objectCart[i].quantity * objectCart[i].pricePerItem}" readonly type="text"/>
             <a onclick="deleteCartItem(${objectCart[i].productId})" class="cart-delete-item">X</a>
             </div>
         </div>
         `;
     }
+}
 
+function testing()  {
     let totalItemsCartPrice = document.getElementById("cart-total-price");
     let totalItemsInCart = document.getElementById("cart-total-items");
     let cartTax = document.getElementById("cart-total-tax");
@@ -96,14 +99,6 @@ async function renderCartBigCart(objectCart) {
     cartTotal.innerText = JSON.stringify(totalCartSum + (totalCartSum * 0.15)) + document.getElementById("cart-shipping").textContent;
 }
 
-
-function  checkCartItemsTwo()   {
-    let state = getState();
-    if (state.isLoggedIn === true)  {
-        checkCart();
-}   else return false;
-}
-
 async function deleteCartItem(productId)   {
 
     const removeProductApi = `http://jamiestore.herokuapp.com/Cart/RemoveProduct?productId=${productId}`;
@@ -119,3 +114,67 @@ async function deleteCartItem(productId)   {
     await fetch(removeProductApi, removeDetails);
     location.reload();
 }
+
+async function increment(productId, increment, productPrice)   {
+
+    let productIncDecInput = document.getElementById("product-amount-" + productId)
+    let parsedValue = parseInt(productIncDecInput.value)
+
+    let product =   {
+        "quantity": parsedValue + increment, 
+        "productId": productId,
+    }
+    
+    const productDetails = {
+        method: 'PUT',
+        headers:    {
+            AuthToken: token,
+            'Content-Type': 'application/json',
+            'accept': '*/*'
+        },
+        body: JSON.stringify(product),
+    }
+
+    await fetch ("http://jamiestore.herokuapp.com/Cart/UpdateQuantity", productDetails );
+    productIncDecInput.value = parsedValue + increment;
+    cartProductPriceSeperateTotal(productId, productPrice);
+    checkCart()
+
+}
+
+async function userManualyChangeProductAmount(inputValue, productId)   {
+    let value = inputValue.value
+    console.log(value);
+
+    let product =   {
+        "quantity": value,
+        "productId": productId,
+    }
+    
+    const productDetails = {
+        method: 'PUT',
+        headers:    {
+            AuthToken: token,
+            'Content-Type': 'application/json',
+            'accept': '*/*'
+        },
+        body: JSON.stringify(product),
+    }
+
+    await fetch ("http://jamiestore.herokuapp.com/Cart/UpdateQuantity", productDetails );
+    checkCart()
+}
+
+function cartProductPriceSeperateTotal(productId, productPrice)    {
+    let totalPrice = document.getElementById("product-total-" + productId);
+    let amount = document.getElementById("product-amount-" + productId).value;
+
+    totalPrice.value = amount * productPrice;
+    checkCart()
+}
+
+
+
+
+
+

@@ -69,7 +69,7 @@
                     <div id="product-buy-section">
                     <p>Price: </p><span id="product-price"></span>
                     </div>
-                    <button class="add-to-cart-button" id="addToCart" onclick="errorHandling()">Add to Cart</button><span id="product_error_msg"></span>
+                    <button class="add-to-cart-button" id="addToCart" onclick="addProductToCartProductPageUrlParams()">Add to Cart</button><span id="product_error_msg"></span>
                 </div>
             </div>
         </section>
@@ -90,8 +90,15 @@
 </body>
 <script>
 
+function addProductToCartProductPageUrlParams()  {
+    const urlParams = new URLSearchParams(location.search);
+    let productId = urlParams.get("id");
+    addProductToCart(productId);
+}
+
 async function productOnLoad()  {
     fetchProduct();
+    cartUserLogin();
 }
 
 async function cartUserLogin()  {

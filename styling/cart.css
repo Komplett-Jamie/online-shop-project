@@ -40,7 +40,7 @@ padding:100px;
 .cart-info-container    {
     display: flex;
     flex-direction:row;
-width:100%;
+    width:100%;
 }
 
 #cart-summary  {
@@ -50,6 +50,13 @@ width:100%;
     background-color: #fafafa;
     width:50%;
     padding:15px;
+}
+
+.total-amount-products-seperate {
+    pointer-events:none;
+    border:none;
+    background-color: #fafafa;
+    width:fit-content;
 }
 
 .cart-summary-description   {
@@ -74,6 +81,7 @@ td {
     width:50%;
     text-align: left;
     padding-right: 10px;
+    border-bottom: 1px solid #bbbbbb;
 }
 
 #cart-freight-options   {
@@ -194,4 +202,10 @@ td {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }

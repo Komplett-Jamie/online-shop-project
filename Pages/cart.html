@@ -56,7 +56,7 @@
     </div>
     </section>
     <section>
-<form class="cart-full-summary" onsubmit="checkoutApiCall(event)" id="cartForm">
+<form class="cart-full-summary" onsubmit="onSubmitConfirmButton(event)" id="cartForm">
     <div class="cart-info-container">
         <div class="container-one">
             <div id="cart-freight-options">
@@ -75,7 +75,7 @@
                     <td><span class="cart-summary-call" id="cart-total-items"></span></span></td>
                 </tr>
                 <tr>
-                    <td class="cart-summary-description">Of which mva: </td>
+                    <td class="cart-summary-description">Mva: </td>
                     <td><span class="cart-summary-call" id="cart-total-tax"></span>,-</span></td>
                 </tr>
                 <tr>
@@ -103,6 +103,8 @@
                         placeholder="xxxx-xxxx-xxxx-xxxx"
                         onkeyup="formatCreditCard()">
                         <br>
+                        <span id="cardNumberErrorMessage"></span>
+                        <br>
                         <label>Expiration Date</label>
                     <select name='expirationDateMonth' id='expirationDateMonth'>
                         <option value=''>Month</option>
@@ -129,14 +131,20 @@
                         <option value='2024'>2024</option>
                     </select> 
                     <br>
+                    <span id="cardDateErrorMessage"></span>
+                    <br>
                     <label for="cardCVC">CVC</label>
                         <input 
                         required
                         placeholder="xxx"
                         id="cardCVC" 
-                        type="tel" 
+                        type="number"
                         name="cardCVC"
-                        maxlength="3">
+                        maxlength = "3"
+                        oninput="this.value=this.value.slice(0,this.maxLength)">
+                        <br>
+                        <span id="cardCvcErrorMessage"></span>
+                        <br>
                 </div>
             </div>
         </div>
@@ -226,6 +234,7 @@ async function onLoadCart()  {
     freightOptions();
     renderCartBigCart(cartItems);
     countCartItems(cartItems);
+    testing(cartItems);
 }
 
 function dropdownMenu() {
@@ -240,6 +249,9 @@ function dropdownMenu() {
     }
 }
 
+async function onSubmitConfirmButton(event)    {
+    checkoutApiCall(event);
+}
 function formatCreditCard() {
     var x = document.getElementById("cardNumber");
     var index = x.value.lastIndexOf('-');

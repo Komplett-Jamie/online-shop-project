@@ -1,5 +1,4 @@
 let tokenCheckout = userAuthToken.authToken;
-
 async function checkoutApiCall(event) {
 
     const checkoutUrl =  "http://jamiestore.herokuapp.com/Cart/Checkout";
@@ -40,6 +39,22 @@ async function checkoutApiCall(event) {
         body: convertFormDataToJson,
     };
 
-    await fetch(checkoutUrl, apiInfo);
+    let creditcardNumberWarning = document.getElementById("cardNumberErrorMessage");
+    let creditcardDateWarning = document.getElementById("cardDateErrorMessage");
+    let creditcardCvcWarning = document.getElementById("cardCvcErrorMessage");
+    
+    await fetch(checkoutUrl, apiInfo)
+    .then (response => response.json())
+    .then (data => {
+        if (data.errors.hasOwnProperty("CreditCard.ExpireYear"))   {
+            creditcardDateWarning.innerText += data.errors["CreditCard.ExpireYear"][0];
+        }
+        if (data.errors.hasOwnProperty("CreditCard.CCV"))   {
+            creditcardCvcWarning.innerText += data.errors["CreditCard.CCV"][0];
+        }
+        if (data.errors.hasOwnProperty("CreditCard.CreditCardNumber"))   {
+            creditcardNumberWarning.innerText += data.errors["CreditCard.CreditCardNumber"][0];
+        }
+    })
 
 }

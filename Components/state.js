@@ -49,4 +49,3 @@ function checkIfUserLoggedIn()  {
         errorhandling.innerText = " please log in";
         return false;
 }
-
