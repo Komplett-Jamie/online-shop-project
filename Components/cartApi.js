@@ -37,7 +37,9 @@ async function checkCart() {
     let response = await fetch(productApi, cartDetails);
     let cartNumber = await response.json();
     countCartItems(cartNumber.items);
+    totalCartSummary(cartNumber);
     return cartNumber.items
+
     
 }
 
@@ -78,26 +80,53 @@ async function renderCartBigCart(objectCart) {
     }
 }
 
-function testing()  {
+
+
+function totalCartSummary(cartItemsTotal)  {
     let totalItemsCartPrice = document.getElementById("cart-total-price");
     let totalItemsInCart = document.getElementById("cart-total-items");
-    let cartTax = document.getElementById("cart-total-tax");
     let cartTotal = document.getElementById("cart-total");
 
-    let totalCartSumArray = [];
-    let totalItemsInCartArray = [];
-        for (var i = 0; i < objectCart.length; i++) {
-            totalCartSumArray.push(objectCart[i].pricePerItem * objectCart[i].quantity)
-            totalItemsInCartArray.push(objectCart[i].quantity)
-        }
-    let totalCartSum = totalCartSumArray.reduce((a, b) => a + b, 0);
-    let totalItemsInCartSum = totalItemsInCartArray.reduce((a, b) => a + b, 0);
-
-    totalItemsCartPrice.innerText = JSON.stringify(totalCartSum);
-    totalItemsInCart.innerText = JSON.stringify(totalItemsInCartSum);
-    cartTax.innerText = JSON.stringify((Math.round((totalCartSum * 0.15) * 100) / 100).toFixed(2));
-    cartTotal.innerText = JSON.stringify(totalCartSum + (totalCartSum * 0.15)) + document.getElementById("cart-shipping").textContent;
+let totalPriceProductsAndQuantity = [];
+let totalItemsInCartArray = [];
+let freightPriceArray = [];
+console.log()
+freightPriceArray.push(cartItemsTotal.selectedFreightPrice)
+    for (let i = 0; i < cartItemsTotal.items.length; i++)   {
+    cartItemsTotal.items[i].pricePerItem * cartItemsTotal.items[i].quantity
+    totalPriceProductsAndQuantity.push(cartItemsTotal.items[i].pricePerItem * cartItemsTotal.items[i].quantity);
+    totalItemsInCartArray.push(cartItemsTotal.items[i].quantity);
 }
+let totalCartSum = totalPriceProductsAndQuantity.reduce((a, b) => a + b, 0);
+totalItemsCartPrice.innerText = JSON.stringify(totalCartSum);
+
+let totalItemsInCartSum = totalItemsInCartArray.reduce((a, b) => a + b, 0);
+totalItemsInCart.innerText = JSON.stringify(totalItemsInCartSum);
+
+cartTotal.innerText = totalCartSum + freightPriceArray[0];
+
+
+}
+
+
+// function totalCartSummary()  {
+//     let totalItemsCartPrice = document.getElementById("cart-total-price");
+//     let totalItemsInCart = document.getElementById("cart-total-items");
+//     let cartTotal = document.getElementById("cart-total");
+
+//     let totalCartSumArray = [];
+//     let totalItemsInCartArray = [];
+//         for (var i = 0; i < objectCart.length; i++) {
+//             totalCartSumArray.push(objectCart[i].pricePerItem * objectCart[i].quantity)
+//             totalItemsInCartArray.push(objectCart[i].quantity)
+//         }
+//     let totalCartSum = totalCartSumArray.reduce((a, b) => a + b, 0);
+//     let totalItemsInCartSum = totalItemsInCartArray.reduce((a, b) => a + b, 0);
+
+//     totalItemsCartPrice.innerText = JSON.stringify(totalCartSum);
+//     totalItemsInCart.innerText = JSON.stringify(totalItemsInCartSum);
+//     cartTotal.innerText = JSON.stringify(totalCartSum) + document.getElementById("cart-shipping").textContent;
+// }
 
 async function deleteCartItem(productId)   {
 

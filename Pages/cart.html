@@ -75,10 +75,6 @@
                     <td><span class="cart-summary-call" id="cart-total-items"></span></span></td>
                 </tr>
                 <tr>
-                    <td class="cart-summary-description">Mva: </td>
-                    <td><span class="cart-summary-call" id="cart-total-tax"></span>,-</span></td>
-                </tr>
-                <tr>
                     <td  class="cart-summary-description">Shipping: </td>
                     <td><span class="cart-summary-call" id="cart-shipping"></span>,-</span></td>
                 </tr>
@@ -234,7 +230,6 @@ async function onLoadCart()  {
     freightOptions();
     renderCartBigCart(cartItems);
     countCartItems(cartItems);
-    testing(cartItems);
 }
 
 function dropdownMenu() {
@@ -259,5 +254,6 @@ function formatCreditCard() {
     if  (test.length === 4 && x.value.length<19)
         x.value = x.value + '-';
 }
+
 </script>
 </html>

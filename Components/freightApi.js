@@ -1,5 +1,4 @@
 let apiCallFreight;
-
 async function freightOptions() {
     const freightApi = "https://jamiestore.herokuapp.com/Freight/FreightOptions";
 
@@ -19,7 +18,6 @@ async function freightOptions() {
 
 function renderFreightOptions(response) {
     let placing = document.getElementById("cart-freight-options");
-
     for(var i = 0; i < response.length; i++)    {
 
         let freightName;
@@ -33,17 +31,34 @@ function renderFreightOptions(response) {
         } else if (response[i].name === 'Letter')    {
             freightName = "Letter"
         }
-        placing.innerHTML += 
+        placing.innerHTML +=
         `
             <li>
-            <input onclick="sendValueFromRadioToCartSummary(${response[i].price})" name="radio-input" class="radio-input" type="radio" id="${response[i].name}" value="${response[i].name}-radio-value">
+            <input onclick="sendValueFromRadioToCartSummary(${response[i].price}), chosenFreightOption('${response[i].name}')" name="radio-input" class="radio-input" type="radio" id="${response[i].name}" value="${response[i].name}-radio-value">
             <label class="radio-label" for="${response[i].name}"><span>${freightName}:</span> ${response[i].price},-</label>
             </li>
         `
     }
+    
 }
 
 function sendValueFromRadioToCartSummary(radioPrice) {
     let cartShipping = document.getElementById("cart-shipping");
     cartShipping.innerText = radioPrice;
+
 }
+
+async function chosenFreightOption(freightOption)  {
+    let url = `http://jamiestore.herokuapp.com/Cart/FreightOption?freightOption=${freightOption}`;
+
+    const freightDetails = {
+        method: 'PUT',
+        headers:    {
+            AuthToken: token,
+            "accept": "text/plain",
+        },
+    }
+    await fetch (url, freightDetails);
+    checkCart()
+}
+
