@@ -3,7 +3,7 @@ async function getAllProductsForSearch()    {
 
     let allProducts = [];
 
-    await fetch("http://jamiestore.herokuapp.com/Products")
+    await fetch("https://jamiestore.herokuapp.com/Products")
     .then (response => allProducts.push(response))
     .then (console.log(response));
 }

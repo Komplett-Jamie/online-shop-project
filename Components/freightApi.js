@@ -48,7 +48,7 @@ function sendValueFromRadioToCartSummary(radioPrice) {
 }
 
 async function chosenFreightOption(freightOption)  {
-    let url = `http://jamiestore.herokuapp.com/Cart/FreightOption?freightOption=${freightOption}`;
+    let url = `https://jamiestore.herokuapp.com/Cart/FreightOption?freightOption=${freightOption}`;
 
     const freightDetails = {
         method: 'PUT',
