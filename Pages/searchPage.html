@@ -10,6 +10,7 @@
 </head>
 <script src="./../Components/categoryCallFrontPage.js"></script>
 <script src="./../Components/state.js"></script>
+<script src="./../Components/searchPage.js"></script>
 <body onload="onLoadMain(), cartUserLogin()">
 <div class="main-page-container">
 <header>
@@ -75,9 +76,8 @@
 <script>
 
 async function onLoadMain()  {
-    getCategoriesFromApi(); 
-    getRandomProducts();
     showUserNameUserIcon();
+    getAllProductsForSearch();
 }
 
 async function cartUserLogin()  {

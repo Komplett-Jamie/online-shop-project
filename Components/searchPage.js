@@ -1,30 +1,21 @@
-
 async function getAllProductsForSearch()    {
 
-    let allProducts = [];
+    const apiDetails = {
+        method: 'GET',
+        headers:    {
+            'accept': 'text/plain'
+        }
+    }
+    let apiFetch = await fetch("https://jamiestore.herokuapp.com/Products", apiDetails);
+    var arr = await apiFetch.json();
 
-    await fetch("https://jamiestore.herokuapp.com/Products")
-    .then (response => allProducts.push(response))
-    .then (console.log(response));
+const filterItems = (arr, query) => {
+    return arr.filter(el => {
+        if ((el.name.toLowerCase().indexOf(query.toLowerCase()) !== -1) || (el.description.toLowerCase().indexOf(query.toLowerCase()) !== -1))
+            return true 
+        else 
+            return false 
+    } )
 }
-
-
-
-
-
-
-var __POSTS = [ 
-	{ id: 1, title: 'Apple', description: 'Description of post 1' }, 
-	{ id: 2, title: 'Orange', description: 'Description of post 2' }, 
-	{ id: 3, title: 'Guava', description: 'Description of post 3' }, 
-	{ id: 4, title: 'Banana', description: 'Description of post 4' }
-];
-
-var __FOUND = __POSTS.find(function(post, index) {
-	if(post.title == 'Guava')
-		return true;
-});
-
-// On success __FOUND will contain the complete element (an object)
-// On failure it will contain undefined  
-console.log(__FOUND); // { id: 3, title: 'Guava', description: 'Description of post 3' }
+console.log(filterItems(arr, "skjerm"))
+}

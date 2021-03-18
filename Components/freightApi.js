@@ -39,7 +39,6 @@ function renderFreightOptions(response) {
             </li>
         `
     }
-    
 }
 
 function sendValueFromRadioToCartSummary(radioPrice) {

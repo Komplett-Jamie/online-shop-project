@@ -38,9 +38,8 @@ async function checkCart() {
     let cartNumber = await response.json();
     countCartItems(cartNumber.items);
     totalCartSummary(cartNumber);
+    freightOptionCheck(cartNumber);
     return cartNumber.items
-
-    
 }
 
 function countCartItems(value)   {
@@ -181,8 +180,10 @@ function cartProductPriceSeperateTotal(productId, productPrice)    {
     checkCart()
 }
 
-
-
-
-
-
+async function freightOptionCheck(freightOption)   {
+    if (freightOption.selectedFreightOption === "PickupInStore")    {
+        let containerOne = document.getElementById("PickupInStore");
+        containerOne.checked = true;
+        console.log("Hello");
+    }
+}
