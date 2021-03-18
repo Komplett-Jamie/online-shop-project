@@ -45,7 +45,6 @@ function renderFreightOptions(response) {
 function sendValueFromRadioToCartSummary(radioPrice) {
     let cartShipping = document.getElementById("cart-shipping");
     cartShipping.innerText = radioPrice;
-
 }
 
 async function chosenFreightOption(freightOption)  {
@@ -61,4 +60,3 @@ async function chosenFreightOption(freightOption)  {
     await fetch (url, freightDetails);
     checkCart()
 }
-
