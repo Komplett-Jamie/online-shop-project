@@ -225,12 +225,12 @@
 <script>
 
 async function onLoadCart()  {
-    let cartItems = await checkCart();
-    showUserNameUserIcon(); 
-    freightOptions();
-    renderCartBigCart(cartItems);
-    countCartItems(cartItems);
-    freightOptionCheck();
+    await freightOptions();
+    let cart = await checkCart();
+    showUserNameUserIcon();
+    renderCartBigCart(cart.items);
+    countCartItems(cart.items);
+    freightOptionCheck(cart);
 }
 
 function dropdownMenu() {

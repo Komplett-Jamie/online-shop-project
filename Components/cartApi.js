@@ -36,18 +36,15 @@ async function checkCart() {
     }
     let response = await fetch(productApi, cartDetails);
     let cartNumber = await response.json();
-    countCartItems(cartNumber.items);
     totalCartSummary(cartNumber);
-    freightOptionCheck(cartNumber);
-    return cartNumber.items
+    return cartNumber
 }
 
-function countCartItems(value)   {
+function countCartItems(cartItems)   {
     let numberOfCartItems = [];
-    let objectCart = value;
 
-    for (var i = 0; i < objectCart.length; i++)    {
-        numberOfCartItems.push(objectCart[i].quantity);
+    for (var i = 0; i < cartItems.length; i++)    {
+        numberOfCartItems.push(cartItems[i].quantity);
     }
 
     let totalCartItems = numberOfCartItems.reduce((total, n) => total + n, 0);
@@ -181,9 +178,7 @@ function cartProductPriceSeperateTotal(productId, productPrice)    {
 }
 
 async function freightOptionCheck(freightOption)   {
-    if (freightOption.selectedFreightOption === "PickupInStore")    {
-        let containerOne = document.getElementById("PickupInStore");
-        containerOne.checked = true;
-        console.log("Hello");
+    if (freightOption.selectedFreightOption !== null)    {
+        document.getElementById(freightOption.selectedFreightOption).checked = true;
     }
 }
