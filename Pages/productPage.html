@@ -88,6 +88,10 @@
             </footer>
         </div>
 </body>
+
+<script src="./../Components/redoingCart/eventBus.js"></script>
+<script src="./../Components/redoingMainPage/productsApi.js"></script>
+<script src="./../Components/redoingMainPage/renderProduct.js"></script>
 <script>
 
 function addProductToCartProductPageUrlParams()  {
@@ -97,8 +101,9 @@ function addProductToCartProductPageUrlParams()  {
 }
 
 async function productOnLoad()  {
-    fetchProduct();
-    cartUserLogin();
+    publishEvent("pageLoad");
+    // fetchProduct();
+    // cartUserLogin();
 }
 
 async function cartUserLogin()  {
@@ -113,17 +118,6 @@ async function cartUserLogin()  {
 
 showUserNameUserIcon();
 var productResponse;
-
-function renderProduct(response)    {
-
-    productResponse = response;
-
-    document.getElementById("product-Id").innerHTML = productResponse.id;
-    document.getElementById("product-name").innerHTML = productResponse.name;
-    document.getElementById("product-description").innerHTML = productResponse.description;
-    document.getElementById("product-image").innerHTML = `<img src="${productResponse.imageUrl.replace(/200/,600)}">`
-    document.getElementById("product-price").innerHTML = productResponse.price;
-};
 
 function dropdownMenu() {
 

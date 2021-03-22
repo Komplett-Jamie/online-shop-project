@@ -37,7 +37,6 @@ function showUserNameUserIcon() {
         usernameDiv.innerHTML = state.user.name;
         
     }   else usernameDiv.innerHTML = "User";
-    
 }
 
 function checkIfUserLoggedIn()  {

@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="./../styling/nestedMenu.css">
     <title>Document</title>
 </head>
-<script src="./../Components/categoryCallFrontPage.js"></script>
 <script src="./../Components/state.js"></script>
 <body onload="onLoadMain()">
 <div class="main-page-container">
@@ -72,7 +71,6 @@
     </footer>
 </div>
 
-
 <script src="./../Components/cartApi.js"></script>
 <script src="./../Components/redoingCart/eventBus.js"></script>
 <script src="./../Components/redoingCart/fetchCart.js"></script>
@@ -83,25 +81,26 @@
 <script src="./../Components/redoingMainPage/productsApi.js"></script>
 <script src="./../Components/redoingMainPage/addProductToCartApi.js"></script>
 <script src="./../Components/redoingMainPage/smallCartCounter.js"></script>
+<script src="./../Components/redoingMainPage/categoryCall.js"></script>
+<script src="./../Components/redoingMainPage/categoryDropdownRender.js"></script>
+
 </body>
 
 <script>
 
 async function onLoadMain()  {
-    publishEvent("pageLoad")
-    // getCategoriesFromApi(); 
-    // getRandomProducts();
+    publishEvent("pageLoad");
     // showUserNameUserIcon();
 }
 
-async function cartUserLogin()  {
-    let state = getState();
-    if (state.isLoggedIn === true)  {
-        let cartItems = await checkCart();
-        countCartItems(cartItems);
-}   else
-        return false;
-}
+// async function cartUserLogin()  {
+//     let state = getState();
+//     if (state.isLoggedIn === true)  {
+//         let cartItems = await checkCart();
+//         countCartItems(cartItems);
+// }   else
+//         return false;
+// }
 
 function dropdownMenu() {
 
