@@ -62,14 +62,14 @@
                     </div>
                     <div id="product-description">
                         
-                    </div>0
+                    </div>
                     <div id="product-image">
                         
                     </div>
                     <div id="product-buy-section">
                     <p>Price: </p><span id="product-price"></span>
                     </div>
-                    <button class="add-to-cart-button" id="addToCart" onclick="addProductToCartProductPageUrlParams()">Add to Cart</button><span id="product_error_msg"></span>
+                    <button class="add-to-cart-button" id="addToCart" onclick="productAddToCart()">Add to Cart</button><span id="product_error_msg"></span>
                 </div>
             </div>
         </section>
@@ -92,18 +92,17 @@
 <script src="./../Components/redoingCart/eventBus.js"></script>
 <script src="./../Components/redoingMainPage/productsApi.js"></script>
 <script src="./../Components/redoingMainPage/renderProduct.js"></script>
+<script src="./../Components/redoingMainPage/addProductToCartApi.js"></script>
 <script>
 
-function addProductToCartProductPageUrlParams()  {
-    const urlParams = new URLSearchParams(location.search);
-    let productId = urlParams.get("id");
-    addProductToCart(productId);
+function productAddToCart() {
+    const productIdUrl = new URLSearchParams(location.search).get("id");
+    publishEvent("addToCart", {productId: JSON.parse(productIdUrl), productQuantity: 1})
 }
+
 
 async function productOnLoad()  {
     publishEvent("pageLoad");
-    // fetchProduct();
-    // cartUserLogin();
 }
 
 async function cartUserLogin()  {
