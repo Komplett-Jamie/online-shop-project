@@ -10,7 +10,7 @@
 </head>
 <script src="./../Components/categoryCallFrontPage.js"></script>
 <script src="./../Components/state.js"></script>
-<body onload="onLoadMain(), cartUserLogin()">
+<body onload="onLoadMain()">
 <div class="main-page-container">
 <header>
     <div id="header-container">
@@ -74,14 +74,19 @@
 
 
 <script src="./../Components/cartApi.js"></script>
+<script src="./../Components/redoingCart/eventBus.js"></script>
+<script src="./../Components/redoingCart/fetchCart.js"></script>
+<script src="./../Components/redoingCart/smallCart.js"></script>
+<script src="./../Components/redoingCart/cartState.js"></script>
 </body>
 
 <script>
 
 async function onLoadMain()  {
-    getCategoriesFromApi(); 
-    getRandomProducts();
-    showUserNameUserIcon();
+    publishEvent("pageLoad")
+    // getCategoriesFromApi(); 
+    // getRandomProducts();
+    // showUserNameUserIcon();
 }
 
 async function cartUserLogin()  {
