@@ -60,39 +60,39 @@ function renderCategory(category, parent)   {
     }
 }
 
-async function getRandomProducts()  {
-    const CategoriesUrl = "https://jamiestore.herokuapp.com/Products/Random/10";
+// async function getRandomProducts()  {
+//     const CategoriesUrl = "https://jamiestore.herokuapp.com/Products/Random/10";
 
-    const curlDetails = 
-    {
-        method: 'GET',
-    };
+//     const curlDetails = 
+//     {
+//         method: 'GET',
+//     };
 
-    let apiFetch = await fetch(CategoriesUrl, curlDetails);
-    let randomProductObject = await apiFetch.json();
-    renderRandomProducts(randomProductObject);
-}
+//     let apiFetch = await fetch(CategoriesUrl, curlDetails);
+//     let randomProductObject = await apiFetch.json();
+//     renderRandomProducts(randomProductObject);
+// }
 
-async function renderRandomProducts(randomProductObject) {
-    let object = randomProductObject;
-    let placing = document.getElementById("random-products");
-    for (var i = 0; i < object.length; i++) {
-        placing.innerHTML += 
-        `   
-        <div class="random-product-cointainer">
-            <a href="./../Pages/productPage.html?id=${object[i].id}">
-                <img class="random-product-image" alt="${object[i].description}" src="${object[i].imageUrl}">
-            </a>
-            <div class="product">
-                <div class="product-name">
-                    <p>${object[i].name}</p>
-                </div>
-            </div>
-            <div class="random-product-price-button-container">
-                <p>Nå: <b>${object[i].price},-</b></p>
-                <button class="add-to-cart-button" id="addToCart" onclick="addProductToCart(${(object[i].id)})">Add to Cart</button>
-            </div>
-        </div>  
-        `
-    }
-}
+// async function renderRandomProducts(randomProductObject) {
+//     let object = randomProductObject;
+//     let placing = document.getElementById("random-products");
+//     for (var i = 0; i < object.length; i++) {
+//         placing.innerHTML += 
+//         `   
+//         <div class="random-product-cointainer">
+//             <a href="./../Pages/productPage.html?id=${object[i].id}">
+//                 <img class="random-product-image" alt="${object[i].description}" src="${object[i].imageUrl}">
+//             </a>
+//             <div class="product">
+//                 <div class="product-name">
+//                     <p>${object[i].name}</p>
+//                 </div>
+//             </div>
+//             <div class="random-product-price-button-container">
+//                 <p>Nå: <b>${object[i].price},-</b></p>
+//                 <button class="add-to-cart-button" id="addToCart" onclick="addProductToCart(${(object[i].id)})">Add to Cart</button>
+//             </div>
+//         </div>  
+//         `
+//     }
+// }

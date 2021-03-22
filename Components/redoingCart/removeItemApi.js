@@ -12,4 +12,3 @@ subscribeToEvent("removeItem", async function deleteCartItem(productId)   {
     }
     await fetch(removeProductApi, removeDetails);
 })
-

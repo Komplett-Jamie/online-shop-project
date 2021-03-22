@@ -25,7 +25,7 @@ function renderCartBigCart(cartItems) {
             <a onclick="removeItemFromCart(${cartItem.productId})" class="cart-delete-item">X</a>
             </div>
         </div>
-        `;
+        `
     }
 }
 
