@@ -12,32 +12,23 @@ function getState() {
         };
 }
 
-function updateAuthToken(authToken)  {
+subscribeToEvent("userState", function updateAuthToken(response)  {
     let state = getState();
-    state.authToken = authToken;
+    console.log(response)
+    state.authToken = response.authToken;
     state.isLoggedIn = true;
     saveState(state);
-}
+})
 
 function saveState(state)    {
     sessionStorage.setItem("state", JSON.stringify(state));
 }
 
-function updateUser(user)   {
+subscribeToEvent("userState", function updateUser(response)   {
     let state = getState();
-    state.user = user;
+    state.user = response.user;
     saveState(state);
-}
-
-function showUserNameUserIcon() {
-    let state = getState();
-    let usernameDiv = document.getElementById("user_name_toggle");
-    
-    if (state.isLoggedIn === true)  {
-        usernameDiv.innerHTML = state.user.name;
-        
-    }   else usernameDiv.innerHTML = "User";
-}
+})
 
 function checkIfUserLoggedIn()  {
     let errorhandling = document.getElementById("cart_no_login_error");

@@ -23,7 +23,7 @@
     </header>
     <div class="login-page">
         <div class="form-container">
-            <form onsubmit="handleAndSendDataLoginUser(event)" id="loginForm" class="login-form">
+            <form onsubmit="handleLogin(event)" id="loginForm" class="login-form">
                 <label for="email">Email</label>
                 <input 
                 required 
@@ -57,49 +57,29 @@
         </div>
     </footer>
 </div>
+<script src="./../Components/redoingCart/eventBus.js"></script>
 <script src="./../Components/state.js"></script>
-<script src="./../Components/userApi.js"></script>
+<script src="./../Components/redoingMainPage/userLogin.js"></script>
+
 <script>
 
-async function handleAndSendDataLoginUser(event) {
-
+function handleLogin(event)  {
     event.preventDefault();
-    const loginUserApi = "https://jamiestore.herokuapp.com/User/Login";
-
     let emailInput = document.getElementById("email").value;
     let passwordInput = document.getElementById("password").value;
-
-    let formObject = {
-        email: emailInput,
-        password: passwordInput,
-    }
-
-    let convertFormDataToJson = JSON.stringify(formObject);
-
-    const loginUserDetails = {
-        method: 'POST',
-        headers:    {
-            'accept': 'text/plain',
-            'Content-Type': 'application/json',
-        },
-        body: convertFormDataToJson,
-    };
-
-    let apiFetch = await fetch(loginUserApi, loginUserDetails);
-
-    let response = await apiFetch.json()
-
-    if(apiFetch.status === 401)  {
-        return document.getElementById("error_handling").innerText = "Please check your password or register for a free account!";
-    }     
-    else if (apiFetch.status === 200)    {
-        document.getElementById("error_handling").innerText = "Thank you for loging in, you will be redirected soon!";
-        updateAuthToken(response.authToken);
-        let userInfo = await fetchUser(response.authToken);
-        updateUser(userInfo);
-        setTimeout(function(){window.location.assign("./mainPage.html")}, 3000);
-    }  
+    publishEvent("userLogin", {emailInput, passwordInput})
 }
+
+subscribeToEvent("userLoginUnauthorized", function(response)   {
+    document.getElementById("error_handling").innerText = "Please check your password or register for a free account!";
+})
+
+subscribeToEvent("userLoginAuthorized", function(response)  {
+    document.getElementById("error_handling").innerText = "Thank you for loging in, you will be redirected soon!";
+    publishEvent("userState", response);
+    // setTimeout(function(){window.location.assign("./mainPage.html")}, 3000);
+})
+
 </script>
 </body>
 </html>

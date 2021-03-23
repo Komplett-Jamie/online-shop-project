@@ -7,9 +7,6 @@
     <link rel="stylesheet" href="./../styling/mainPage.css">
     <title>Document</title>
 </head>
-<script src="./../Components/state.js"></script>
-<script src="./../Components/cartApi.js"></script>
-<script src="./../Components/productApi.js"></script>
 <body onload="productOnLoad()">
     <div class="main-page-container">
         <header>
@@ -35,7 +32,7 @@
                             <span id="user_name_toggle" class="user_name"></span>
                         </div>
                         <div id="icon-container">
-                            <a href="./../Pages/cart.html" onclick=" return checkIfUserLoggedIn()">
+                            <a href="./../Pages/cart.html" onclick="return checkIfUserLoggedIn()">
                             <div id="small_cart">
                                 <svg width="20" height="20" viewBox="0 0 16 16"><path fill="#333" d="M6 14.5c0 0.828-0.672 1.5-1.5 1.5s-1.5-0.672-1.5-1.5c0-0.828 0.672-1.5 1.5-1.5s1.5 0.672 1.5 1.5z"></path><path fill="#333" d="M16 14.5c0 0.828-0.672 1.5-1.5 1.5s-1.5-0.672-1.5-1.5c0-0.828 0.672-1.5 1.5-1.5s1.5 0.672 1.5 1.5z"></path><path fill="#333" d="M16 8v-6h-12c0-0.552-0.448-1-1-1h-3v1h2l0.751 6.438c-0.458 0.367-0.751 0.93-0.751 1.562 0 1.105 0.895 2 2 2h12v-1h-12c-0.552 0-1-0.448-1-1 0-0.003 0-0.007 0-0.010l13-1.99z"></path></svg>
                             </div>
@@ -88,11 +85,16 @@
             </footer>
         </div>
 </body>
-
+<script src="./../Components/redoingMainPage/userNameVisibility.js"></script>
 <script src="./../Components/redoingCart/eventBus.js"></script>
 <script src="./../Components/redoingMainPage/productsApi.js"></script>
 <script src="./../Components/redoingMainPage/renderProduct.js"></script>
 <script src="./../Components/redoingMainPage/addProductToCartApi.js"></script>
+<script src="./../Components/redoingMainPage/smallCartState.js"></script>
+<script src="./../Components/redoingMainPage/smallCartCounter.js"></script>
+<script src="./../Components/redoingCart/fetchCart.js"></script>
+<script src="./../Components/redoingCart/cartState.js"></script>
+<script src="./../Components/state.js"></script>
 <script>
 
 function productAddToCart() {
@@ -100,22 +102,11 @@ function productAddToCart() {
     publishEvent("addToCart", {productId: JSON.parse(productIdUrl), productQuantity: 1})
 }
 
-
 async function productOnLoad()  {
     publishEvent("pageLoad");
 }
 
-async function cartUserLogin()  {
-    let state = getState();
-    if (state.isLoggedIn === true)  {
-        let cartItems = await checkCart();
-        countCartItems(cartItems);
-        showUserNameUserIcon();
-}   else
-        return false;
-}
 
-showUserNameUserIcon();
 var productResponse;
 
 function dropdownMenu() {
@@ -129,7 +120,5 @@ if(menuContent.style.display===""){
     menuContent.style.display="";
 }
 }
-
-
 </script>
 </html>

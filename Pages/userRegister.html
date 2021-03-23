@@ -23,7 +23,7 @@
     </header>
     <div class="register-page">
         <div class="form-container">
-            <form onsubmit="handleAndSendDataRegisterUser(event)" id="registerNewUserForm" class="register-form">
+            <form onsubmit="handleRegister(event)" id="registerNewUserForm" class="register-form">
                 <label for="name">Name</label>
                     <input 
                     required 
@@ -70,57 +70,28 @@
         </div>
     </footer>
 </div>
-<script src="./../Components/passwordValidation.js"></script>
+<script src="./../Components/redoingCart/eventBus.js"></script>
 <script src="./../Components/state.js"></script>
-<script src="./../Components/userApi.js"></script>
+<script src="./../Components/redoingMainPage/userRegister.js"></script>
 <script>
-// import { fetchUser } from './../Components/userApi.js';
-
-async function handleAndSendDataRegisterUser(event) {
-
-    const registerUserUrl =  "https://jamiestore.herokuapp.com/User/Register";
-
+function handleRegister(event)  {
+    event.preventDefault();
     let emailInput = document.getElementById("email").value;
     let nameInput = document.getElementById("name").value;
     let passwordInput = document.getElementById("password").value;
     let repeatPasswordInput = document.getElementById("confirm_password").value;
-
-    event.preventDefault();
-
-    let formObject = {
-        email: emailInput,
-        name: nameInput,
-        password: passwordInput,
-        repeatPassword: repeatPasswordInput,
-    }
-
-    let convertFormDataToJson = JSON.stringify(formObject);
-
-    const registerUserDetails = {
-        method: 'POST',
-        headers:    {
-            'accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: convertFormDataToJson,
-    };
-
-    let apiFetch = await fetch(registerUserUrl, registerUserDetails)    
-
-    let response = await apiFetch.json()
-
-    if (apiFetch.status === 400)   {
-        return document.getElementById("error_handling").innerText = "This Email adress is already registered."
-    }
-    else if (apiFetch.status === 200)    {
-        document.getElementById("error_handling").innerText = "Thank you for registering, you will be redirected soon!";
-        updateAuthToken(response.authToken);
-        let userInfo = await fetchUser(response.authToken);
-        updateUser(userInfo);
-
-        setTimeout(function(){window.location.assign("./mainPage.html")}, 3000);
-    }
+    publishEvent("userRegister", {emailInput, nameInput, passwordInput, repeatPasswordInput})
 }
+
+subscribeToEvent("userRegisterEmailAlreadyInUse", function(response)    {
+    document.getElementById("error_handling").innerText = "This Email adress is already registered."
+})
+
+subscribeToEvent("userRegistered", function(response)   {
+    document.getElementById("error_handling").innerText = "Thank you for registering, you will be redirected soon!";
+    setTimeout(function(){window.location.assign("./mainPage.html")}, 2000);
+    publishEvent("userState", response);
+})
 </script>
 </body>
 </html>

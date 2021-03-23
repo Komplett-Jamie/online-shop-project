@@ -2,6 +2,10 @@ subscribeToEvent("cartStateUpdated", function(state)    {
     renderCartBigCart(state.items)
 })
 
+subscribeToEvent("countryApiReturn", function(response) {
+    renderCountryList(response)
+})
+
 function renderCartBigCart(cartItems) {
     let renderContainer = document.getElementById("cart-items");
     renderContainer.innerHTML = "";
@@ -35,4 +39,14 @@ function updateQuantity(productId, productQuantity)   {
 
 function removeItemFromCart(productId)   {
     publishEvent("removeItem", productId);
+}
+
+function renderCountryList(response)    {
+    let htmlContainer = document.getElementById("country-options");
+    for (var i = 0; i < response.length; i++ )  {
+        htmlContainer.innerHTML += 
+        `
+        <option value="${response[i].name}">${response[i].name}</option>
+        `
+    }
 }
