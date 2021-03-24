@@ -73,6 +73,7 @@
 <script src="./../Components/redoingCart/eventBus.js"></script>
 <script src="./../Components/state.js"></script>
 <script src="./../Components/redoingMainPage/userRegister.js"></script>
+<script src="./../Components/redoingMainPage/fetchUserApi.js"></script>
 <script>
 function handleRegister(event)  {
     event.preventDefault();
@@ -89,8 +90,7 @@ subscribeToEvent("userRegisterEmailAlreadyInUse", function(response)    {
 
 subscribeToEvent("userRegistered", function(response)   {
     document.getElementById("error_handling").innerText = "Thank you for registering, you will be redirected soon!";
-    setTimeout(function(){window.location.assign("./mainPage.html")}, 2000);
-    publishEvent("userState", response);
+    // setTimeout(function(){window.location.assign("./mainPage.html")}, 2000);
 })
 </script>
 </body>

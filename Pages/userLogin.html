@@ -60,6 +60,7 @@
 <script src="./../Components/redoingCart/eventBus.js"></script>
 <script src="./../Components/state.js"></script>
 <script src="./../Components/redoingMainPage/userLogin.js"></script>
+<script src="./../Components/redoingMainPage/fetchUserApi.js"></script>
 
 <script>
 
@@ -76,7 +77,7 @@ subscribeToEvent("userLoginUnauthorized", function(response)   {
 
 subscribeToEvent("userLoginAuthorized", function(response)  {
     document.getElementById("error_handling").innerText = "Thank you for loging in, you will be redirected soon!";
-    publishEvent("userState", response);
+
     // setTimeout(function(){window.location.assign("./mainPage.html")}, 3000);
 })
 

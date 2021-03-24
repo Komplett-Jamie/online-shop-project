@@ -20,7 +20,7 @@ subscribeToEvent("userLogin", async function({emailInput, passwordInput}) {
 
     let apiFetch = await fetch(loginUserApi, loginUserDetails);
     let response = await apiFetch.json()
-    console.log(response);
+
     if (apiFetch.status === 401)    {
         publishEvent("userLoginUnauthorized", response)
     }

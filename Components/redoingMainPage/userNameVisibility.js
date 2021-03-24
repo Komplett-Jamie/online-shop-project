@@ -1,9 +1,10 @@
-subscribeToEvent("pageLoad", function() {
-    let state = getState();
-    console.log(state);
+subscribeToEvent("userIsLoggedIn", function(state) {
     let usernameDiv = document.getElementById("user_name_toggle");
     if (state.isLoggedIn === true)  {
-        usernameDiv.innerHTML = state.user;
+        usernameDiv.innerHTML = state.user.name;
     }   
-    else usernameDiv.innerHTML = "User";
+    else if (state.isLoggedIn === false)    {
+        usernameDiv.innerHTML = "Log in";
+    }
+
 })

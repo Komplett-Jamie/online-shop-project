@@ -28,9 +28,10 @@
                         <div class="dropdown-content">
                             <a id="toggle-login-on-off" href="./../Pages/userLogin.html">Login</a>
                             <a href="./../Pages/userRegister.html">Register</a>
+                            <a id="logout" onclick="logoutUser()">Logout</a>
                         </div>
                     </div>
-                    <span id="user_name_toggle" class="user_name"></span>
+                    <span id="user_name_toggle" class="user_name">Log In</span>
                 </div>
                 <div id="icon-container">
                     <a href="./../Pages/cart.html" onclick=" return checkIfUserLoggedIn()">
@@ -69,9 +70,9 @@
         </div>
     </footer>
 </div>
+
 <script src="./../Components/redoingCart/eventBus.js"></script>
 <script src="./../Components/redoingCart/fetchCart.js"></script>
-
 <script src="./../Components/redoingMainPage/mainPageRender.js"></script>
 <script src="./../Components/redoingMainPage/addProductToCartApi.js"></script>
 <script src="./../Components/redoingMainPage/smallCartCounter.js"></script>
@@ -81,23 +82,20 @@
 <script src="./../Components/redoingCart/cartState.js"></script>
 <script src="./../Components/redoingMainPage/smallCartState.js"></script>
 <script src="./../Components/state.js"></script>
+<script src="./../Components/redoingMainPage/fetchUserApi.js"></script>
+<script src="./../Components/redoingMainPage/userNameVisibility.js"></script>
+<script src="./../Components/redoingMainPage/userLogout.js"></script>
 
 </body>
 <script>
 
 async function onLoadMain()  {
     publishEvent("pageLoad");
-    // showUserNameUserIcon();
 }
 
-// async function cartUserLogin()  {
-//     let state = getState();
-//     if (state.isLoggedIn === true)  {
-//         let cartItems = await checkCart();
-//         countCartItems(cartItems);
-// }   else
-//         return false;
-// }
+function logoutUser()   {
+    publishEvent("userClickLogout");
+}
 
 function dropdownMenu() {
 
@@ -110,6 +108,5 @@ function dropdownMenu() {
         menuContent.style.display="";
     }
 }
-
 </script>
 </html>

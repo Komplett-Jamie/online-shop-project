@@ -31,6 +31,7 @@
                                     <div class="dropdown-content">
                                         <a id="toggle-login-on-off" href="./../Pages/userLogin.html">Login</a>
                                         <a href="./../Pages/userRegister.html">Register</a>
+                                        <a id="logout">Logout</a>
                                     </div>
                                 </div>
                                 <span id="user_name_toggle" class="user_name"></span>
@@ -89,50 +90,6 @@ async function cartUserLogin()  {
 }   else
         return false;
 }
-
-// async function getProductList()  {
-
-//     const urlParams = new URLSearchParams(location.search);
-//     let categoryId = urlParams.get("categoryId");
-
-//     const CategoriesUrl = `https://jamiestore.herokuapp.com/Products/ByCategory/${categoryId}`;
-
-// const curlDetails = {
-//     method: 'GET',
-//     headers: {
-//         'accept': 'text/plain'
-//     }
-// }
-
-// let apiFetch = await fetch(CategoriesUrl, curlDetails);
-// var arr = await apiFetch.json();
-// renderCategoryList(arr);
-// }
-
-// async function renderCategoryList(arr) {
-
-// let object = arr;
-// let placing = document.getElementById("random-products");
-// for (var i = 0; i < object.length; i++) {
-//     placing.innerHTML += 
-//     `   
-//     <div class="random-product-cointainer">
-//         <a href="./../pages/productPage.html?id=${object[i].id}">
-//             <img class="random-product-image" alt="${object[i].description}" src="${object[i].imageUrl}">
-//         </a>
-//         <div class="product">
-//             <div class="product-name">
-//                 <p>${object[i].name}</p>
-//             </div>
-//         </div>
-//         <div class="random-product-price-button-container">
-//             <p>Nå: <b>${object[i].price},-</b></p>
-//             <button class="add-to-cart-button" id="addToCart" onclick="checkCart(${JSON.stringify(object[i].id)})">Add to Cart</button>
-//         </div>
-//     </div>  
-//     `
-// }
-// }
 
 function dropdownMenu() {
 
