@@ -19,7 +19,7 @@
                 </a>
             </div>
             <div id="searchBar">
-                <input id="search_input" type="text" placeholder="Search for products...">
+                <input id="search_input" type="text" placeholder="Search for products..." onkeyup="mainPageSearchInputUser(event)">
             </div>
             <div id="user_controls">
                 <div id="icon-container">
@@ -85,13 +85,21 @@
 <script src="./../Components/redoingMainPage/fetchUserApi.js"></script>
 <script src="./../Components/redoingMainPage/userNameVisibility.js"></script>
 <script src="./../Components/redoingMainPage/userLogout.js"></script>
-
+<script src="./../Components/redoingMainPage/searchFunctionality.js"></script>
 </body>
 <script>
 
-async function onLoadMain()  {
+function onLoadMain()  {
     publishEvent("pageLoad");
 }
+
+function mainPageSearchInputUser(event) {
+    let inputContainer = document.getElementById("search_input").value;
+
+if (event.key === "Enter") {
+    // publishEvent("userSearchInput", inputContainer)
+    location = "./../Pages/searchPage.html";
+}}
 
 function logoutUser()   {
     publishEvent("userClickLogout");

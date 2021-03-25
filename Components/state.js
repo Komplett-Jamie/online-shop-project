@@ -4,13 +4,10 @@ function getState() {
         user: null,
         isLoggedIn: false,
     }
-
     let getState = sessionStorage.getItem("state");
     if (getState === null)  {
         return initialState;
-    }else{
-        return JSON.parse(getState)
-        };
+    } else {return JSON.parse(getState)};
 }
 
 subscribeToEvent("userLoggedInApiReturn", function({response, userLoggedIn})  {
@@ -26,7 +23,6 @@ subscribeToEvent("pageLoad", function()   {
     if (state.isLoggedIn === true)  {
         publishEvent("userIsLoggedIn", state)
 }   else return false;
-
 })
 
 subscribeToEvent("userClickLogout", function handleLogout() {
@@ -36,4 +32,4 @@ subscribeToEvent("userClickLogout", function handleLogout() {
     state.isLoggedIn = false;
     state.user = null;
     sessionStorage.clear("state");
-}) 
+})

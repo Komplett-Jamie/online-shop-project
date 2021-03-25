@@ -1,29 +1,4 @@
 let fetchedProducts = [];
-
-async function getProductList()  {
-
-    const urlParams = new URLSearchParams(location.search);
-    let categoryId = urlParams.get("categoryId");
-
-    const CategoriesUrl = `https://jamiestore.herokuapp.com/Products/ByCategory/${categoryId}`;
-
-    const curlDetails = {
-        method: 'GET',
-        headers: {
-            'accept': 'text/plain'
-        }
-    }
-
-    let apiFetch = await fetch(CategoriesUrl, curlDetails);
-    var arr = await apiFetch.json();
-
-    fetchedProducts = arr;
-    renderCategoryList()
-}
-
-
-
-
 let baseCount = 0;
 let amountOfProductsPerPage = 19;
 
