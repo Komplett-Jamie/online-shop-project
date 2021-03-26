@@ -231,6 +231,7 @@
     <script src="./../Components/redoingMainPage/smallCartState.js"></script>
     <script src="./../Components/state.js"></script>
     <script src="./../Components/redoingMainPage/userNameVisibility.js"></script>
+    <script src="./../Components/redoingCart/confirmPurchasesCart.js"></script>
 
 </body>
 <script>
@@ -251,9 +252,22 @@ function dropdownMenu() {
     }
 }
 
-async function onSubmitConfirmButton(event)    {
-    checkoutApiCall(event);
+function onSubmitConfirmButton(event)    {
+
+    event.preventDefault();
+    
+    let cityInput = document.getElementById("addressLineTwo").value;
+    let streetInput = document.getElementById("address").value;
+    let creditcardNumberInput = document.getElementById("cardNumber").value;
+    let expireMonthInput = document.getElementById("expirationDateMonth").value;
+    let expireYearInput = document.getElementById("expirationDateYear").value;
+    let creditcardCvcInput = document.getElementById("cardCVC").value;
+    let countryInput = document.getElementById("country-options").value;
+
+    publishEvent("confirmPurchases", cityInput, streetInput, creditcardNumberInput, creditcardCvcInput, expireMonthInput, expireYearInput, countryInput);
 }
+
+
 function formatCreditCard() {
     var x = document.getElementById("cardNumber");
     var index = x.value.lastIndexOf('-');

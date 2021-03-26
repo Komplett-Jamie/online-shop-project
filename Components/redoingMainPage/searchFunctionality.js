@@ -11,6 +11,5 @@ subscribeToEvent("userSearchInput", (query) => {
         else 
             return false
     })
-
     publishEvent("searchedProducts", searchArray)
 })

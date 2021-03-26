@@ -27,10 +27,10 @@
                                     <div class="dropdown-content">
                                         <a id="toggle-login-on-off" href="./../Pages/userLogin.html">Login</a>
                                         <a href="./../Pages/userRegister.html">Register</a>
-                                        <a id="logout">Logout</a>
+                                        <a id="logout" onclick="logoutUser()">Logout</a>
                                     </div>
                                 </div>
-                                <span id="user_name_toggle" class="user_name"></span>
+                                <span id="user_name_toggle" class="user_name">Log in</span>
                             </div>
                             <div id="icon-container">
                                 <a href="./../Pages/cart.html" onclick=" return checkIfUserLoggedIn()">
@@ -70,9 +70,24 @@
                 </footer>
             </div>
     </body>
-<script src="./../Components/redoingCart/eventBus.js"></script>
-<script src="./../Components/redoingMainPage/categoryCallPageApi.js"></script>
-<script src="./../Components/state.js"></script>
+    <script src="./../Components/redoingCart/eventBus.js"></script>
+    <script src="./../Components/redoingCart/fetchCart.js"></script>
+
+    <script src="./../Components/redoingMainPage/addProductToCartApi.js"></script>
+    <script src="./../Components/redoingMainPage/smallCartCounter.js"></script>
+    <script src="./../Components/redoingMainPage/categoryCall.js"></script>
+    <script src="./../Components/redoingMainPage/categoryDropdownRender.js"></script>
+
+    <script src="./../Components/redoingCart/cartState.js"></script>
+    <script src="./../Components/redoingMainPage/smallCartState.js"></script>
+    <script src="./../Components/state.js"></script>
+    <script src="./../Components/redoingMainPage/fetchUserApi.js"></script>
+    <script src="./../Components/redoingMainPage/userNameVisibility.js"></script>
+    <script src="./../Components/redoingMainPage/userLogout.js"></script>
+    <script src="./../Components/redoingMainPage/searchFunctionality.js"></script>
+
+    <script src="./../Components/redoingMainPage/categoryCallPageApi.js"></script>
+
 <script src="./../Components/redoingMainPage/renderProductsCategoryPage.js"></script>
 
 <script>
@@ -81,13 +96,9 @@ function onLoadCategoryPage()   {
     publishEvent("pageLoad");
 }
 
-
-
-// async function onLoadCategoryPage()  {
-//     getCategoriesFromApi(); 
-//     showUserNameUserIcon();
-//     getProductList()
-// }
+function logoutUser()   {
+    publishEvent("userClickLogout");
+}
 
 async function cartUserLogin()  {
     let state = getState();
