@@ -1,5 +1,4 @@
 subscribeToEvent("userIsLoggedIn", async function fetchCart(state) {
-    // let authToken = getState().authToken;
     const productApi = "https://jamiestore.herokuapp.com/Cart";
 
     const cartDetails = {

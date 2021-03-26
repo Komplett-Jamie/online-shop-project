@@ -216,7 +216,7 @@
         </div>
     </footer>
 </div>
-    <script src="./../Components/checkoutApi.js"></script>
+    <!-- <script src="./../Components/checkoutApi.js"></script> -->
     <script src="./../Components/redoingCart/eventBus.js"></script>
     <script src="./../Components/redoingCart/fetchCart.js"></script>
     <script src="./../Components/redoingCart/bigCart.js"></script>
@@ -255,7 +255,7 @@ function dropdownMenu() {
 function onSubmitConfirmButton(event)    {
 
     event.preventDefault();
-    
+
     let cityInput = document.getElementById("addressLineTwo").value;
     let streetInput = document.getElementById("address").value;
     let creditcardNumberInput = document.getElementById("cardNumber").value;
@@ -264,8 +264,25 @@ function onSubmitConfirmButton(event)    {
     let creditcardCvcInput = document.getElementById("cardCVC").value;
     let countryInput = document.getElementById("country-options").value;
 
-    publishEvent("confirmPurchases", cityInput, streetInput, creditcardNumberInput, creditcardCvcInput, expireMonthInput, expireYearInput, countryInput);
+    publishEvent("confirmPurchases", {cityInput, streetInput, creditcardNumberInput, creditcardCvcInput, expireMonthInput, expireYearInput, countryInput});
 }
+
+subscribeToEvent("responseFromCheckout", function(data) {
+
+    let creditcardNumberWarning = document.getElementById("cardNumberErrorMessage");
+    let creditcardDateWarning = document.getElementById("cardDateErrorMessage");
+    let creditcardCvcWarning = document.getElementById("cardCvcErrorMessage");
+    
+        if (data.errors.hasOwnProperty("CreditCard.ExpireYear"))   {
+            creditcardDateWarning.innerText += data.errors["CreditCard.ExpireYear"][0];
+        }
+        if (data.errors.hasOwnProperty("CreditCard.CCV"))   {
+            creditcardCvcWarning.innerText += data.errors["CreditCard.CCV"][0];
+        }
+        if (data.errors.hasOwnProperty("CreditCard.CreditCardNumber"))   {
+            creditcardNumberWarning.innerText += data.errors["CreditCard.CreditCardNumber"][0];
+        }
+})
 
 
 function formatCreditCard() {

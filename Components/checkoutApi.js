@@ -46,7 +46,7 @@ async function checkoutApiCall(event) {
     await fetch(checkoutUrl, apiInfo)
     .then (response => response.json())
     .then (data => {
-        if (data.errors.hasOwnProperty("CreditCard.ExpireYear"))   {
+        if (data.getOwnPropertyNames(data.errors))   {
             creditcardDateWarning.innerText += data.errors["CreditCard.ExpireYear"][0];
         }
         if (data.errors.hasOwnProperty("CreditCard.CCV"))   {
