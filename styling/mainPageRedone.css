@@ -5,39 +5,22 @@
     scroll-behavior: smooth;
 }
 
-.main-page-container    {
-    /* padding:0px 200px 0px 200px; */
-}
-/* ------------HEADER----------------- */
-#header-wrapper {
-max-width: 1200;
-    display: flex;
-    top: 0px;
-    min-height: 60px;
-    flex-direction: row;
-    flex-grow:1;
-    align-items: center;
+#header-wrapper   {
+    max-width:1200px;
+    width:100%;
+    display:flex;
     justify-content: space-between;
-    flex-wrap: wrap;
-    width: 100%;
+    align-items: center;
+
+}
+
+#header-container   {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     z-index: 100;
     border-bottom: 1px solid blue;
     background:#fafafa;
-}
-
-#logo   {
-   width: 50%;
-}
-
-#logo img   {
-    width: 25px;
-    height:auto;
-}
-
-
-
-#lower-header-container {
-    padding:0px 200px 0px 200px;
 }
 
 #search_input {
@@ -45,6 +28,7 @@ max-width: 1200;
     border: 1px solid blue;
     padding:10px;
     flex: 0 1 600px;
+    width:100%;
 }
 
 #user_controls {
@@ -61,7 +45,11 @@ max-width: 1200;
     flex-direction: column;
     align-items: center;
     cursor: pointer;
-    text-decoration: none;
+}
+
+#icon-container a {
+text-decoration: none;
+text-align: center;
 }
 
 .dropdown-content {
@@ -103,9 +91,6 @@ max-width: 1200;
     border: 1px solid blue;
 }
 
-/* ----------------------------------- */
-/* -------------FOOTER---------------- */
-
 .footer-container {
     background:#fafafa;
     border-top:1px solid blue;
@@ -138,7 +123,6 @@ max-width: 1200;
 
 #random-products-container {
     padding:0px 200px 0px 200px;
-
     font-family: 'Open Sans', sans-serif;
     margin: 25px 0px 25px 0px;
 }   
@@ -159,7 +143,6 @@ max-width: 1200;
     grid-template-columns: repeat(5, 1fr);
     background-color:white;
     gap: 10px;
-    /* padding: 50px; */
 }
 
 #random-products a{
@@ -182,20 +165,11 @@ max-width: 1200;
 .random-product-image{
     max-width: 100%;
     margin: 0 auto;
-
 }
 
 .product p  {
     padding:2px;
 }
-
-/* .product:hover{
-    box-shadow: 0 1px 10px rgba(0,0,0,.3);
-    transform: scale(1.05);
-    border: none;
-    transition: box-shadow 0.5s ease, transform 0.5s ease;
-    z-index: 1;
-} */
 
 .add-to-cart-button {
     margin-top:10px;
@@ -210,3 +184,14 @@ max-width: 1200;
 .add-to-cart-button:hover {
     background-color: white;
 }
+
+/* #category_list {
+    display: block;
+    color: red;
+}
+
+ul {
+    padding-right: 5px;
+    text-decoration: none;
+    list-style-type:none;
+} */

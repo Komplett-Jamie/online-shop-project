@@ -21,7 +21,7 @@ function makeCategoryTree(categoryCall) {
             categoryTree.push(node);
         }
     }
-
+    console.log(categoryTree)
     for (var i = 0; i < categoryTree.length; i++)  {
         extractedCategory = categoryTree[i];
         renderCategory(extractedCategory, document.getElementById("category_list"));
@@ -31,19 +31,21 @@ function makeCategoryTree(categoryCall) {
 function renderCategory(category, parent)   {
     var listItem = document.createElement("li");
     listItem.innerHTML = category.name;
+    listItem.className = "dropdown"
 
-    var categoryLink = document.createElement("a");
-    categoryLink.innerHTML = category.name;
-    
-    categoryLink.setAttribute("href", `categoryPage.html?categoryId=${category.id}`);
+    var categoryLink = document.createElement("li");
+    categoryLink.innerHTML = `<a href="categoryPage.html?categoryId=${category.id}">`+category.name+`</a>`;
 
+    var unorderedList = document.createElement("ul");
+    unorderedList.className = "submenu"
 
     if (category.children.length > 0)   {
         parent.appendChild(listItem);
+        listItem.appendChild(unorderedList);
     }   else parent.appendChild(categoryLink);
 
     for (var i = 0; i < category.children.length; i++)  {
         extractedSubCategory = category.children[i];
-        renderCategory(extractedSubCategory, listItem);
+        renderCategory(extractedSubCategory, unorderedList);
     }
 }
