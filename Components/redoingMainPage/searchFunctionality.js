@@ -2,6 +2,7 @@ let productState = [];
 
 subscribeToEvent("searchProductsReturn", function(response) {
     productState = response;
+
 })
 
 subscribeToEvent("userSearchInput", (query) => {
