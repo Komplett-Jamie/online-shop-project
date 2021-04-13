@@ -9,6 +9,11 @@ class CartApi   {
             headers:    {
                 AuthToken: this.state.authToken,
             },
+        }
+        let apiFetch = await fetch(this.baseUrl, cartDetails)
+        return apiFetch;
+    }
+    async post(path, details)    {
         const UserDetails = {
             method: 'POST',
             headers:    {
