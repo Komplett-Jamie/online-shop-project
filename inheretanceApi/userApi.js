@@ -3,15 +3,15 @@ class UserApi extends ApiCall{
         super();
     }
     async userRegister(curlBody)  {
-        return await this.post("Register", curlBody)
+        return await this.post("User/Register", curlBody)
     }
     async userLogin(curlBody) {
-        return await this.post("Login", curlBody)
+        return await this.post("User/Login", curlBody)
     }
     async userLogout()    {
-        return await this.post("Logout", null)
+        return await this.post("User/Logout", null)
     }
     async currentUser()   {
-        return await this.get("Current")
+        return await this.get("User/Current")
     }
 }
