@@ -15,17 +15,6 @@ subscribeToEvent("pageLoad", async function freightOptions() {
 })
 
 subscribeToEvent("freightOptionSelected", async function chosenFreightOption(freightName)  {
-    let authToken = getState().authToken;
-    let url = `https://jamiestore.herokuapp.com/Cart/FreightOption?freightOption=${freightName}`;
-
-    const freightDetails = {
-        method: 'PUT',
-        headers:    {
-            AuthToken: authToken,
-            "accept": "text/plain",
-        },
-    }
-    await fetch (url, freightDetails);
+    let cartApi = new CartApi()
+    await cartApi.freightOptionSelection(freightName);
 })
-
-

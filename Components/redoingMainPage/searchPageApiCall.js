@@ -1,6 +1,6 @@
 subscribeToEvent("pageLoad", async function getAllProductsForSearch()    {
 
-    let productApiCall = new ProductApi();
+    let productApiCall = new ProductsApi();
     let response = await productApiCall.getAllProducts();
-    publishEvent("searchProductsReturn", response)
+    publishEvent("searchProductsReturn", await response.json())
 })

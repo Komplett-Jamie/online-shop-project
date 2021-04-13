@@ -10,12 +10,18 @@ function getState() {
     } else {return JSON.parse(getState)};
 }
 
-subscribeToEvent("userLoggedInApiReturn", function({response, userLoggedIn})  {
+subscribeToEvent("userLoggedInApiReturn", function({response})  {
     let state = getState()
-    state.authToken = userLoggedIn.authToken;
-    state.isLoggedIn = true;
     state.user = response;
     sessionStorage.setItem("state", JSON.stringify(state));
+})
+
+subscribeToEvent("userRegisteredAuthtoken", function(userDetails)    {
+    let state = getState()
+    state.authToken = userDetails.authToken;
+    state.isLoggedIn = true;
+    sessionStorage.setItem("state", JSON.stringify(state));
+    publishEvent("userRegistered")
 })
 
 subscribeToEvent("pageLoad", function()   {

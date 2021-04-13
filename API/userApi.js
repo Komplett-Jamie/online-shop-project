@@ -1,34 +1,46 @@
 class UserApi   {
     constructor()   {
         this.baseUrl = "https://jamiestore.herokuapp.com/User/"
+        this.state = getState();
     }
 
-    post()  {
-
+    async get(path)   {
+        const curlDetails = {
+            headers:    {
+                AuthToken: this.state.authToken,
+            },
+        }
+        let apiFetch = await fetch(this.baseUrl + path, curlDetails)
+        return apiFetch;
     }
 
-    get()   {
-
+    async post(path, curlBody)    {
+        const curlDetails = {
+            method: 'POST',
+            headers:    {
+                'accept': 'application/json',
+                'Content-Type': 'application/json',
+                authToken: this.state.authToken
+            },
+            body: curlBody,
+        };
+        let apiFetch = await fetch(this.baseUrl + path, curlDetails)
+        return apiFetch;
     }
 
-    async userRegister()  {
-
+    async userRegister(curlBody)  {
+        return await this.post("Register", curlBody)
     }
 
-    async userLogin() {
-
+    async userLogin(curlBody) {
+        return await this.post("Login", curlBody)
     }
 
-    userLogout()    {
-
+    async userLogout()    {
+        return await this.post("Logout", null)
     }
 
-    currentUser()   {
-
+    async currentUser()   {
+        return await this.get("Current")
     }
-
-    allRegisteredUsers()    {
-
-    }
-
 }

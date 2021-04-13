@@ -1,4 +1,10 @@
 subscribeToEvent("pageLoad", async function categoryApi() {
+
+
+    // let CategoryApi = new divApi()
+    // let response = await CategoryApi.Categories()
+
+
     const CategoriesUrl = "https://jamiestore.herokuapp.com/Categories";
 
     const curlDetails = {

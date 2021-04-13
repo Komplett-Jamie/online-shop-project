@@ -1,7 +1,5 @@
 subscribeToEvent("pageLoad", async function frontPageRandomProducts()  {
-
-    let productsApi = new ProductApi();
+    let productsApi = new ProductsApi();
     let response = await productsApi.randomProducts(10)
-
-    publishEvent("randomProducts", response);
+    publishEvent("randomProducts", await response.json());
 })
