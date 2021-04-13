@@ -21,7 +21,7 @@ function makeCategoryTree(categoryCall) {
             categoryTree.push(node);
         }
     }
-    console.log(categoryTree)
+
     for (var i = 0; i < categoryTree.length; i++)  {
         extractedCategory = categoryTree[i];
         renderCategory(extractedCategory, document.getElementById("category_list"));

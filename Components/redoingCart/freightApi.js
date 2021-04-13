@@ -1,17 +1,7 @@
 subscribeToEvent("pageLoad", async function freightOptions() {
-    let authToken = getState().authToken;
-    const freightApi = "https://jamiestore.herokuapp.com/Freight/FreightOptions";
-
-    const freightDetails = {
-        method: 'GET',
-        headers:    {
-            AuthToken: authToken,
-            "accept": "text/plain",
-        },
-    }
-    let apiFetch = await fetch(freightApi, freightDetails);
-    let response = await apiFetch.json();
-    publishEvent("freightOptions", response);
+    let freightOptions = new FreightOptions();
+    let response = await freightOptions.getFreightOptions()
+    publishEvent("freightOptions", await response.json());
 })
 
 subscribeToEvent("freightOptionSelected", async function chosenFreightOption(freightName)  {

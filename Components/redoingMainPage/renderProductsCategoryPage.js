@@ -1,11 +1,10 @@
 subscribeToEvent("categoryCallPageApiReturn", function(response)    {
-    console.log(response)
+
     let baseCount = 0;
     let amountOfProductsPerPage = 19;
     let placing = document.getElementById("random-products");
 
     for (var i = baseCount; i <= (amountOfProductsPerPage + baseCount - 1) ; i++) {
-        console.log(i);
         let productElement = document.createElement("div");
         productElement.innerHTML = `
             <a href="./../Pages/productPage.html?id=${response[i].id}">
