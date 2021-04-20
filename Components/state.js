@@ -38,4 +38,5 @@ subscribeToEvent("userClickLogout", function handleLogout() {
     state.isLoggedIn = false;
     state.user = null;
     sessionStorage.clear("state");
+    publishEvent("userIsLoggedOut", state)
 })

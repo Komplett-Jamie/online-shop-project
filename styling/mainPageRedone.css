@@ -48,8 +48,9 @@
 }
 
 #icon-container a {
-text-decoration: none;
-text-align: center;
+    text-decoration: none;
+    text-align: center;
+    position: relative;
 }
 
 .dropdown-content {
@@ -58,13 +59,14 @@ text-align: center;
     background-color: grey;
     min-width: 100px;
     z-index: 1;
-    }
+    overflow: auto;
+}
 
 .dropdown-content a {
     color: rgb(255, 255, 255);
     padding: 5px;
     text-decoration: none;
-    display: block;
+    display: inline-block;
     font-size: 15px;
     font-weight: bold;
 }
@@ -91,7 +93,7 @@ text-align: center;
     border: 1px solid blue;
 }
 
-.footer-container {
+/* .footer-container {
     background:#fafafa;
     border-top:1px solid blue;
     display: flex;
@@ -116,7 +118,7 @@ text-align: center;
     text-transform: uppercase;
     letter-spacing: 10px;
     text-decoration: none;
-}
+} */
 
 /* ----------------------------------- */
 /* ---------------randomproduct------- */

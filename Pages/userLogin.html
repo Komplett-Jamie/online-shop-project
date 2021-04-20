@@ -21,7 +21,8 @@
             </div>
         </div>
     </header>
-    <div class="login-page">
+    <user-login></user-login>
+    <!-- <div class="login-page">
         <div class="form-container">
             <form onsubmit="handleLogin(event)" id="loginForm" class="login-form">
                 <label for="email">Email</label>
@@ -42,7 +43,7 @@
                 <p>Need to register an account? <a href="./userRegister.html">Register here</a></p>
             </form>
         </div>
-    </div>
+    </div> -->
     <footer>
         <div class="footer-container">
             <div class="footer-wrapper">
@@ -57,6 +58,7 @@
         </div>
     </footer>
 </div>
+<script type="module" src="./../Components/webComponents/components.js"></script>
 <script src="./../Components/redoingCart/eventBus.js"></script>
 <script src="./../Components/state.js"></script>
 <script src="./../Components/redoingMainPage/userLogin.js"></script>
@@ -70,12 +72,12 @@
 
 <script>
 
-function handleLogin(event)  {
-    event.preventDefault();
-    let emailInput = document.getElementById("email").value;
-    let passwordInput = document.getElementById("password").value;
-    publishEvent("userLogin", {emailInput, passwordInput})
-}
+// function handleLogin(event)  {
+//     event.preventDefault();
+//     let emailInput = document.getElementById("email").value;
+//     let passwordInput = document.getElementById("password").value;
+//     publishEvent("userLogin", {emailInput, passwordInput})
+// }
 
 subscribeToEvent("userLoginUnauthorized", function(response)   {
     document.getElementById("error_handling").innerText = "Please check your password or register for a free account!";
@@ -83,7 +85,7 @@ subscribeToEvent("userLoginUnauthorized", function(response)   {
 
 subscribeToEvent("userLoginAuthorized", function(response)  {
     document.getElementById("error_handling").innerText = "Thank you for loging in, you will be redirected soon!";
-    setTimeout(function(){window.location.assign("./mainPage.html")}, 3000);
+    // setTimeout(function(){window.location.assign("./mainPage.html")}, 3000);
 })
 
 </script>
