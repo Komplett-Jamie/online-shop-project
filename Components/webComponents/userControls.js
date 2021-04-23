@@ -93,7 +93,26 @@ connectedCallback() {
     `
     this.querySelector("#logout").addEventListener("click", this.logoutUser);
     this.querySelector("#user_icon").addEventListener("click", this.dropdownMenu)
-    // this.querySelector("#small-cart-link").addEventListener("click", this.checkIfUserLoggedIn)
+
+    subscribeToEvent("smallCartStateUpdated", function(smallCartState) {
+        console.log(smallCartState)
+        let totalCartItems = smallCartState.items.reduce((total, n) => total + n.productQuantity, 0);
+        this.querySelector("#small_cart").innerText = totalCartItems || 0;
+    }.bind(this));
+
+    subscribeToEvent("userIsLoggedIn", function(state) {
+        let usernameDiv = this.querySelector("#user_name_toggle");
+        if (state.isLoggedIn === true)  {
+            usernameDiv.innerHTML = state.user.name;
+        }   
+    }.bind(this));
+    
+    subscribeToEvent("userIsLoggedOut", function(state) {
+        let usernameDiv = this.querySelector("#user_name_toggle");
+        if (state.isLoggedIn === false) {
+            usernameDiv.innerHTML = "Log in";
+        }  
+    }.bind(this));
 }
 
 logoutUser()    {
@@ -110,7 +129,8 @@ dropdownMenu()  {
     }
 }
 
-// checkIfUserLoggedIn()   {
+// livsforsikring cecilie - 1375,- / år 
+//                 jamie - 1509,- / år
 
-// }
+// tlf - 21407876. Julia.
 }

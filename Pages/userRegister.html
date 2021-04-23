@@ -5,99 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./../styling/register-login-logout.css">
-    <link rel="stylesheet" href="./../styling/mainPage.css">
 </head>
 <body>
-<div class="main-page-container">
-    <header>
-        <div id="header-container">
-            <div id="header-wrapper">
-                <div id="logo">
-                    <a href="./mainPage.html">
-                        <img src="https://logos.textgiraffe.com/logos/logo-name/Jamie-designstyle-kiddo-m.png" style="width: 50%;" alt="logo-b2c-svg" href="#">
-                    </a>
-                </div>
-            </div>
-        </div>
-    </header>
-    <div class="register-page">
-        <div class="form-container">
-            <form onsubmit="handleRegister(event)" id="registerNewUserForm" class="register-form">
-                <label for="name">Name</label>
-                    <input 
-                    required 
-                    id="name" 
-                    type="text" 
-                    name="name">
-                <label for="email">Email</label>
-                    <input 
-                    required 
-                    id="email" 
-                    type="email" 
-                    name="email">
-                <label for="password">Password</label>
-                    <input 
-                    required 
-                    min="8" 
-                    id="password" 
-                    type="password" 
-                    name="password">
-                <label for="repeatPassword">Confirm Password</label>
-                    <input 
-                    required 
-                    min="8" 
-                    id="confirm_password" 
-                    type="password" 
-                    name="confirm_password">
-                <button>Create Account</button>
-                <div class="error-handling" id="error_handling"></div>
-                <p>Already registered? <a href="./userLogin.html">Sign in</a></p>
-            </form>
-        </div>
-    </div>
-    <footer>
-        <div class="footer-container">
-            <div class="footer-wrapper">
-                <div class="footer-social-contact">
-                    FACEBOOK - INSTAGRAM - LINKEDIN
-                </div>
-                <div class="footer-site-info">
-                    All rights reserved © 2021 komplett.no
-                </div>
-                <a href="https://codepen.io/jamie-kielland">Jamie Kielland</a>
-            </div>
-        </div>
-    </footer>
-</div>
+    <custom-header></custom-header>
+        <user-register></user-register>
+    <custom-footer></custom-footer>
+
+<script type="module" src="./../Components/webComponents/components.js"></script>
 <script src="./../Components/redoingCart/eventBus.js"></script>
 <script src="./../Components/state.js"></script>
 <script src="./../Components/redoingMainPage/userRegister.js"></script>
 <script src="./../Components/redoingMainPage/fetchUserApi.js"></script>
 <script src="./../inheretanceApi/mainApi.js"></script>
-<script src="./../inheretanceApi/productsApi.js"></script>
 <script src="./../inheretanceApi/userApi.js"></script>
 <script src="./../inheretanceApi/cartApi.js"></script>
-<script src="./../inheretanceApi/freightOptionsApi.js"></script>
-<script src="./../inheretanceApi/categoriesApi.js"></script>
-<script>
-function handleRegister(event)  {
-    event.preventDefault();
-    let emailInput = document.getElementById("email").value;
-    let nameInput = document.getElementById("name").value;
-    let passwordInput = document.getElementById("password").value;
-    let repeatPasswordInput = document.getElementById("confirm_password").value;
-    publishEvent("userRegister", {emailInput, nameInput, passwordInput, repeatPasswordInput})
-}
-
-subscribeToEvent("userRegisterEmailAlreadyInUse", function(response)    {
-    document.getElementById("error_handling").innerText = "This Email adress is already registered."
-})
-
-subscribeToEvent("userRegistered", function(response)   {
-    document.getElementById("error_handling").innerText = "Thank you for registering, you will be redirected soon!";
-    setTimeout(function(){window.location.assign("./mainPage.html")}, 2000);
-})
-</script>
 </body>
 </html>

@@ -42,7 +42,7 @@ function removeItemFromCart(productId)   {
 }
 
 function renderCountryList(response)    {
-    let htmlContainer = document.getElementById("country-options");
+    let htmlContainer = document.getElementById("country");
     for (var i = 0; i < response.length; i++ )  {
         htmlContainer.innerHTML += 
         `

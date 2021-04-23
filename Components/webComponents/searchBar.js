@@ -20,8 +20,6 @@ export class SearchBar extends HTMLElement  {
         }
         </style>
         `
-
-        
         this.querySelector("#search_input").addEventListener("onkeyup", mainPageSearchInputUser(event))
     }
 

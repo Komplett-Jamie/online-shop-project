@@ -123,6 +123,6 @@ export class RandomProducts extends HTMLElement {
         }
     }
     addProductToCart(productId, productQuantity)   {
-        publishEvent("addToCart", {productId, productQuantity})
+        publishEvent("addToCart", { productId, productQuantity })
     }
 }

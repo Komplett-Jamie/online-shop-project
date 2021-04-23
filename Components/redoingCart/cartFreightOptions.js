@@ -21,7 +21,7 @@ function renderFreightOptions(freightOptions, selectedFreightOption) {
         renderContainer.innerHTML +=
         `
             <li>
-            <input ${freightOption.name === selectedFreightOption ? "checked" : ""} onclick="freightOptionChoice('${freightOption.name}')" name="radio-input" class="radio-input" type="radio" id="${freightOption.name}" value="${freightOption.name}-radio-value">
+            <input ${freightOption.name === selectedFreightOption ? "checked" : ""} onclick="freightOptionChoice('${freightOption.name}')" name="radio-input" class="radio-input" type="radio" id="${freightOption.name}" value="${freightOption.name}-radio-value" data-log>
             <label class="radio-label" for="${freightOption.name}"><span>${freightName}:</span> ${freightOption.price},-</label>
             </li>
         `

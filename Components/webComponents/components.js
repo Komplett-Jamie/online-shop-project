@@ -6,6 +6,8 @@ import { RandomProducts } from "./randomProducts.js";
 import { DropdownMenu } from "./dropdownMenu.js";
 import { SearchBar } from "./searchBar.js";
 import { UserLogin } from "./userLogin.js";
+import { Userregister } from "./userRegister.js";
+import { ProductPage } from "./productPage.js";
 
 customElements.define("custom-header", Header);
 customElements.define("user-controls", UserControls);
@@ -15,3 +17,5 @@ customElements.define("random-products", RandomProducts);
 customElements.define("dropdown-menu", DropdownMenu);
 customElements.define("search-bar", SearchBar);
 customElements.define("user-login", UserLogin);
+customElements.define("user-register", Userregister);
+customElements.define("display-product", ProductPage);

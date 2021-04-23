@@ -4,64 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./../styling/register-login-logout.css">
-    <link rel="stylesheet" href="./../styling/mainPage.css">
     <title>Document</title>
 </head>
 <body>
-<div class="main-page-container">
-    <header>
-        <div id="header-container">
-            <div id="header-wrapper">
-                <div id="logo">
-                    <a href="./mainPage.html">
-                        <img src="https://logos.textgiraffe.com/logos/logo-name/Jamie-designstyle-kiddo-m.png" style="width: 50%;" alt="logo-b2c-svg" href="#">
-                    </a>
-                </div>
-            </div>
-        </div>
-    </header>
-    <user-login></user-login>
-    <!-- <div class="login-page">
-        <div class="form-container">
-            <form onsubmit="handleLogin(event)" id="loginForm" class="login-form">
-                <label for="email">Email</label>
-                <input 
-                required 
-                id="email" 
-                type="email" 
-                name="email">
-            <label for="password">Password</label>
-                <input 
-                required 
-                min="8" 
-                id="password" 
-                type="password" 
-                name="password">
-                <button>Login</button>
-                <div class="error-handling" id="error_handling"></div>
-                <p>Need to register an account? <a href="./userRegister.html">Register here</a></p>
-            </form>
-        </div>
-    </div> -->
-    <footer>
-        <div class="footer-container">
-            <div class="footer-wrapper">
-                <div class="footer-social-contact">
-                    FACEBOOK - INSTAGRAM - LINKEDIN
-                </div>
-                <div class="footer-site-info">
-                    All rights reserved © 2021 komplett.no
-                </div>
-                <a href="https://codepen.io/jamie-kielland">Jamie Kielland</a>
-            </div>
-        </div>
-    </footer>
-</div>
+    <custom-header></custom-header>
+        <user-login></user-login>
+    <custom-footer></custom-footer>
+
 <script type="module" src="./../Components/webComponents/components.js"></script>
 <script src="./../Components/redoingCart/eventBus.js"></script>
 <script src="./../Components/state.js"></script>
-<script src="./../Components/redoingMainPage/userLogin.js"></script>
 <script src="./../Components/redoingMainPage/fetchUserApi.js"></script>
 <script src="./../inheretanceApi/mainApi.js"></script>
 <script src="./../inheretanceApi/productsApi.js"></script>
@@ -69,25 +21,5 @@
 <script src="./../inheretanceApi/cartApi.js"></script>
 <script src="./../inheretanceApi/freightOptionsApi.js"></script>
 <script src="./../inheretanceApi/categoriesApi.js"></script>
-
-<script>
-
-// function handleLogin(event)  {
-//     event.preventDefault();
-//     let emailInput = document.getElementById("email").value;
-//     let passwordInput = document.getElementById("password").value;
-//     publishEvent("userLogin", {emailInput, passwordInput})
-// }
-
-subscribeToEvent("userLoginUnauthorized", function(response)   {
-    document.getElementById("error_handling").innerText = "Please check your password or register for a free account!";
-})
-
-subscribeToEvent("userLoginAuthorized", function(response)  {
-    document.getElementById("error_handling").innerText = "Thank you for loging in, you will be redirected soon!";
-    // setTimeout(function(){window.location.assign("./mainPage.html")}, 3000);
-})
-
-</script>
 </body>
 </html>
