@@ -1,5 +1,5 @@
-export class BillingAddress extends HTMLElement    {
-    constructor()   {
+export class BillingAddress extends HTMLElement {
+    constructor() {
         super();
         this.billingState = {
             fullName: null,
@@ -10,12 +10,11 @@ export class BillingAddress extends HTMLElement    {
             phoneNumber: null,
             country: null,
             orderNotes: undefined,
-        }
+        };
     }
 
     async connectedCallback() {
-        this.innerHTML = 
-        `
+        this.innerHTML = `
         <div class="billing-details">
             Billing Address
             <div class="billing-details-container">
@@ -77,36 +76,44 @@ export class BillingAddress extends HTMLElement    {
                 </div>
             </div>
         </div>
-        `
+        `;
 
+        let countryList = await this.loadCountryList();
+        this.renderCountryList(countryList);
 
-    let countryList = await this.loadCountryList();
-    this.renderCountryList(countryList);
+        let logMe = this.querySelectorAll("[data-log]");
 
-    let logMe = this.querySelectorAll('[data-log]');
+        for (let item of logMe) {
+            item.addEventListener(
+                "focusout",
+                function (event) {
+                    this.billingState[event.target.id] = event.target.value;
+                    console.log(this.billingState);
+                    this.dispatchEvent(
+                        new CustomEvent("onUpdate", {
+                            detail: this.billingState,
+                            bubbles: false,
+                        })
+                    );
+                }.bind(this),
+                false
+            );
+        }
+    }
 
-    for (let item of logMe) {
-        item.addEventListener('focusout', function(event) {
-            this.billingState[event.target.id] = event.target.value;
-            console.log(this.billingState);
-            this.dispatchEvent(new CustomEvent("onUpdate", { detail: this.billingState, bubbles: false }));
-        }.bind(this), false);
-    }}
-
-    async loadCountryList()  {
+    async loadCountryList() {
         let url = "https://restcountries.eu/rest/v2/all";
-        let apiFetch = await fetch(url)
+        let apiFetch = await fetch(url);
         let response = await apiFetch.json();
         return await response;
     }
 
-    renderCountryList(response)    {
+    renderCountryList(response) {
         let htmlContainer = this.querySelector("#country");
-        for (var i = 0; i < response.length; i++ )  {
-            htmlContainer.innerHTML += 
-            `
+        for (var i = 0; i < response.length; i++) {
+            htmlContainer.innerHTML += `
             <option value="${response[i].name}">${response[i].name}</option>
-            `
+            `;
         }
     }
 }

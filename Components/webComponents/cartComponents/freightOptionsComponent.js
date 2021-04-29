@@ -1,19 +1,18 @@
 export class FreightOptions extends HTMLElement {
-    constructor()   {
-        super()
+    constructor() {
+        super();
 
         this.freightChoice = {
             freight: cartState.chosenFreightOption,
-        }
+        };
     }
 
     connectedCallback() {
-        this.innerHTML = 
-        `
+        this.innerHTML = `
         <div id="cart-freight-options">
             <span>Freight Options</span>
             <br>          
         </div>
-        `
+        `;
     }
 }

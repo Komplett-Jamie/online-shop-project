@@ -1,11 +1,10 @@
-export class Footer extends HTMLElement    {
-    constructor()   {
+export class Footer extends HTMLElement {
+    constructor() {
         super();
     }
 
     connectedCallback() {
-        this.innerHTML = 
-    `
+        this.innerHTML = `
     <div class="footer-container">
         <div class="footer-wrapper">
             <div class="footer-social-contact">
@@ -46,6 +45,6 @@ export class Footer extends HTMLElement    {
         text-decoration: none;
     }
     </style>
-    `
+    `;
     }
 }

@@ -1,5 +1,5 @@
 export class CreditcardForm extends HTMLElement {
-    constructor()   {
+    constructor() {
         super();
 
         this.creditcardDetails = {
@@ -7,12 +7,11 @@ export class CreditcardForm extends HTMLElement {
             expirationDateMonth: null,
             expirationDateYear: null,
             cardCVC: null,
-        }
+        };
     }
 
     connectedCallback() {
-        this.innerHTML = 
-        `
+        this.innerHTML = `
         <div class="card-details">
             Credit Card Details
             <div class="credit-card-details-container">
@@ -73,15 +72,25 @@ export class CreditcardForm extends HTMLElement {
                 </div>
             </div>
         </div>
-        `
+        `;
 
-    let logMe = this.querySelectorAll('[data-log]');
+        let logMe = this.querySelectorAll("[data-log]");
 
-    for (let item of logMe) {
-        item.addEventListener('focusout', function(event) {
-            this.creditcardDetails[event.target.id] = event.target.value;
-                console.log(this.creditcardDetails)
-                this.dispatchEvent(new CustomEvent("onUpdate", { detail: this.creditcardDetails, bubbles: false }));
-        }.bind(this), false);
-    }}
+        for (let item of logMe) {
+            item.addEventListener(
+                "focusout",
+                function (event) {
+                    this.creditcardDetails[event.target.id] =
+                        event.target.value;
+                    this.dispatchEvent(
+                        new CustomEvent("onUpdate", {
+                            detail: this.creditcardDetails,
+                            bubbles: false,
+                        })
+                    );
+                }.bind(this),
+                false
+            );
+        }
+    }
 }

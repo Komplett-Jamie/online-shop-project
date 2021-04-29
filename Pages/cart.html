@@ -1,42 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="./../styling/mainPage.css"> -->
-<link rel="stylesheet" href="./../styling/cart.css">
-    <title>Document</title>
-</head>
-<body onload="onLoadCart()">
-    <custom-header></custom-header>
-    <big-cart></big-cart>
-    <cart-forms></cart-forms>
-    <custom-footer></custom-footer>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- <link rel="stylesheet" href="./../styling/mainPage.css"> -->
+        <link rel="stylesheet" href="./../styling/cart.css" />
+        <title>Document</title>
+    </head>
+    <body onload="onLoadCart()">
+        <custom-header></custom-header>
+        <big-cart></big-cart>
+        <cart-forms></cart-forms>
+        <custom-footer></custom-footer>
 
-<script type="module" src="./../Components/webComponents/components.js"></script>
-<script type="module" src="./../Components/webComponents/cartComponents/cartComponentsBus.js"></script>
-    <script src="./../Components/redoingCart/eventBus.js"></script>
-    <script src="./../Components/redoingCart/fetchCart.js"></script>
-    <script src="./../Components/redoingCart/updateQuantityApi.js"></script>
-    <script src="./../Components/redoingCart/freightApi.js"></script>
-    <script src="./../Components/redoingCart/cartFreightOptions.js"></script>
-    <script src="./../Components/redoingCart/removeItemApi.js"></script>
-    <script src="./../Components/redoingCart/cartState.js"></script>
-    <script src="./../Components/redoingMainPage/smallCartState.js"></script>
-    <script src="./../Components/state.js"></script>
-    <script src="./../Components/redoingCart/confirmPurchasesCart.js"></script>
-    <script src="./../inheretanceApi/mainApi.js"></script>
-    <script src="./../inheretanceApi/productsApi.js"></script>
-    <script src="./../inheretanceApi/userApi.js"></script>
-    <script src="./../inheretanceApi/cartApi.js"></script>
-    <script src="./../inheretanceApi/freightOptionsApi.js"></script>
-</body>
-<script>
-
-async function onLoadCart()  {
-    publishEvent("pageLoad")
-}
-
-</script>
+        <script
+            type="module"
+            src="./../Components/webComponents/components.js"
+        ></script>
+        <script
+            type="module"
+            src="./../Components/webComponents/cartComponents/cartComponentsBus.js"
+        ></script>
+        <script src="./../Components/redoingCart/eventBus.js"></script>
+        <script src="./../Components/redoingCart/fetchCart.js"></script>
+        <script src="./../Components/redoingCart/updateQuantityApi.js"></script>
+        <script src="./../Components/redoingCart/freightApi.js"></script>
+        <script src="./../Components/redoingCart/cartFreightOptions.js"></script>
+        <script src="./../Components/redoingCart/removeItemApi.js"></script>
+        <script src="./../Components/redoingCart/cartState.js"></script>
+        <script src="./../Components/redoingMainPage/smallCartState.js"></script>
+        <script src="./../Components/state.js"></script>
+        <script src="./../Components/redoingCart/confirmPurchasesCart.js"></script>
+        <script src="./../inheretanceApi/mainApi.js"></script>
+        <script src="./../inheretanceApi/productsApi.js"></script>
+        <script src="./../inheretanceApi/userApi.js"></script>
+        <script src="./../inheretanceApi/cartApi.js"></script>
+        <script src="./../inheretanceApi/freightOptionsApi.js"></script>
+    </body>
+    <script>
+        async function onLoadCart() {
+            publishEvent("pageLoad");
+        }
+    </script>
 </html>

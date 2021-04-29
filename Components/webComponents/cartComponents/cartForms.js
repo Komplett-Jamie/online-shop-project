@@ -1,11 +1,11 @@
-export class CartForms extends HTMLElement  {
-    constructor()   {
-        super()
+export class CartForms extends HTMLElement {
+    constructor() {
+        super();
         this.testCartState = {
-            address:    {
+            address: {
                 country: null,
                 city: null,
-                street: null, 
+                street: null,
             },
             creditCard: {
                 creditCardNumber: null,
@@ -14,12 +14,11 @@ export class CartForms extends HTMLElement  {
                 ccv: null,
             },
             freightOption: null,
-        }
+        };
     }
 
     connectedCallback() {
-        this.innerHTML =
-        `
+        this.innerHTML = `
         <form>
         <cart-summary></cart-summary>
         <billing-address></billing-address>
@@ -27,46 +26,65 @@ export class CartForms extends HTMLElement  {
         <freight-options></freight-options>
         <cart-button></cart-button>
         </form>
-        `
+        `;
 
-        this.querySelector("billing-address").addEventListener("onUpdate", function(event)   {
-            this.testCartState.address.city = event.detail.addressLineTwo;
-            this.testCartState.address.country = event.detail.country;
-            this.testCartState.address.street = event.detail.street;
-        }.bind(this))
+        this.querySelector("billing-address").addEventListener(
+            "onUpdate",
+            function (event) {
+                this.testCartState.address.city = event.detail.addressLineTwo;
+                this.testCartState.address.country = event.detail.country;
+                this.testCartState.address.street = event.detail.street;
+            }.bind(this)
+        );
 
-        this.querySelector("creditcard-details").addEventListener("onUpdate", function(event)    {
-            this.testCartState.creditCard.creditCardNumber = event.detail.cardNumber;
-            this.testCartState.creditCard.expireMonth = event.detail.expirationDateMonth;
-            this.testCartState.creditCard.expireYear = event.detail.expirationDateYear;
-            this.testCartState.creditCard.ccv = event.detail.cardCVC;
-            console.log(this.testCartState)
-        }.bind(this))
-        
-        subscribeToEvent("cartStateUpdated", function thisFreight(cartState) {
-            this.testCartState.freightOption = cartState.chosenFreightOption;
-        }.bind(this));
+        this.querySelector("creditcard-details").addEventListener(
+            "onUpdate",
+            function (event) {
+                this.testCartState.creditCard.creditCardNumber =
+                    event.detail.cardNumber;
+                this.testCartState.creditCard.expireMonth =
+                    event.detail.expirationDateMonth;
+                this.testCartState.creditCard.expireYear =
+                    event.detail.expirationDateYear;
+                this.testCartState.creditCard.ccv = event.detail.cardCVC;
+                console.log(this.testCartState);
+            }.bind(this)
+        );
 
-        this.querySelector("form").addEventListener("onsubmit", async function() {
-            let cartApi = new CartApi()
-            let response = await cartApi.confirmPurchases(JSON.stringify(this.testCartState))
-            publishEvent("responseFromCheckout", await response.json());
-        }.bind(this))
+        subscribeToEvent(
+            "cartStateUpdated",
+            function thisFreight(cartState) {
+                this.testCartState.freightOption =
+                    cartState.chosenFreightOption;
+            }.bind(this)
+        );
+
+        this.querySelector("form").addEventListener(
+            "onsubmit",
+            async function () {
+                let cartApi = new CartApi();
+                let response = await cartApi.confirmPurchases(
+                    JSON.stringify(this.testCartState)
+                );
+                publishEvent("responseFromCheckout", await response.json());
+            }.bind(this)
+        );
     }
 }
-subscribeToEvent("responseFromCheckout", function(data) {
-
+subscribeToEvent("responseFromCheckout", function (data) {
     let creditcardNumberWarning = this.querySelector("#cardNumberErrorMessage");
     let creditcardDateWarning = this.querySelector("#cardDateErrorMessage");
     let creditcardCvcWarning = this.querySelector("#cardCvcErrorMessage");
-    
-        if (data.errors.hasOwnProperty("CreditCard.ExpireYear"))   {
-            creditcardDateWarning.innerText += data.errors["CreditCard.ExpireYear"][0];
-        }
-        if (data.errors.hasOwnProperty("CreditCard.CCV"))   {
-            creditcardCvcWarning.innerText += data.errors["CreditCard.CCV"][0];
-        }
-        if (data.errors.hasOwnProperty("CreditCard.CreditCardNumber"))   {
-            creditcardNumberWarning.innerText += data.errors["CreditCard.CreditCardNumber"][0];
-        }
-})
+
+    if (data.errors.hasOwnProperty("CreditCard.ExpireYear")) {
+        creditcardDateWarning.innerText +=
+            data.errors["CreditCard.ExpireYear"][0];
+    }
+    if (data.errors.hasOwnProperty("CreditCard.CCV")) {
+        creditcardCvcWarning.innerText += data.errors["CreditCard.CCV"][0];
+    }
+    if (data.errors.hasOwnProperty("CreditCard.CreditCardNumber")) {
+        creditcardNumberWarning.innerText +=
+            data.errors["CreditCard.CreditCardNumber"][0];
+    }
+});

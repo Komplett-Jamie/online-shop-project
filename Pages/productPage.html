@@ -1,48 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="./../styling/mainPageRedone.css">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- <link rel="stylesheet" href="./../styling/mainPageRedone.css">
     <link rel="stylesheet" href="./../styling/dropdownMenu.css"> -->
-    <title>Document</title>
-</head>
-<body onload="productOnLoad()">
-<custom-header></custom-header>
-<display-product></display-product>
-<custom-footer></custom-footer>
-</body>
+        <title>Document</title>
+    </head>
+    <body onload="productOnLoad()">
+        <custom-header></custom-header>
+        <display-product></display-product>
+        <custom-footer></custom-footer>
+    </body>
 
-<script type="module" src="./../Components/webComponents/components.js"></script>
-<script src="./../Components/redoingCart/eventBus.js"></script>
-<script src="./../Components/redoingMainPage/productsApi.js"></script>
-<script src="./../Components/redoingMainPage/smallCartState.js"></script>
-<script src="./../Components/redoingCart/fetchCart.js"></script>
-<script src="./../Components/redoingCart/cartState.js"></script>
-<script src="./../Components/state.js"></script>
-<script src="./../Components/redoingMainPage/fetchUserApi.js"></script>
-<script src="./../Components/redoingMainPage/userNameVisibility.js"></script>
-<script src="./../inheretanceApi/mainApi.js"></script>
-<script src="./../inheretanceApi/productsApi.js"></script>
-<script src="./../inheretanceApi/userApi.js"></script>
-<script src="./../inheretanceApi/cartApi.js"></script>
-<script src="./../inheretanceApi/freightOptionsApi.js"></script>
-<script src="./../inheretanceApi/categoriesApi.js"></script>
-<script>
+    <script
+        type="module"
+        src="./../Components/webComponents/components.js"
+    ></script>
+    <script src="./../Components/redoingCart/eventBus.js"></script>
+    <script src="./../Components/redoingMainPage/productsApi.js"></script>
+    <script src="./../Components/redoingMainPage/smallCartState.js"></script>
+    <script src="./../Components/redoingCart/fetchCart.js"></script>
+    <script src="./../Components/redoingCart/cartState.js"></script>
+    <script src="./../Components/state.js"></script>
+    <script src="./../Components/redoingMainPage/fetchUserApi.js"></script>
+    <script src="./../Components/redoingMainPage/userNameVisibility.js"></script>
+    <script src="./../inheretanceApi/mainApi.js"></script>
+    <script src="./../inheretanceApi/productsApi.js"></script>
+    <script src="./../inheretanceApi/userApi.js"></script>
+    <script src="./../inheretanceApi/cartApi.js"></script>
+    <script src="./../inheretanceApi/freightOptionsApi.js"></script>
+    <script src="./../inheretanceApi/categoriesApi.js"></script>
+    <script>
+        async function productOnLoad() {
+            publishEvent("pageLoad");
+        }
 
-
-async function productOnLoad()  {
-    publishEvent("pageLoad");
-}
-
-subscribeToEvent("fetchedProduct", function(response)    {
+        subscribeToEvent("fetchedProduct", function (response) {
             document.querySelector("#product-Id").innerHTML = response.id;
             document.querySelector("#product-name").innerHTML = response.name;
-            document.querySelector("#product-description").innerHTML = response.description;
-            document.querySelector("#product-image").innerHTML = `<img src="${response.imageUrl.replace(/200/,600)}">`
+            document.querySelector("#product-description").innerHTML =
+                response.description;
+            document.querySelector(
+                "#product-image"
+            ).innerHTML = `<img src="${response.imageUrl.replace(
+                /200/,
+                600
+            )}">`;
             document.querySelector("#product-price").innerHTML = response.price;
-        })
-
-</script>
+        });
+    </script>
 </html>

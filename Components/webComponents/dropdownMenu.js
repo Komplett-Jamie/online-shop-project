@@ -1,8 +1,6 @@
-export class DropdownMenu extends HTMLElement   {
-
+export class DropdownMenu extends HTMLElement {
     async connectedCallback() {
-        this.innerHTML = 
-        `
+        this.innerHTML = `
         <div id="lower-header-container">
         <ul id="category_list">
         </ul>
@@ -58,54 +56,64 @@ export class DropdownMenu extends HTMLElement   {
     }
     
     </style>
-        `
-    subscribeToEvent("categoryCall", function(categoryCall) {
-        this.makeCategoryTree(categoryCall);
-    }.bind(this))};
+        `;
+        subscribeToEvent(
+            "categoryCall",
+            function (categoryCall) {
+                this.makeCategoryTree(categoryCall);
+            }.bind(this)
+        );
+    }
 
     makeCategoryTree(categoryCall) {
         var arr = categoryCall;
         var mapObject = {};
         var node = {};
         var categoryTree = [];
-    
+
         for (var j = 0; j < arr.length; j += 1) {
             mapObject[arr[j].id] = j;
             arr[j].children = [];
         }
-    
+
         for (var j = 0; j < arr.length; j += 1) {
             node = arr[j];
             if (node.parentId !== null) {
-            arr[mapObject[node.parentId]].children.push(node);
+                arr[mapObject[node.parentId]].children.push(node);
             } else {
                 categoryTree.push(node);
             }
         }
 
-        for (var i = 0; i < categoryTree.length; i++)  {
+        for (var i = 0; i < categoryTree.length; i++) {
             var extractedCategory = categoryTree[i];
-            this.renderCategory(extractedCategory, this.querySelector("#category_list"));
+            this.renderCategory(
+                extractedCategory,
+                this.querySelector("#category_list")
+            );
         }
     }
-    
-    renderCategory(category, parent)   {
+
+    renderCategory(category, parent) {
         var listItem = document.createElement("li");
         listItem.innerHTML = category.name;
-        listItem.className = "dropdown"
-    
+        listItem.className = "dropdown";
+
         var categoryLink = document.createElement("li");
-        categoryLink.innerHTML = `<a href="categoryPage.html?categoryId=${category.id}">`+category.name+`</a>`;
-    
+        categoryLink.innerHTML =
+            `<a href="categoryPage.html?categoryId=${category.id}">` +
+            category.name +
+            `</a>`;
+
         var unorderedList = document.createElement("ul");
-        unorderedList.className = "submenu"
-    
-        if (category.children.length > 0)   {
+        unorderedList.className = "submenu";
+
+        if (category.children.length > 0) {
             parent.appendChild(listItem);
             listItem.appendChild(unorderedList);
-        }   else parent.appendChild(categoryLink);
-    
-        for (var i = 0; i < category.children.length; i++)  {
+        } else parent.appendChild(categoryLink);
+
+        for (var i = 0; i < category.children.length; i++) {
             var extractedSubCategory = category.children[i];
             this.renderCategory(extractedSubCategory, unorderedList);
         }
