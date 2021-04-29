@@ -13,7 +13,7 @@ export class BillingAddress extends HTMLElement    {
         }
     }
 
-    connectedCallback() {
+    async connectedCallback() {
         this.innerHTML = 
         `
         <div class="billing-details">
@@ -79,6 +79,10 @@ export class BillingAddress extends HTMLElement    {
         </div>
         `
 
+
+    let countryList = await this.loadCountryList();
+    this.renderCountryList(countryList);
+
     let logMe = this.querySelectorAll('[data-log]');
 
     for (let item of logMe) {
@@ -88,4 +92,21 @@ export class BillingAddress extends HTMLElement    {
             this.dispatchEvent(new CustomEvent("onUpdate", { detail: this.billingState, bubbles: false }));
         }.bind(this), false);
     }}
+
+    async loadCountryList()  {
+        let url = "https://restcountries.eu/rest/v2/all";
+        let apiFetch = await fetch(url)
+        let response = await apiFetch.json();
+        return await response;
+    }
+
+    renderCountryList(response)    {
+        let htmlContainer = this.querySelector("#country");
+        for (var i = 0; i < response.length; i++ )  {
+            htmlContainer.innerHTML += 
+            `
+            <option value="${response[i].name}">${response[i].name}</option>
+            `
+        }
+    }
 }

@@ -128,9 +128,4 @@ dropdownMenu()  {
         menuContent.style.display="";
     }
 }
-
-// livsforsikring cecilie - 1375,- / år 
-//                 jamie - 1509,- / år
-
-// tlf - 21407876. Julia.
 }

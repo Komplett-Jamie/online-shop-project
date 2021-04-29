@@ -24,7 +24,7 @@ export class CreditcardForm extends HTMLElement {
                         type="tel" 
                         inputmode="numeric" 
                         autocomplete="cc-number" 
-                        maxlength="16" 
+                        maxlength="19" 
                         placeholder="xxxx-xxxx-xxxx-xxxx">
                         <br>
                         <span id="cardNumberErrorMessage"></span>

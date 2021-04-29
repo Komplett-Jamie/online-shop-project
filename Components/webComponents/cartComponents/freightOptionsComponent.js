@@ -16,5 +16,4 @@ export class FreightOptions extends HTMLElement {
         </div>
         `
     }
-
 }

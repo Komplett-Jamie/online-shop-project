@@ -9,145 +9,33 @@
     <title>Document</title>
 </head>
 <body onload="onLoadCart()">
-<div class="main-page-container">
     <custom-header></custom-header>
-    <section>
-    <div id="cart-items">
-
-    </div>
-    </section>
-    <section>
-<form class="cart-full-summary" onsubmit="onSubmitConfirmButton(event)" id="cartForm">
-    <div class="cart-info-container">
-        <div class="container-one">
-            <!-- <div id="cart-freight-options">
-            <span>Freight Options</span>
-            <br>          
-            </div> -->
-            <div id="cart-summary">
-            <span>Cart Summary</span>
-            <table>
-                <tr>
-                    <td class="cart-summary-description">Cart total: </td>
-                    <td><span class="cart-summary-call" id="cart-total-price"></span> ,-</td>
-                </tr>
-                <tr>
-                    <td class="cart-summary-description">Total items: </td>
-                    <td><span class="cart-summary-call" id="cart-total-items"></span></span></td>
-                </tr>
-                <tr>
-                    <td  class="cart-summary-description">Shipping: </td>
-                    <td><span class="cart-summary-call" id="cart-shipping"></span>,-</span></td>
-                </tr>
-                <tr>
-                    <td class="cart-summary-description">Total Price: </td>
-                    <td><span class="cart-summary-call" id="cart-total" ></span>,-</span></td>
-                </tr>
-            </table>
-            </div>
-        </div>
-    </div>
-    </section>
+    <big-cart></big-cart>
     <cart-forms></cart-forms>
-    <button class="confirm-purchase-button">Confirm Purchase</button>
-</form>
-    <footer>
-        <div class="footer-container">
-            <div class="footer-wrapper">
-                <div class="footer-social-contact">
-                    FACEBOOK - INSTAGRAM - LINKEDIN
-                </div>
-                <div class="footer-site-info">
-                All rights reserved © 2021 komplett.no
-                </div>
-                <a href="https://codepen.io/jamie-kielland">Jamie Kielland</a>
-            </div>
-        </div>
-    </footer>
-</div>
+    <custom-footer></custom-footer>
+
 <script type="module" src="./../Components/webComponents/components.js"></script>
 <script type="module" src="./../Components/webComponents/cartComponents/cartComponentsBus.js"></script>
-    <!-- <script src="./../Components/checkoutApi.js"></script> -->
     <script src="./../Components/redoingCart/eventBus.js"></script>
     <script src="./../Components/redoingCart/fetchCart.js"></script>
-    <script src="./../Components/redoingCart/bigCart.js"></script>
     <script src="./../Components/redoingCart/updateQuantityApi.js"></script>
-    <script src="./../Components/redoingCart/removeItemApi.js"></script>
     <script src="./../Components/redoingCart/freightApi.js"></script>
     <script src="./../Components/redoingCart/cartFreightOptions.js"></script>
-    <script src="./../Components/redoingCart/cartSummary.js"></script>
-    <script src="./../Components/redoingMainPage/smallCartCounter.js"></script>
-    <script src="./../Components/redoingCart/countrySelectApi.js"></script>
+    <script src="./../Components/redoingCart/removeItemApi.js"></script>
     <script src="./../Components/redoingCart/cartState.js"></script>
     <script src="./../Components/redoingMainPage/smallCartState.js"></script>
     <script src="./../Components/state.js"></script>
-    <script src="./../Components/redoingMainPage/userNameVisibility.js"></script>
     <script src="./../Components/redoingCart/confirmPurchasesCart.js"></script>
     <script src="./../inheretanceApi/mainApi.js"></script>
     <script src="./../inheretanceApi/productsApi.js"></script>
     <script src="./../inheretanceApi/userApi.js"></script>
     <script src="./../inheretanceApi/cartApi.js"></script>
     <script src="./../inheretanceApi/freightOptionsApi.js"></script>
-    <script src="./../inheretanceApi/categoriesApi.js"></script>
-
 </body>
 <script>
 
 async function onLoadCart()  {
     publishEvent("pageLoad")
-}
-
-function dropdownMenu() {
-
-    let dropdownBtn = document.querySelector('.user_icon');
-    let menuContent = document.querySelector('.dropdown-content');
-
-    if(menuContent.style.display===""){
-        menuContent.style.display="flex";
-    } else {
-        menuContent.style.display="";
-    }
-}
-
-function onSubmitConfirmButton(event)    {
-
-    event.preventDefault();
-
-    let cityInput = document.getElementById("addressLineTwo").value;
-    let streetInput = document.getElementById("address").value;
-    let creditcardNumberInput = document.getElementById("cardNumber").value;
-    let expireMonthInput = document.getElementById("expirationDateMonth").value;
-    let expireYearInput = document.getElementById("expirationDateYear").value;
-    let creditcardCvcInput = document.getElementById("cardCVC").value;
-    let countryInput = document.getElementById("country-options").value;
-
-    publishEvent("confirmPurchases", {cityInput, streetInput, creditcardNumberInput, creditcardCvcInput, expireMonthInput, expireYearInput, countryInput});
-}
-
-subscribeToEvent("responseFromCheckout", function(data) {
-
-    let creditcardNumberWarning = document.getElementById("cardNumberErrorMessage");
-    let creditcardDateWarning = document.getElementById("cardDateErrorMessage");
-    let creditcardCvcWarning = document.getElementById("cardCvcErrorMessage");
-    
-        if (data.errors.hasOwnProperty("CreditCard.ExpireYear"))   {
-            creditcardDateWarning.innerText += data.errors["CreditCard.ExpireYear"][0];
-        }
-        if (data.errors.hasOwnProperty("CreditCard.CCV"))   {
-            creditcardCvcWarning.innerText += data.errors["CreditCard.CCV"][0];
-        }
-        if (data.errors.hasOwnProperty("CreditCard.CreditCardNumber"))   {
-            creditcardNumberWarning.innerText += data.errors["CreditCard.CreditCardNumber"][0];
-        }
-})
-
-
-function formatCreditCard() {
-    var x = document.getElementById("cardNumber");
-    var index = x.value.lastIndexOf('-');
-    var test = x.value.substr(index + 1);
-    if  (test.length === 4 && x.value.length<19)
-        x.value = x.value + '-';
 }
 
 </script>

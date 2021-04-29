@@ -4,5 +4,5 @@ subscribeToEvent("quantityUpdated", async function updateQuantityCall({productId
         "productId": productId,
     }
     let cartApi = new CartApi()
-    await cartApi.addToCart(JSON.stringify(product))
+    await cartApi.updateQuantity(JSON.stringify(product))
 })
