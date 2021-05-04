@@ -1,129 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./../styling/mainPageRedone.css">
-    <link rel="stylesheet" href="./../styling/dropdownMenu.css">
-</head>
-<body onload="onLoadCategoryPage()">
-        <div class="main-page-container">
-            <header>
-                <div id="header-container">
-                    <div id="header-wrapper">
-                        <div id="logo">
-                            <a href="./mainPage.html">
-                                <img src="https://logos.textgiraffe.com/logos/logo-name/Jamie-designstyle-kiddo-m.png" style="width: 50%;" alt="logo-b2c-svg" href="#">
-                            </a>
-                        </div>
-                        <div id="searchBar">
-                            <input id="search_input" type="text" placeholder="Search for products...">
-                        </div>
-                        <div id="user_controls">
-                            <div id="icon-container">
-                                <div onclick="dropdownMenu()" id="user_icon">
-                                    <svg width="20" height="20" viewBox="0 0 16 16"><path fill="#333" d="M13.477 16h-10.954c-0.14 0-0.274-0.059-0.369-0.163s-0.142-0.242-0.129-0.382c0.11-1.22 0.585-2.363 1.373-3.305 0.697-0.832 1.59-1.452 2.602-1.809l0-0.475c-0.562-0.385-1.037-0.926-1.385-1.582-0.402-0.758-0.615-1.634-0.615-2.535 0-1.251 0.405-2.431 1.139-3.323 0.758-0.92 1.774-1.427 2.861-1.427s2.103 0.507 2.861 1.427c0.735 0.892 1.139 2.072 1.139 3.323 0 0.901-0.213 1.777-0.615 2.535-0.348 0.655-0.823 1.197-1.385 1.582l0 0.475c1.012 0.357 1.905 0.977 2.602 1.809 0.788 0.942 1.263 2.084 1.373 3.305 0.013 0.14-0.034 0.279-0.129 0.382s-0.229 0.163-0.369 0.163zM3.1 15h9.8c-0.164-0.81-0.527-1.565-1.064-2.208-0.649-0.776-1.504-1.33-2.471-1.604-0.215-0.061-0.364-0.257-0.364-0.481l-0-1.116c0-0.179 0.095-0.344 0.25-0.433 1.063-0.613 1.75-1.951 1.75-3.408 0-2.068-1.346-3.75-3-3.75s-3 1.682-3 3.75c0 1.457 0.687 2.795 1.75 3.408 0.155 0.089 0.25 0.254 0.25 0.433l-0 1.116c0 0.224-0.149 0.42-0.364 0.481-0.967 0.274-1.822 0.828-2.471 1.604-0.538 0.642-0.9 1.397-1.064 2.208z"></path></svg>
-                                    <div class="dropdown-content">
-                                        <a id="toggle-login-on-off" href="./../Pages/userLogin.html">Login</a>
-                                        <a href="./../Pages/userRegister.html">Register</a>
-                                        <a id="logout" onclick="logoutUser()">Logout</a>
-                                    </div>
-                                </div>
-                                <span id="user_name_toggle" class="user_name">Log in</span>
-                            </div>
-                            <div id="icon-container">
-                                <a href="./../Pages/cart.html" onclick=" return checkIfUserLoggedIn()">
-                                <div id="small_cart">
-                                    <svg width="20" height="20" viewBox="0 0 16 16"><path fill="#333" d="M6 14.5c0 0.828-0.672 1.5-1.5 1.5s-1.5-0.672-1.5-1.5c0-0.828 0.672-1.5 1.5-1.5s1.5 0.672 1.5 1.5z"></path><path fill="#333" d="M16 14.5c0 0.828-0.672 1.5-1.5 1.5s-1.5-0.672-1.5-1.5c0-0.828 0.672-1.5 1.5-1.5s1.5 0.672 1.5 1.5z"></path><path fill="#333" d="M16 8v-6h-12c0-0.552-0.448-1-1-1h-3v1h2l0.751 6.438c-0.458 0.367-0.751 0.93-0.751 1.562 0 1.105 0.895 2 2 2h12v-1h-12c-0.552 0-1-0.448-1-1 0-0.003 0-0.007 0-0.010l13-1.99z"></path></svg>
-                                </div>
-                                <span>Cart</span>
-                                </a>
-                                <span id="cart_no_login_error"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="lower-header-container">
-                    <ul id="category_list">
-                    </ul>
-                </div>
-            </header>
-            <section id="random-products-container">
-                <div id="random-products">
-            
-                </div>
-                <div id="output"></div>
-            </section>
-                <footer>
-                    <div class="footer-container">
-                        <div class="footer-wrapper">
-                            <div class="footer-social-contact">
-                                FACEBOOK - INSTAGRAM - LINKEDIN
-                            </div>
-                            <div class="footer-site-info">
-                            All rights reserved © 2021 komplett.no
-                            </div>
-                            <a href="https://codepen.io/jamie-kielland">Jamie Kielland</a>
-                        </div>
-                    </div>
-                </footer>
-            </div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="./../styling/mainPageRedone.css" />
+        <link rel="stylesheet" href="./../styling/dropdownMenu.css" />
+    </head>
+    <body onload="onLoadCategoryPage()">
+        <custom-header></custom-header>
+        <category-view></category-view>
+        <custom-footer></custom-footer>
     </body>
-<script src="./../Components/redoingCart/eventBus.js"></script>
-<script src="./../Components/redoingCart/fetchCart.js"></script>
-<script src="./../Components/redoingMainPage/addProductToCartApi.js"></script>
-<script src="./../Components/redoingMainPage/smallCartCounter.js"></script>
-<script src="./../Components/redoingMainPage/categoryCall.js"></script>
-<script src="./../Components/redoingMainPage/categoryDropdownRender.js"></script>
-<script src="./../Components/redoingCart/cartState.js"></script>
-<script src="./../Components/redoingMainPage/smallCartState.js"></script>
-<script src="./../Components/state.js"></script>
-<script src="./../Components/redoingMainPage/fetchUserApi.js"></script>
-<script src="./../Components/redoingMainPage/userNameVisibility.js"></script>
-<script src="./../Components/redoingMainPage/userLogout.js"></script>
-<script src="./../Components/redoingMainPage/searchFunctionality.js"></script>
-<script src="./../Components/redoingMainPage/categoryCallPageApi.js"></script>
-<script src="./../Components/redoingMainPage/renderProductsCategoryPage.js"></script>
-<script src="./../inheretanceApi/mainApi.js"></script>
-<script src="./../inheretanceApi/productsApi.js"></script>
-<script src="./../inheretanceApi/userApi.js"></script>
-<script src="./../inheretanceApi/cartApi.js"></script>
-<script src="./../inheretanceApi/freightOptionsApi.js"></script>
-<script src="./../inheretanceApi/categoriesApi.js"></script>
+    <script src="./../Components/redoingCart/eventBus.js"></script>
+    <script src="./../Components/redoingCart/fetchCart.js"></script>
+    <script src="./../Components/redoingMainPage/addProductToCartApi.js"></script>
 
+    <script src="./../Components/redoingCart/cartState.js"></script>
+    <script src="./../Components/redoingMainPage/smallCartState.js"></script>
+    <script src="./../Components/state.js"></script>
+    <script src="./../Components/redoingMainPage/fetchUserApi.js"></script>
+    <script src="./../Components/redoingMainPage/userLogout.js"></script>
+    <script src="./../Components/redoingMainPage/searchFunctionality.js"></script>
 
-<script>
+    <script src="./../inheretanceApi/mainApi.js"></script>
+    <script src="./../inheretanceApi/productsApi.js"></script>
+    <script src="./../inheretanceApi/userApi.js"></script>
+    <script src="./../inheretanceApi/cartApi.js"></script>
+    <script src="./../inheretanceApi/freightOptionsApi.js"></script>
+    <script src="./../inheretanceApi/categoriesApi.js"></script>
 
-function onLoadCategoryPage()   {
-    publishEvent("pageLoad");
-}
+    <script
+        type="module"
+        src="./../Components/webComponents/components.js"
+    ></script>
 
-function logoutUser()   {
-    publishEvent("userClickLogout");
-}
-
-async function cartUserLogin()  {
-    let state = getState();
-    if (state.isLoggedIn === true)  {
-        let cartItems = await checkCart();
-        countCartItems(cartItems);
-}   else
-        return false;
-}
-
-function dropdownMenu() {
-
-let dropdownBtn = document.querySelector('.user_icon');
-let menuContent = document.querySelector('.dropdown-content');
-
-if(menuContent.style.display===""){
-    menuContent.style.display="flex";
-} else {
-    menuContent.style.display="";
-}
-}
-
-</script>
+    <script>
+        function onLoadCategoryPage() {
+            publishEvent("pageLoad");
+        }
+    </script>
 </html>

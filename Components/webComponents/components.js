@@ -8,6 +8,7 @@ import { SearchBar } from "./searchBar.js";
 import { UserLogin } from "./userLogin.js";
 import { Userregister } from "./userRegister.js";
 import { ProductPage } from "./productPage.js";
+import { CategoryPage } from "./categoryComponent.js";
 
 customElements.define("custom-header", Header);
 customElements.define("user-controls", UserControls);
@@ -19,3 +20,4 @@ customElements.define("search-bar", SearchBar);
 customElements.define("user-login", UserLogin);
 customElements.define("user-register", Userregister);
 customElements.define("display-product", ProductPage);
+customElements.define("category-view", CategoryPage);

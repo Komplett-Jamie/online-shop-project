@@ -7,7 +7,7 @@ export class CartItem extends HTMLElement {
         super();
     }
 
-    connectedCallback() {
+    async connectedCallback() {
         this.innerHTML = `
         <div class="cart-item">
         <div class="cart-item-image">
@@ -38,7 +38,6 @@ export class CartItem extends HTMLElement {
         this.querySelector(".cart-delete-item").addEventListener(
             "click",
             function () {
-                console.log(this.productId);
                 publishEvent("removeItem", this.productId);
             }.bind(this)
         );

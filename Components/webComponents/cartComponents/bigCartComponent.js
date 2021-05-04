@@ -18,7 +18,6 @@ export class BigCart extends HTMLElement {
 
     renderCartBigCart(cartItems) {
         cartItems.forEach((cartItem) => {
-            // console.log(this.items, cartItem)
             let itemIsInList = this.checkIfItemExistsInList(
                 this.items,
                 cartItem
@@ -56,7 +55,6 @@ export class BigCart extends HTMLElement {
             }
             if (!isInCartItems) {
                 let item = this.items.splice(i, 1)[0];
-                console.log(item);
                 this.removeChild(item.component);
             }
         }

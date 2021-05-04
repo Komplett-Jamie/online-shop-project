@@ -1,8 +1,6 @@
-export class UserControls extends HTMLElement  {
-
-connectedCallback() {
-    this.innerHTML = 
-    `
+export class UserControls extends HTMLElement {
+    connectedCallback() {
+        this.innerHTML = `
     <div id="user_controls">
         <div id="icon-container">
             <div id="user_icon">
@@ -90,42 +88,60 @@ connectedCallback() {
         border: 1px solid blue;
     }
     </style>
-    `
-    this.querySelector("#logout").addEventListener("click", this.logoutUser);
-    this.querySelector("#user_icon").addEventListener("click", this.dropdownMenu)
+    `;
+        this.querySelector("#logout").addEventListener(
+            "click",
+            this.logoutUser
+        );
+        this.querySelector("#user_icon").addEventListener(
+            "click",
+            this.dropdownMenu
+        );
 
-    subscribeToEvent("smallCartStateUpdated", function(smallCartState) {
-        console.log(smallCartState)
-        let totalCartItems = smallCartState.items.reduce((total, n) => total + n.productQuantity, 0);
-        this.querySelector("#small_cart").innerText = totalCartItems || 0;
-    }.bind(this));
+        subscribeToEvent(
+            "smallCartStateUpdated",
+            function (smallCartState) {
+                let totalCartItems = smallCartState.items.reduce(
+                    (total, n) => total + n.productQuantity,
+                    0
+                );
+                this.querySelector("#small_cart").innerText =
+                    totalCartItems || 0;
+            }.bind(this)
+        );
 
-    subscribeToEvent("userIsLoggedIn", function(state) {
-        let usernameDiv = this.querySelector("#user_name_toggle");
-        if (state.isLoggedIn === true)  {
-            usernameDiv.innerHTML = state.user.name;
-        }   
-    }.bind(this));
-    
-    subscribeToEvent("userIsLoggedOut", function(state) {
-        let usernameDiv = this.querySelector("#user_name_toggle");
-        if (state.isLoggedIn === false) {
-            usernameDiv.innerHTML = "Log in";
-        }  
-    }.bind(this));
-}
+        subscribeToEvent(
+            "userIsLoggedIn",
+            function (state) {
+                let usernameDiv = this.querySelector("#user_name_toggle");
+                if (state.isLoggedIn === true) {
+                    usernameDiv.innerHTML = state.user.name;
+                }
+            }.bind(this)
+        );
 
-logoutUser()    {
-    publishEvent("userClickLogout");
-}
-
-dropdownMenu()  {
-    let menuContent = this.querySelector('.dropdown-content');
-
-    if(menuContent.style.display===""){
-        menuContent.style.display="flex";
-    } else {
-        menuContent.style.display="";
+        subscribeToEvent(
+            "userIsLoggedOut",
+            function (state) {
+                let usernameDiv = this.querySelector("#user_name_toggle");
+                if (state.isLoggedIn === false) {
+                    usernameDiv.innerHTML = "Log in";
+                }
+            }.bind(this)
+        );
     }
-}
+
+    logoutUser() {
+        publishEvent("userClickLogout");
+    }
+
+    dropdownMenu() {
+        let menuContent = this.querySelector(".dropdown-content");
+
+        if (menuContent.style.display === "") {
+            menuContent.style.display = "flex";
+        } else {
+            menuContent.style.display = "";
+        }
+    }
 }

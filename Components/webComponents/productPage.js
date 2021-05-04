@@ -1,11 +1,10 @@
-export class ProductPage extends HTMLElement    {
-    constructor()   {
-        super()
+export class ProductPage extends HTMLElement {
+    constructor() {
+        super();
     }
 
-    connectedCallback() {
-        this.innerHTML = 
-        `
+    async connectedCallback() {
+        this.innerHTML = `
         <div id="productPage-product-container">
         <div>
             <div>
@@ -93,13 +92,38 @@ export class ProductPage extends HTMLElement    {
     }
     
     </style>
-        `
+        `;
 
-        this.querySelector("#addToCart").addEventListener("click", this.productAddToCart)
+        const urlParams = new URLSearchParams(location.search).get("id");
+        let product = await this.loadProduct(urlParams);
+        this.renderProduct(product);
     }
 
-    productAddToCart() {
-        const productIdUrl = new URLSearchParams(location.search).get("id");
-        publishEvent("addToCart", { productId: JSON.parse(productIdUrl), productQuantity: 1 })
+    async loadProduct(product) {
+        let productApiCall = new ProductsApi();
+        let response = await productApiCall.productById(product);
+        return await response.json();
+    }
+
+    renderProduct(product) {
+        document.querySelector("#product-Id").innerHTML = product.id;
+        document.querySelector("#product-name").innerHTML = product.name;
+        document.querySelector("#product-description").innerHTML =
+            product.description;
+        document.querySelector(
+            "#product-image"
+        ).innerHTML = `<img src="${product.imageUrl.replace(/200/, 600)}">`;
+        document.querySelector("#product-price").innerHTML = product.price;
+
+        document.querySelector("#addToCart").addEventListener(
+            "click",
+            function () {
+                this.productAddToCart(product.id, 1);
+            }.bind(this)
+        );
+    }
+
+    async productAddToCart(productId, productQuantity) {
+        publishEvent("addToCart", { productId, productQuantity });
     }
 }

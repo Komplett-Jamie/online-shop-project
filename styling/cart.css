@@ -1,121 +1,120 @@
 .cart-items {
-padding:100px;
+    padding: 100px;
 }
 
-
-.cart-item  {
-    display:flex;
-    flex-direction:row;
-    align-items:center;
+.cart-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     justify-content: space-around;
-    margin:5px 0px 5px 0px;
-    padding:0;
-    padding-top:10px;
+    margin: 5px 0px 5px 0px;
+    padding: 0;
+    padding-top: 10px;
     background-color: #fafafa;
     border: 1px solid #d6d6d6;
     border-radius: 5px;
 }
 .item-image img {
-    z-index:-1;
-    width:75%;
+    z-index: -1;
+    width: 75%;
     border: 1px solid #d6d6d6;
     border-radius: 5px;
 }
 
-.cart-item-add-reduce  {
+.cart-item-add-reduce {
     font-size: 22px;
-    margin:5px;
-    padding:3px;
-    
+    margin: 5px;
+    padding: 3px;
+    cursor: pointer;
 }
 .cart-delete-item {
     padding-left: 25px;
-} 
-
-.cart-amount-visual-input   {
-    border:1px solid #d6d6d6;
-    width:30px;
 }
 
-.cart-info-container    {
+.cart-amount-visual-input {
+    border: 1px solid #d6d6d6;
+    width: 30px;
+}
+
+.cart-info-container {
     display: flex;
-    flex-direction:row;
-    width:100%;
+    flex-direction: row;
+    width: 100%;
 }
 
-#cart-summary  {
+#cart-summary {
     border: 1px solid #d6d6d6;
     border-radius: 5px;
-    margin:5px 0px 5px 5px;
+    margin: 5px 0px 5px 5px;
     background-color: #fafafa;
-    width:50%;
-    padding:15px;
+    width: 50%;
+    padding: 15px;
 }
 
 .total-amount-products-seperate {
-    pointer-events:none;
-    border:none;
+    pointer-events: none;
+    border: none;
     background-color: #fafafa;
-    width:fit-content;
+    width: fit-content;
 }
 
-.cart-summary-description   {
+.cart-summary-description {
     font-size: 20px;
     font-weight: 400;
 }
 
-.cart-summary-call  {
+.cart-summary-call {
     font-weight: 200;
     font-size: 16px;
 }
 
-table { 
+table {
     width: 100%;
 }
 
-tr{
+tr {
     padding-bottom: 20px;
 }
 
 td {
-    width:50%;
+    width: 50%;
     text-align: left;
     padding-right: 10px;
     border-bottom: 1px solid #bbbbbb;
 }
 
-#cart-freight-options   {
+#cart-freight-options {
     background-color: #fafafa;
-    margin:5px 0px 5px 5px;
+    margin: 5px 0px 5px 5px;
     display: flex;
     flex-direction: column;
     border: 1px solid #d6d6d6;
     border-radius: 5px;
-    width:50%;
-    padding:15px;
+    width: 50%;
+    padding: 15px;
 }
 
-#cart-freight-options li   {
+#cart-freight-options li {
     list-style-type: none;
     padding-left: 25px;
     padding-bottom: 25px;
 }
 
-.billing-details    {
+.billing-details {
     background-color: #fafafa;
-    margin:5px 5px 5px 0px;
+    margin: 5px 5px 5px 0px;
     padding: 20px;
-    width:75%;
+    width: 75%;
     border: 1px solid #d6d6d6;
     border-radius: 5px;
 }
 
-.billing-details-container  {
+.billing-details-container {
     flex-direction: row;
 }
 
-.billing-address-form input  {
-    width:100%;
+.billing-address-form input {
+    width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
@@ -124,20 +123,20 @@ td {
     box-sizing: border-box;
 }
 
-.cart-full-summary  {
+.cart-full-summary {
     display: flex;
     flex-direction: row-reverse;
-    width:100%;
+    width: 100%;
 }
 
 #orderNotes {
-    width:100%;
-    resize:vertical;
+    width: 100%;
+    resize: vertical;
 }
 
-.confirm-purchase-button    {
+.confirm-purchase-button {
     width: 100%;
-    height:40px;
+    height: 40px;
     margin: 8px 0;
     border: 1px solid #d6d6d6;
     border-radius: 4px;
@@ -145,26 +144,26 @@ td {
     font-size: 20px;
     background-color: #fafafa;
 }
-.container-one  {
+.container-one {
     display: flex;
 }
 
-.cart-info-container    {
+.cart-info-container {
     display: flex;
     flex-direction: column;
 }
 
-.card-details   {
+.card-details {
     background-color: #fafafa;
-    margin:5px 0px 5px 5px;
+    margin: 5px 0px 5px 5px;
     padding: 20px;
     border: 1px solid #d6d6d6;
     border-radius: 5px;
-    height:100%
+    height: 100%;
 }
 
 #cardNumber {
-    width:auto;
+    width: auto;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
@@ -175,9 +174,9 @@ td {
     text-align: center;
 }
 
-#cardCVC    {
-    width:10%;
-    padding:5px;
+#cardCVC {
+    width: 10%;
+    padding: 5px;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -186,7 +185,7 @@ td {
     text-align: center;
 }
 
-#expirationDateMonth    {
+#expirationDateMonth {
     padding: 5px;
     margin: 8px 0;
     display: inline-block;
@@ -208,4 +207,17 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+
+.cart-item-add-button,
+.cart-item-remove-button {
+    cursor: pointer;
+    display: inline-block;
+    padding: 5px;
+}
+
+.cart-delete-item {
+    cursor: pointer;
+    display: inline-block;
+    padding: 5px;
 }
