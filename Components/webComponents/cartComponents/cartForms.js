@@ -47,7 +47,6 @@ export class CartForms extends HTMLElement {
                 this.testCartState.creditCard.expireYear =
                     event.detail.expirationDateYear;
                 this.testCartState.creditCard.ccv = event.detail.cardCVC;
-                console.log(this.testCartState);
             }.bind(this)
         );
 

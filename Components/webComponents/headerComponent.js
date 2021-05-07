@@ -1,12 +1,10 @@
-export class Header extends HTMLElement    {
-    constructor()   {
+export class Header extends HTMLElement {
+    constructor() {
         super();
     }
 
     connectedCallback() {
-
-        this.innerHTML = 
-    `
+        this.innerHTML = `
     <div id="header-container">
         <div id="header-wrapper">
             <div id="logo">
@@ -14,7 +12,6 @@ export class Header extends HTMLElement    {
                     <img src="https://logos.textgiraffe.com/logos/logo-name/Jamie-designstyle-kiddo-m.png" alt="logo-b2c-svg" href="#">
                 </a>
             </div>
-            <search-bar></search-bar>
             <user-controls></user-controls>
         </div>
     </div>
@@ -45,6 +42,6 @@ export class Header extends HTMLElement    {
     background:#fafafa;
 }
     </style>
-    `
+    `;
     }
 }
