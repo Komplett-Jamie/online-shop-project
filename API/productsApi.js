@@ -1,26 +1,17 @@
-class ProductApi {
-    constructor ()  {
-        this.baseUrl = "https://jamiestore.herokuapp.com/Products/";
+class ProductsApi extends ApiCall{
+    constructor()   {
+        super();
     }
-
-    async get(path) {
-        let apiFetch = await fetch(this.baseUrl + path);
-        return await apiFetch.json();
-    }
-
     async getAllProducts()    {
-        return await this.get("");
+        return await this.get("Products/");
     }
-
     async productById(productId)  {
-        return await this.get(productId);
+        return await this.get(`Products/${productId}`);
     }
-
     async productsByCategoryWithId(categoryId)  {
-        return await this.get(`ByCategory/${categoryId}`);
+        return await this.get(`Products/ByCategory/${categoryId}`);
     }
-
     async randomProducts(amountOfRandomProducts)    {
-        return await this.get(`Random/${amountOfRandomProducts}`);
+        return await this.get(`Products/Random/${amountOfRandomProducts}`);
     }
 }

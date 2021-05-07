@@ -1,46 +1,17 @@
-class UserApi   {
+class UserApi extends ApiCall{
     constructor()   {
-        this.baseUrl = "https://jamiestore.herokuapp.com/User/"
-        this.state = getState();
+        super();
     }
-
-    async get(path)   {
-        const curlDetails = {
-            headers:    {
-                AuthToken: this.state.authToken,
-            },
-        }
-        let apiFetch = await fetch(this.baseUrl + path, curlDetails)
-        return apiFetch;
-    }
-
-    async post(path, curlBody)    {
-        const curlDetails = {
-            method: 'POST',
-            headers:    {
-                'accept': 'application/json',
-                'Content-Type': 'application/json',
-                authToken: this.state.authToken
-            },
-            body: curlBody,
-        };
-        let apiFetch = await fetch(this.baseUrl + path, curlDetails)
-        return apiFetch;
-    }
-
     async userRegister(curlBody)  {
-        return await this.post("Register", curlBody)
+        return await this.post("User/Register", curlBody)
     }
-
     async userLogin(curlBody) {
-        return await this.post("Login", curlBody)
+        return await this.post("User/Login", curlBody)
     }
-
     async userLogout()    {
-        return await this.post("Logout", null)
+        return await this.post("User/Logout", null)
     }
-
     async currentUser()   {
-        return await this.get("Current")
+        return await this.get("User/Current")
     }
 }

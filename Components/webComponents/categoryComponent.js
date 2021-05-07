@@ -50,7 +50,7 @@ export class CategoryPage extends HTMLElement {
                 </div>
                 <div class="random-product-price-button-container">
                     <p>Nå: <b>${product.price},-</b></p>
-                    <button class="add-to-cart-button" id="addToCart">Add to Cart</button>
+                    <button class="add-to-cart-button">Add to Cart</button>
                 </div>
                 `;
             productElement.addEventListener(
