@@ -24,14 +24,6 @@ export class FreightOptions extends HTMLElement {
                 );
             }.bind(this)
         );
-
-        this.querySelector("#cart-freight-options").addEventListener(
-            "click",
-            function () {
-                publishEvent("freightOptionSelected", this.freightName);
-                console.log(freightName);
-            }.bind(this)
-        );
     }
 
     renderFreightOptions(freightOptions, selectedFreightOption) {
@@ -40,6 +32,18 @@ export class FreightOptions extends HTMLElement {
         for (var i = 0; i < freightOptions.length; i++) {
             let freightOption = freightOptions[i];
             let freightName;
+            let freightInput = document.createElement("input");
+            freightInput.setAttribute("name", "radio-input");
+            freightInput.setAttribute("class", "radio-input");
+            freightInput.setAttribute("type", "radio");
+            freightInput.setAttribute("id", freightOption.name);
+            freightInput.setAttribute("value", freightOption.name);
+            freightInput.checked = freightOption.name === selectedFreightOption;
+
+            let listItem = document.createElement("li");
+            let freightLabel = document.createElement("label");
+            freightLabel.setAttribute("class", "radio-label");
+            freightLabel.setAttribute("for", freightOption.name);
 
             if (freightOption.name === "PickupInStore") {
                 freightName = "Pick Up in Store";
@@ -50,20 +54,16 @@ export class FreightOptions extends HTMLElement {
             } else if (freightOption.name === "Letter") {
                 freightName = "Letter";
             }
-            renderContainer.innerHTML += `
-                <li>
-                <input ${
-                    freightOption.name === selectedFreightOption
-                        ? "checked"
-                        : ""
-                } name="radio-input" class="radio-input" type="radio" id="${
-                freightOption.name
-            }" value="${freightOption.name}-radio-value" data-log>
-                <label class="radio-label" for="${
-                    freightOption.name
-                }"><span>${freightName}:</span> ${freightOption.price},-</label>
-                </li>
-            `;
+
+            freightLabel.innerHTML = `${freightName}: ${freightOption.price},-`;
+            renderContainer.appendChild(listItem);
+            listItem.appendChild(freightInput);
+            listItem.appendChild(freightLabel);
+
+            freightInput.addEventListener("click", function () {
+                publishEvent("freightOptionSelected", freightOption.name);
+                console.log(freightName);
+            });
         }
     }
 }

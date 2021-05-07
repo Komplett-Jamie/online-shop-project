@@ -88,7 +88,6 @@ export class BillingAddress extends HTMLElement {
                 "focusout",
                 function (event) {
                     this.billingState[event.target.id] = event.target.value;
-                    console.log(this.billingState);
                     this.dispatchEvent(
                         new CustomEvent("onUpdate", {
                             detail: this.billingState,
