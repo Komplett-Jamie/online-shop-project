@@ -4,6 +4,10 @@ let cartState = {
     chosenFreightOption: "",
 };
 
+subscribeToEvent("pageLoad", function () {
+    publishEvent("cartItems", cartState);
+});
+
 subscribeToEvent("fetchCart", function (cart) {
     cartState.items = cart.items;
     cartState.chosenFreightOption = cart.selectedFreightOption;

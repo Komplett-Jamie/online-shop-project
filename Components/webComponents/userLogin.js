@@ -1,11 +1,12 @@
-export class UserLogin extends HTMLElement  {
-    constructor()   {
+import { UserApi } from "./../../API/UserApi.js";
+
+export class UserLogin extends HTMLElement {
+    constructor() {
         super();
     }
 
     connectedCallback() {
-        this.innerHTML = 
-    `
+        this.innerHTML = `
     <div class="login-page">
         <div class="form-container">
             <form id="loginForm" class="login-form">
@@ -71,44 +72,48 @@ export class UserLogin extends HTMLElement  {
         margin: 15px 0px 5px 0px;
     }
     </style>
-    `
-    this.querySelector("#loginForm").addEventListener("submit", this.handleLogin);
-    
-    subscribeToEvent("userLogin", async function({emailInput, passwordInput}) {
+    `;
+        this.querySelector("#loginForm").addEventListener(
+            "submit",
+            this.handleLogin
+        );
 
-        let formObject = {
-            email: emailInput,
-            password: passwordInput,
-        }
-    
-        let convertFormDataToJson = JSON.stringify(formObject);
-    
-        let userLoginApiCall = new UserApi();
-        let callBack = await userLoginApiCall.userLogin(convertFormDataToJson)
+        subscribeToEvent(
+            "userLogin",
+            async function ({ emailInput, passwordInput }) {
+                let formObject = {
+                    email: emailInput,
+                    password: passwordInput,
+                };
 
-        if (callBack.status === 401)    {
-            publishEvent("userLoginUnauthorized", await callBack.json())
-        }
-        if (callBack.status === 200)    {
-            publishEvent("userRegisteredAuthtoken", await callBack.json())
-            publishEvent("userLoginAuthorized")
-        }
-    })
+                let userLoginApiCall = new UserApi();
+                let callBack = await userLoginApiCall.userLogin(formObject);
 
-    subscribeToEvent("userLoginUnauthorized", function()   {
-        this.querySelector("#error_handling").innerText = "Please check your password or register for a free account!";
-    }.bind(this))
-    
-    subscribeToEvent("userLoginAuthorized", function()  {
-        this.querySelector("#error_handling").innerText = "Thank you for loging in, you will be redirected soon!";
-        setTimeout(function(){window.location.assign("./mainPage.html")}, 3000);
-    }.bind(this))
+                if (callBack.status === 401) {
+                    publishEvent(
+                        "userLoginUnauthorized",
+                        await callBack.json()
+                    );
+                    document.querySelector("#error_handling").innerText =
+                        "Please check your password or register for a free account!";
+                }
+                if (callBack.status === 200) {
+                    publishEvent(
+                        "userRegisteredAuthtoken",
+                        await callBack.json()
+                    );
+                    document.querySelector("#error_handling").innerText =
+                        "Thank you for loging in, you will be redirected soon!";
+                    publishEvent("userLoginAuthorized");
+                }
+            }
+        );
     }
 
-    handleLogin(event)  {
+    handleLogin(event) {
         event.preventDefault();
         let emailInput = this.querySelector("#email").value;
         let passwordInput = this.querySelector("#password").value;
-        publishEvent("userLogin", { emailInput, passwordInput })
+        publishEvent("userLogin", { emailInput, passwordInput });
     }
 }

@@ -9,10 +9,11 @@
         <link rel="stylesheet" href="./../styling/dropdownMenu.css" />
     </head>
     <body onload="onLoadCategoryPage()">
-        <custom-header></custom-header>
-        <category-view></category-view>
-        <custom-footer></custom-footer>
+        <shop-page>
+            <category-view></category-view>
+        </shop-page>
     </body>
+    <script src="./../API/NoExportBaseAPI.js"></script>
     <script src="./../Components/redoingCart/eventBus.js"></script>
     <script src="./../Components/redoingCart/fetchCart.js"></script>
     <script src="./../Components/redoingMainPage/addProductToCartApi.js"></script>
@@ -24,12 +25,11 @@
     <script src="./../Components/redoingMainPage/userLogout.js"></script>
     <script src="./../Components/redoingMainPage/searchFunctionality.js"></script>
 
-    <script src="./../API/mainApi.js"></script>
-    <script src="./../API/productsApi.js"></script>
-    <script src="./../API/userApi.js"></script>
-    <script src="./../API/cartApi.js"></script>
-    <script src="./../API/freightOptionsApi.js"></script>
+    <script src="./../API/ProductsApi.js"></script>
+    <script src="./../API/UserApi.js"></script>
+    <script src="./../API/FreightOptionsApi.js"></script>
     <script src="./../API/categoriesApi.js"></script>
+    <script src="./../API/NoExportCartAPI.js"></script>
 
     <script
         type="module"

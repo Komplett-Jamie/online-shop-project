@@ -14,12 +14,7 @@ export class UserControls extends HTMLElement {
                     <span id="user_name_toggle" class="user_name">Log In</span>
                 </div>
                 <div id="icon-container">
-            <a href="./../Pages/cart.html" id="small-cart-link">
-            <div id="small_cart">
-                <svg width="20" height="20" viewBox="0 0 16 16"><path fill="#333" d="M6 14.5c0 0.828-0.672 1.5-1.5 1.5s-1.5-0.672-1.5-1.5c0-0.828 0.672-1.5 1.5-1.5s1.5 0.672 1.5 1.5z"></path><path fill="#333" d="M16 14.5c0 0.828-0.672 1.5-1.5 1.5s-1.5-0.672-1.5-1.5c0-0.828 0.672-1.5 1.5-1.5s1.5 0.672 1.5 1.5z"></path><path fill="#333" d="M16 8v-6h-12c0-0.552-0.448-1-1-1h-3v1h2l0.751 6.438c-0.458 0.367-0.751 0.93-0.751 1.562 0 1.105 0.895 2 2 2h12v-1h-12c-0.552 0-1-0.448-1-1 0-0.003 0-0.007 0-0.010l13-1.99z"></path></svg>
-            </div>
-            <span>Cart</span>
-            </a>
+                <small-cart></small-cart>
             <span id="cart_no_login_error"></span>
         </div>
     </div>
@@ -99,23 +94,11 @@ export class UserControls extends HTMLElement {
         );
 
         subscribeToEvent(
-            "smallCartStateUpdated",
-            function (smallCartState) {
-                let totalCartItems = smallCartState.items.reduce(
-                    (total, n) => total + n.productQuantity,
-                    0
-                );
-                this.querySelector("#small_cart").innerText =
-                    totalCartItems || 0;
-            }.bind(this)
-        );
-
-        subscribeToEvent(
-            "userIsLoggedIn",
+            "onLoadState",
             function (state) {
                 let usernameDiv = this.querySelector("#user_name_toggle");
                 if (state.isLoggedIn === true) {
-                    usernameDiv.innerHTML = state.user.name;
+                    usernameDiv.innerHTML = state.user;
                 }
             }.bind(this)
         );
@@ -123,6 +106,7 @@ export class UserControls extends HTMLElement {
         subscribeToEvent(
             "userIsLoggedOut",
             function (state) {
+                console.log(state);
                 let usernameDiv = this.querySelector("#user_name_toggle");
                 if (state.isLoggedIn === false) {
                     usernameDiv.innerHTML = "Log in";

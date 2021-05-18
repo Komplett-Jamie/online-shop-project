@@ -1,8 +1,8 @@
-export class RandomProducts extends HTMLElement {
+import { ProductsApi } from "./../../API/ProductsApi.js";
 
+export class RandomProducts extends HTMLElement {
     async connectedCallback() {
-        this.innerHTML = 
-        `
+        this.innerHTML = `
         <section id="random-products-container">
             Some random products we sell...
             <div id="random-products"></div>
@@ -82,47 +82,31 @@ export class RandomProducts extends HTMLElement {
         }
         </style>
 
-        `
+        `;
 
         let randomProducts = await this.loadRandomProducts();
         this.renderRandomProducts(randomProducts);
     }
 
-    async loadRandomProducts()  {
+    async loadRandomProducts() {
         let productsApi = new ProductsApi();
         let response = await productsApi.randomProducts(10);
-        return await response.json()
+        return await response.json();
     }
 
-    renderRandomProducts(randomProducts)  {
+    renderRandomProducts(randomProducts) {
         let renderContainer = this.querySelector("#random-products");
-        
-        renderContainer.innerHTML ="";
+
+        renderContainer.innerHTML = "";
         for (var i = 0; i < randomProducts.length; i++) {
-            let randomProduct = randomProducts[i]
-            let testDiv = document.createElement("div");
-            testDiv.className = "random-product-cointainer";
-            testDiv.innerHTML = `
-                <a href="./../Pages/productPage.html?id=${randomProduct.id}">
-                    <img class="random-product-image" alt="${randomProduct.description}" src="${randomProduct.imageUrl}">
-                </a>
-                <div class="product">
-                    <div class="product-name">
-                        <p>${randomProduct.name}</p>
-                    </div>
-                </div>
-                <div class="random-product-price-button-container">
-                    <p>Nå: <b>${randomProduct.price},-</b></p>
-                    <button class="add-to-cart-button" id="addToCart-${randomProduct.id}">Add to Cart</button>
-                </div>
-            `
-            testDiv.addEventListener("click", function(){
-                this.addProductToCart(randomProduct.id, 1);
-            }.bind(this))
-            renderContainer.appendChild(testDiv);
+            let randomProduct = randomProducts[i];
+            let productCard = document.createElement("product-card");
+
+            productCard.setAttribute("product", JSON.stringify(randomProduct));
+            renderContainer.appendChild(productCard);
         }
     }
-    addProductToCart(productId, productQuantity)   {
-        publishEvent("addToCart", { productId, productQuantity })
+    addProductToCart(productId, productQuantity) {
+        publishEvent("addToCart", { productId, productQuantity });
     }
 }

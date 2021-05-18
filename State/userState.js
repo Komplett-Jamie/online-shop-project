@@ -13,6 +13,7 @@ function getState() {
 }
 
 subscribeToEvent("userLoggedInApiReturn", function ({ response }) {
+    console.log(response);
     let state = getState();
     state.user = response;
     sessionStorage.setItem("state", JSON.stringify(state));
@@ -29,9 +30,9 @@ subscribeToEvent("userRegisteredAuthtoken", function (userDetails) {
 subscribeToEvent("pageLoad", function () {
     let state = getState();
     publishEvent("onLoadState", state);
-    if (state.isLoggedIn === true) {
-        publishEvent("userIsLoggedIn", state);
-    } else return false;
+    // if (state.isLoggedIn === true) {
+    //     publishEvent("userIsLoggedIn", state);
+    // } else return false;
 });
 
 subscribeToEvent("userClickLogout", function handleLogout() {
@@ -42,4 +43,10 @@ subscribeToEvent("userClickLogout", function handleLogout() {
     state.user = null;
     sessionStorage.clear("state");
     publishEvent("userIsLoggedOut", state);
+});
+
+subscribeToEvent("userRegistered", function (response) {
+    let state = getState();
+    state.user = response.name;
+    sessionStorage.setItem("state", JSON.stringify(state));
 });

@@ -1,6 +1,4 @@
-import { BaseApi } from "./BaseApi.js";
-
-export class CartApi extends BaseApi {
+class CartApi extends BaseApi {
     constructor() {
         super();
     }

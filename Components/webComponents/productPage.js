@@ -1,3 +1,5 @@
+import { ProductsApi } from "./../../API/ProductsApi.js";
+
 export class ProductPage extends HTMLElement {
     constructor() {
         super();
@@ -22,7 +24,9 @@ export class ProductPage extends HTMLElement {
             <div id="product-buy-section">
             <p>Price: </p><span id="product-price"></span>
             </div>
-            <button class="add-to-cart-button" id="addToCart">Add to Cart</button><span id="product_error_msg"></span>
+            <add-to-cart-button productId="${this.getAttribute(
+                "productid"
+            )}"></add-to-cart-button>
         </div>
     </div>
 
@@ -94,8 +98,7 @@ export class ProductPage extends HTMLElement {
     </style>
         `;
 
-        const urlParams = new URLSearchParams(location.search).get("id");
-        let product = await this.loadProduct(urlParams);
+        let product = await this.loadProduct(this.getAttribute("productid"));
         this.renderProduct(product);
     }
 
@@ -114,13 +117,6 @@ export class ProductPage extends HTMLElement {
             "#product-image"
         ).innerHTML = `<img src="${product.imageUrl.replace(/200/, 600)}">`;
         document.querySelector("#product-price").innerHTML = product.price;
-
-        document.querySelector("#addToCart").addEventListener(
-            "click",
-            function () {
-                this.productAddToCart(product.id, 1);
-            }.bind(this)
-        );
     }
 
     async productAddToCart(productId, productQuantity) {

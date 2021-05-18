@@ -1,11 +1,12 @@
-export class Userregister extends HTMLElement   {
-    constructor()   {
-        super()
+import { UserApi } from "./../../API/UserApi.js";
+
+export class UserRegister extends HTMLElement {
+    constructor() {
+        super();
     }
-    
+
     connectedCallback() {
-        this.innerHTML = 
-        `
+        this.innerHTML = `
     <div class="register-page">
         <div class="form-container">
             <form id="registerNewUserForm" class="register-form">
@@ -86,49 +87,67 @@ export class Userregister extends HTMLElement   {
     
     </style>
 
-        `
-        this.querySelector("#registerNewUserForm").addEventListener("submit", this.handleRegister)
+        `;
+        this.querySelector("#registerNewUserForm").addEventListener(
+            "submit",
+            this.handleRegister
+        );
 
-        subscribeToEvent("userRegister", async function({emailInput, nameInput, passwordInput, repeatPasswordInput})    {
+        subscribeToEvent(
+            "userRegister",
+            async function ({
+                emailInput,
+                nameInput,
+                passwordInput,
+                repeatPasswordInput,
+            }) {
+                let formObject = {
+                    email: emailInput,
+                    name: nameInput,
+                    password: passwordInput,
+                    repeatPassword: repeatPasswordInput,
+                };
 
-            let formObject = {
-                email: emailInput,
-                name: nameInput,
-                password: passwordInput,
-                repeatPassword: repeatPasswordInput,
+                let userRegisterApiCall = new UserApi();
+                let callBack = await userRegisterApiCall.userRegister(
+                    formObject
+                );
+                console.log(callBack.status);
+                if (callBack.status === 400) {
+                    publishEvent(
+                        "userRegisterEmailAlreadyInUse",
+                        await callBack.json()
+                    );
+                    document.querySelector("#error_handling").innerText =
+                        "This Email adress is already registered.";
+                }
+                if (callBack.status === 200) {
+                    publishEvent(
+                        "userRegisteredAuthtoken",
+                        await callBack.json()
+                    );
+                    document.querySelector("#error_handling").innerText =
+                        "Thank you for registering, you will be redirected soon!";
+                    setTimeout(function () {
+                        window.location.assign("./mainPage.html");
+                    }, 2000);
+                    publishEvent("userRegistered", formObject);
+                }
             }
-            
-            let convertFormDataToJson = JSON.stringify(formObject);
-            
-            let userRegisterApiCall = new UserApi();
-            let callBack = await userRegisterApiCall.userRegister(convertFormDataToJson);
-            console.log(callBack.status)
-                if (callBack.status === 400)   {
-                    publishEvent("userRegisterEmailAlreadyInUse", await callBack.json())
-                }
-                if (callBack.status === 200)    {
-                    publishEvent("userRegisteredAuthtoken", await callBack.json())
-                    publishEvent("userRegistered");
-                }
-            })
-
-        subscribeToEvent("userRegisterEmailAlreadyInUse", function()    {
-            this.querySelector("#error_handling").innerText = "This Email adress is already registered."
-        }.bind(this))
-        
-        subscribeToEvent("userRegistered", function()   {
-            this.querySelector("#error_handling").innerText = "Thank you for registering, you will be redirected soon!";
-            setTimeout(function(){window.location.assign("./mainPage.html")}, 2000);
-        }.bind(this))
+        );
     }
 
-    handleRegister(event)  {
+    handleRegister(event) {
         event.preventDefault();
         let emailInput = this.querySelector("#email").value;
         let nameInput = this.querySelector("#name").value;
         let passwordInput = this.querySelector("#password").value;
         let repeatPasswordInput = this.querySelector("#confirm_password").value;
-        publishEvent("userRegister", { emailInput, nameInput, passwordInput, repeatPasswordInput })
+        publishEvent("userRegister", {
+            emailInput,
+            nameInput,
+            passwordInput,
+            repeatPasswordInput,
+        });
     }
-
 }

@@ -36,34 +36,11 @@ export class CategoryPage extends HTMLElement {
             i <= amountOfProductsPerPage + baseCount - 1;
             i++
         ) {
-            let productElement = document.createElement("div");
             let product = response[i];
-            productElement.className = "random-product-cointainer";
-            productElement.innerHTML = `
-                <a href="./../Pages/productPage.html?id=${product.id}">
-                    <img class="random-product-image" alt="${product.description}" src="${product.imageUrl}">
-                </a>
-                <div class="product">
-                    <div class="product-name">
-                        <p>${product.name}</p>
-                    </div>
-                </div>
-                <div class="random-product-price-button-container">
-                    <p>Nå: <b>${product.price},-</b></p>
-                    <button class="add-to-cart-button">Add to Cart</button>
-                </div>
-                `;
-            productElement.addEventListener(
-                "click",
-                function () {
-                    this.addProductToCart(product.id, 1);
-                }.bind(this)
-            );
-            placing.appendChild(productElement);
+            let productCard = document.createElement("product-card");
+            productCard.setAttribute("product", JSON.stringify(product));
+            placing.appendChild(productCard);
         }
         baseCount = baseCount + amountOfProductsPerPage;
-    }
-    addProductToCart(productId, productQuantity) {
-        publishEvent("addToCart", { productId, productQuantity });
     }
 }

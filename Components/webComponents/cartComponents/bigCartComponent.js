@@ -12,6 +12,7 @@ export class BigCart extends HTMLElement {
             "cartStateUpdated",
             function (state) {
                 this.renderCartBigCart(state.items);
+                console.log("Hello");
             }.bind(this)
         );
     }

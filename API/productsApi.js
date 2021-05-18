@@ -1,17 +1,19 @@
-class ProductsApi extends ApiCall{
-    constructor()   {
+import { BaseApi } from "./BaseApi.js";
+
+export class ProductsApi extends BaseApi {
+    constructor() {
         super();
     }
-    async getAllProducts()    {
+    async getAllProducts() {
         return await this.get("Products/");
     }
-    async productById(productId)  {
+    async productById(productId) {
         return await this.get(`Products/${productId}`);
     }
-    async productsByCategoryWithId(categoryId)  {
+    async productsByCategoryWithId(categoryId) {
         return await this.get(`Products/ByCategory/${categoryId}`);
     }
-    async randomProducts(amountOfRandomProducts)    {
+    async randomProducts(amountOfRandomProducts) {
         return await this.get(`Products/Random/${amountOfRandomProducts}`);
     }
 }

@@ -17,7 +17,7 @@ export class Header extends HTMLElement {
     </div>
 <dropdown-menu></dropdown-menu>
 
-    <style>
+<style>
     * {
     margin: 0;
     padding: 0;
