@@ -22,10 +22,10 @@ export class SmallCart extends HTMLElement {
 
         subscribeToEvent(
             "quantityUpdated",
-            function ({ productId, productQuantity }) {
+            function ({ productId, quantity }) {
                 for (let i = 0; i < this.items.length; i++) {
                     if (this.items[i].productId === productId) {
-                        this.items[i].quantity = productQuantity;
+                        this.items[i].quantity = quantity;
                     }
                 }
                 this.renderHtml();

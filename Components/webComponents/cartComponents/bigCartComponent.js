@@ -1,20 +1,28 @@
+import { CartApi } from "./../../../API/CartApi.js";
+
 export class BigCart extends HTMLElement {
     constructor() {
         super();
         this.items = [];
     }
 
-    connectedCallback() {
+    async connectedCallback() {
         this.innerHTML = `
             <div id="cart-items"></div>
         `;
-        subscribeToEvent(
-            "cartStateUpdated",
-            function (state) {
-                this.renderCartBigCart(state.items);
-                console.log("Hello");
-            }.bind(this)
-        );
+
+        let cartApi = new CartApi();
+        let cart = await cartApi.fetchCart();
+        console.log(cart);
+        this.renderCartBigCart(cart.items);
+
+        // subscribeToEvent(
+        //     "cartStateUpdated",
+        //     function (state) {
+        //         this.renderCartBigCart(state.items);
+        //         console.log("Hello");
+        //     }.bind(this)
+        // );
     }
 
     renderCartBigCart(cartItems) {

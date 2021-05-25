@@ -1,3 +1,6 @@
+import { FreightOptionsApi } from "./../../../API/FreightOptionsApi.js";
+import { CartApi } from "./../../../API/CartApi.js";
+
 export class FreightOptions extends HTMLElement {
     constructor() {
         super();
@@ -7,7 +10,7 @@ export class FreightOptions extends HTMLElement {
         };
     }
 
-    connectedCallback() {
+    async connectedCallback() {
         this.innerHTML = `
         <div id="cart-freight-options">
             <span>Freight Options</span>
@@ -15,18 +18,18 @@ export class FreightOptions extends HTMLElement {
         </div>
         `;
 
-        subscribeToEvent(
-            "cartStateUpdated",
-            function (state) {
-                this.renderFreightOptions(
-                    state.freightOptions,
-                    state.chosenFreightOption
-                );
-            }.bind(this)
-        );
+        let cartFreightApi = new CartApi();
+        let cartFreightResponse = await cartFreightApi.fetchCart();
+        console.log(cartFreightResponse.selectedFreightOption);
+
+        let freightOptions = new FreightOptionsApi();
+        let response = await freightOptions.getFreightOptions();
+        let freightOptionsReturn = await response.json();
+
+        this.renderFreightOptions(freightOptionsReturn, cartFreightResponse);
     }
 
-    renderFreightOptions(freightOptions, selectedFreightOption) {
+    renderFreightOptions(freightOptions, cartFreightResponse) {
         let renderContainer = this.querySelector("#cart-freight-options");
         renderContainer.innerHTML = "";
         for (var i = 0; i < freightOptions.length; i++) {
@@ -38,7 +41,9 @@ export class FreightOptions extends HTMLElement {
             freightInput.setAttribute("type", "radio");
             freightInput.setAttribute("id", freightOption.name);
             freightInput.setAttribute("value", freightOption.name);
-            freightInput.checked = freightOption.name === selectedFreightOption;
+            freightInput.checked =
+                freightOption.name ===
+                cartFreightResponse.selectedFreightOption;
 
             let listItem = document.createElement("li");
             let freightLabel = document.createElement("label");
@@ -60,9 +65,11 @@ export class FreightOptions extends HTMLElement {
             listItem.appendChild(freightInput);
             listItem.appendChild(freightLabel);
 
-            freightInput.addEventListener("click", function () {
-                publishEvent("freightOptionSelected", freightOption.name);
-                console.log(freightName);
+            freightInput.addEventListener("click", async function () {
+                let cartApi = new CartApi();
+                await cartApi.freightOptionSelection(freightName);
+                // publishEvent("freightOptionSelected", freightOption.name);
+                // console.log(freightName);
             });
         }
     }

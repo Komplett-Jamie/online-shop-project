@@ -104,7 +104,7 @@ export class UserLogin extends HTMLElement {
                     );
                     document.querySelector("#error_handling").innerText =
                         "Thank you for loging in, you will be redirected soon!";
-                    publishEvent("userLoginAuthorized");
+                    publishEvent("userLoginOrRegister");
                 }
             }
         );

@@ -1,6 +1,6 @@
 import { BaseApi } from "./BaseApi.js";
 
-export class FreightOptions extends BaseApi {
+export class FreightOptionsApi extends BaseApi {
     constructor() {
         super();
     }

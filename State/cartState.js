@@ -9,7 +9,6 @@ subscribeToEvent("pageLoad", function () {
 });
 
 subscribeToEvent("fetchCart", function (cart) {
-    cartState.items = cart.items;
     cartState.chosenFreightOption = cart.selectedFreightOption;
     publishEvent("cartStateUpdated", cartState);
 });

@@ -33,7 +33,7 @@ export class BaseApi {
                 "Content-Type": "application/json",
                 accept: "*/*",
             },
-            body: bodyDetails,
+            body: JSON.stringify(bodyDetails),
         };
         let apiFetch = await fetch(this.baseUrl + path, options);
         return apiFetch;
