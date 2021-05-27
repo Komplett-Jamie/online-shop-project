@@ -13,6 +13,7 @@ export class CartPage extends HTMLElement {
     this.innerHTML = `
         <big-cart></big-cart>
         <cart-summary></cart-summary>
+        <freight-options></freight-options>
         <cart-forms></cart-forms>
     `;
 
@@ -20,12 +21,16 @@ export class CartPage extends HTMLElement {
     bigCartComponent.addEventListener("onItemRemoved", event => this.handleItemRemoved(event.detail));
     bigCartComponent.addEventListener("onQuantityUpdated", event => this.handleQuantityUpdated(event.detail));
     
+    let freightOptionsComponent = this.querySelector("freight-options");
+    freightOptionsComponent.addEventListener("onFreightOptionSelected", event => this.handleFreightOptionsSelected(event.detail))
+    
     this.update();
   }
   
   update() {
     this.querySelector("big-cart").setAttribute("items", JSON.stringify(this.cart.items))
     this.querySelector("cart-summary").setAttribute("cart", JSON.stringify(this.cart))
+    this.querySelector("freight-options").setAttribute("selectedfreightoption", this.cart.selectedFreightOption)
   }
 
   async handleItemRemoved(productId) {
@@ -42,6 +47,14 @@ export class CartPage extends HTMLElement {
 
     const updatedItem = this.cart.items.find(item => item.productId === quantityUpdate.productId);
     updatedItem.quantity = quantityUpdate.quantity;
+    
+    this.update();
+  }
+
+  async handleFreightOptionsSelected(freightOption) {
+    this.cart.selectedFreightOption = freightOption.name;
+    this.cart.selectedFreightPrice = freightOption.price;
+    await this.cartApi.freightOptionSelection(freightOption.name);
     
     this.update();
   }

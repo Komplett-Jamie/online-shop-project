@@ -12,8 +12,7 @@ export class CartForms extends HTMLElement {
                 expireMonth: null,
                 expireYear: null,
                 ccv: null,
-            },
-            freightOption: null,
+            }
         };
     }
 
@@ -22,7 +21,6 @@ export class CartForms extends HTMLElement {
         <form>
         <billing-address></billing-address>
         <creditcard-details></creditcard-details>
-        <freight-options></freight-options>
         <cart-button></cart-button>
         </form>
         `;
@@ -46,14 +44,6 @@ export class CartForms extends HTMLElement {
                 this.testCartState.creditCard.expireYear =
                     event.detail.expirationDateYear;
                 this.testCartState.creditCard.ccv = event.detail.cardCVC;
-            }.bind(this)
-        );
-
-        subscribeToEvent(
-            "cartStateUpdated",
-            function thisFreight(cartState) {
-                this.testCartState.freightOption =
-                    cartState.chosenFreightOption;
             }.bind(this)
         );
 

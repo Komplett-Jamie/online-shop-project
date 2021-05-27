@@ -6,6 +6,7 @@ export class FreightOptionsApi extends BaseApi {
     }
 
     async getFreightOptions() {
-        return await this.get("Freight/FreightOptions");
+        const response = await this.get("Freight/FreightOptions");
+        return await response.json();
     }
 }

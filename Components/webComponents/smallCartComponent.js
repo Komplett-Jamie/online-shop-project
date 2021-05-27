@@ -17,7 +17,6 @@ export class SmallCart extends HTMLElement {
             function ({ productId, productQuantity }) {
                 this.items.push({ productId, quantity: productQuantity });
                 this.renderHtml();
-                console.log(this.items);
             }.bind(this)
         );
 

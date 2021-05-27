@@ -25,7 +25,7 @@ subscribeToEvent("quantityUpdated", function ({ productId, quantity }) {
 
 subscribeToEvent("removeItem", function (productId) {
     cartState.items = cartState.items.filter(
-        (item) => item.productId !== productId
+      (item) => item.productId !== productId
     );
     publishEvent("cartStateUpdated", cartState);
 });
