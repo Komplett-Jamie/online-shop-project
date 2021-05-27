@@ -13,10 +13,11 @@ export class SmallCart extends HTMLElement {
         this.renderHtml();
 
         subscribeToEvent(
-            "addedToCart",
+            "addToCart",
             function ({ productId, productQuantity }) {
                 this.items.push({ productId, quantity: productQuantity });
                 this.renderHtml();
+                console.log(this.items);
             }.bind(this)
         );
 

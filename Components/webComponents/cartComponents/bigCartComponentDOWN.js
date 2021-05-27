@@ -1,4 +1,4 @@
-import { CartApi } from "./../../../API/CartApi.js";
+import { CartApi } from "../../../API/CartApi.js";
 
 export class BigCart extends HTMLElement {
     constructor() {

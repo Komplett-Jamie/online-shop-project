@@ -1,4 +1,4 @@
-import { CartApi } from "./../../../API/CartApi.js";
+import { CartApi } from "../../../API/CartApi.js";
 
 export class BigCart extends HTMLElement {
     constructor() {
@@ -13,7 +13,8 @@ export class BigCart extends HTMLElement {
 
         let cartApi = new CartApi();
         let cart = await cartApi.fetchCart();
-        console.log(cart);
+        this.items.push(cart.items);
+        console.log(this.items);
         this.renderCartBigCart(cart.items);
 
         // subscribeToEvent(
@@ -26,6 +27,7 @@ export class BigCart extends HTMLElement {
     }
 
     renderCartBigCart(cartItems) {
+        console.log(cartItems);
         cartItems.forEach((cartItem) => {
             let itemIsInList = this.checkIfItemExistsInList(
                 this.items,
@@ -44,9 +46,9 @@ export class BigCart extends HTMLElement {
                 });
                 this.appendChild(item);
             } else {
-                for (let i = 0; i < this.items.length; i++) {
-                    if (this.items[i].productId === cartItem.productId) {
-                        this.items[i].component.setAttribute(
+                for (let i = 0; i < cartItems.length; i++) {
+                    if (cartItems[i].productId === cartItem.productId) {
+                        cartItems[i].component.setAttribute(
                             "productquantity",
                             cartItem.quantity
                         );

@@ -9,6 +9,7 @@ subscribeToEvent("pageLoad", function () {
 });
 
 subscribeToEvent("fetchCart", function (cart) {
+    cartState.items = cart.items;
     cartState.chosenFreightOption = cart.selectedFreightOption;
     publishEvent("cartStateUpdated", cartState);
 });
@@ -37,4 +38,8 @@ subscribeToEvent("freightOptions", function (response) {
 subscribeToEvent("freightOptionSelected", function (freightName) {
     cartState.chosenFreightOption = freightName;
     publishEvent("cartStateUpdated", cartState);
+});
+
+subscribeToEvent("addToCart", function ({ productId, productQuantity }) {
+    cartState.items.push({ productId, quantity: productQuantity });
 });
