@@ -12,6 +12,7 @@ import { CategoryPage } from "./categoryComponent.js";
 import { SmallCart } from "./smallCartComponent.js";
 import { ProductCard } from "./productCard.js";
 import { AddToCartButton } from "./addTocartComponent.js";
+import { CartPage } from "./cartPage.js";
 
 customElements.define("custom-header", Header);
 customElements.define("user-controls", UserControls);
@@ -27,3 +28,4 @@ customElements.define("category-view", CategoryPage);
 customElements.define("small-cart", SmallCart);
 customElements.define("product-card", ProductCard);
 customElements.define("add-to-cart-button", AddToCartButton);
+customElements.define("cart-page", CartPage);
