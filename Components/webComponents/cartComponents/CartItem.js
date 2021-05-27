@@ -38,27 +38,44 @@ export class CartItem extends HTMLElement {
         this.querySelector(".cart-delete-item").addEventListener(
             "click",
             function () {
-                publishEvent("removeItem", this.productId);
+                this.dispatchEvent(
+                  new CustomEvent("onItemRemoved", {
+                      detail: this.productId,
+                      bubbles: true
+                  })
+                );
             }.bind(this)
         );
 
         this.querySelector(".cart-item-add-button").addEventListener(
             "click",
             function () {
-                publishEvent("quantityUpdated", {
-                    productId: this.productId,
-                    quantity: this.quantity + 1,
-                });
+                this.dispatchEvent(
+                  new CustomEvent("onQuantityUpdated", {
+                      detail: {
+                          productId: this.productId,
+                          quantity: this.quantity + 1,
+                      },
+                      bubbles: true
+                  })
+                );
             }.bind(this)
         );
 
         this.querySelector(".cart-item-remove-button").addEventListener(
             "click",
             function () {
-                publishEvent("quantityUpdated", {
-                    productId: this.productId,
-                    quantity: this.quantity - 1,
-                });
+                if (this.quantity > 1) {
+                    this.dispatchEvent(
+                      new CustomEvent("onQuantityUpdated", {
+                          detail: {
+                              productId: this.productId,
+                              quantity: this.quantity - 1,
+                          },
+                          bubbles: true
+                      })
+                    );
+                }
             }.bind(this)
         );
     }

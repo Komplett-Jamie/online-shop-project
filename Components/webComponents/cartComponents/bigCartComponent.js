@@ -69,6 +69,9 @@ export class BigCart extends HTMLElement {
     }
 
     removeFromDOM(deletedItems) {
-        deletedItems.forEach(deletedItem => this.removeChild(deletedItem.component))
+        deletedItems.forEach(deletedItem => {
+            this.removeChild(deletedItem.component)
+            this.renderedItems = this.renderedItems.filter(renderedItem => renderedItem.productId !== deletedItem.productId);
+        });
     }
 }
