@@ -15,5 +15,7 @@ export class CartPage extends HTMLElement {
         <big-cart></big-cart>
         <cart-forms></cart-forms>
     `;
+    
+    this.querySelector("big-cart").setAttribute("items", JSON.stringify(this.items))
   }
 }

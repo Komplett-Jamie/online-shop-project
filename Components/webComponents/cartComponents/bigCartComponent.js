@@ -1,82 +1,74 @@
-import { CartApi } from "../../../API/CartApi.js";
-
 export class BigCart extends HTMLElement {
     constructor() {
         super();
-        this.items = [];
+        this.renderedItems = [];
     }
 
     async connectedCallback() {
         this.innerHTML = `
             <div id="cart-items"></div>
         `;
-
-        let cartApi = new CartApi();
-        let cart = await cartApi.fetchCart();
-        this.items.push(cart.items);
-        console.log(this.items);
-        this.renderCartBigCart(cart.items);
-
-        // subscribeToEvent(
-        //     "cartStateUpdated",
-        //     function (state) {
-        //         this.renderCartBigCart(state.items);
-        //         console.log("Hello");
-        //     }.bind(this)
-        // );
     }
 
-    renderCartBigCart(cartItems) {
-        console.log(cartItems);
-        cartItems.forEach((cartItem) => {
-            let itemIsInList = this.checkIfItemExistsInList(
-                this.items,
-                cartItem
-            );
-            if (!itemIsInList) {
-                let item = document.createElement("cart-item");
-                item.setAttribute("productPrice", cartItem.pricePerItem);
-                item.setAttribute("productquantity", cartItem.quantity);
-                item.setAttribute("productId", cartItem.productId);
-                item.setAttribute("productImage", cartItem.imageUrl);
-                item.setAttribute("productName", cartItem.productName);
-                this.items.push({
-                    productId: cartItem.productId,
-                    component: item,
-                });
-                this.appendChild(item);
-            } else {
-                for (let i = 0; i < cartItems.length; i++) {
-                    if (cartItems[i].productId === cartItem.productId) {
-                        cartItems[i].component.setAttribute(
-                            "productquantity",
-                            cartItem.quantity
-                        );
-                    }
-                }
-            }
+    static get observedAttributes() {
+        return ["items"];
+    }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (name === "items") {
+            this.render(JSON.parse(newValue))
+        }
+    }
+    
+    render(allItemsInState) {
+        const newItems = allItemsInState.filter(itemInState => this.isNewItem(itemInState));
+        const updatedItems = allItemsInState.filter(itemInState => this.isUpdatedItem(itemInState));
+        const deletedItems = this.renderedItems.filter(renderedItem => this.hasBeenDeletedFrom(renderedItem, allItemsInState));
+        
+        this.renderNewItems(newItems);
+        this.updateItems(updatedItems);
+        this.removeFromDOM(deletedItems);
+    }
+    
+    isNewItem(itemInState) {
+        return !this.renderedItems.some(renderedItem => renderedItem.productId === itemInState.productId)
+    }
+    
+    isUpdatedItem(itemInState) {
+        return this.renderedItems.some(renderedItem => renderedItem.productId === itemInState.productId)
+    }
+    
+    hasBeenDeletedFrom(renderedItem, allItemsInState) {
+        return !allItemsInState.some(itemInState => itemInState.productId === renderedItem.productId)
+    }
+
+    renderNewItems(newItems) {
+        newItems.forEach(newItem => {
+            let cartItemComponent = document.createElement("cart-item");
+            cartItemComponent.setAttribute("productPrice", newItem.pricePerItem);
+            cartItemComponent.setAttribute("productquantity", newItem.quantity);
+            cartItemComponent.setAttribute("productId", newItem.productId);
+            cartItemComponent.setAttribute("productImage", newItem.imageUrl);
+            cartItemComponent.setAttribute("productName", newItem.productName);
+            this.renderedItems.push({
+                productId: newItem.productId,
+                component: cartItemComponent,
+            });
+            this.appendChild(cartItemComponent);
         });
-        for (let i = 0; i < this.items.length; i++) {
-            let isInCartItems = false;
-            for (let j = 0; j < cartItems.length; j++) {
-                if (this.items[i].productId === cartItems[j].productId) {
-                    isInCartItems = true;
-                    break;
-                }
-            }
-            if (!isInCartItems) {
-                let item = this.items.splice(i, 1)[0];
-                this.removeChild(item.component);
-            }
-        }
     }
 
-    checkIfItemExistsInList(items, cartItem) {
-        for (let i = 0; i < items.length; i++) {
-            if (items[i].productId === cartItem.productId) {
-                return true;
-            }
-        }
-        return false;
+    updateItems(updatedItems) {
+        updatedItems.forEach(updatedItem => {
+            const renderedItem = this.renderedItems.find(item => item.productId === updatedItem.productId);
+            renderedItem.component.setAttribute(
+              "productquantity",
+              updatedItem.quantity
+            )
+        });
+    }
+
+    removeFromDOM(deletedItems) {
+        deletedItems.forEach(deletedItem => this.removeChild(deletedItem.component))
     }
 }
