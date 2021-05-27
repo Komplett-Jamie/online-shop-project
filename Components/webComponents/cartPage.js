@@ -3,16 +3,16 @@
 export class CartPage extends HTMLElement {
   constructor() {
     super();
-    this.items = [];
+    this.cart = null;
     this.cartApi = new CartApi();
   }
 
   async connectedCallback() {
-    let cart = await this.cartApi.fetchCart();
-    this.items = cart.items;
+    this.cart = await this.cartApi.fetchCart();
     
     this.innerHTML = `
         <big-cart></big-cart>
+        <cart-summary></cart-summary>
         <cart-forms></cart-forms>
     `;
 
@@ -24,14 +24,15 @@ export class CartPage extends HTMLElement {
   }
   
   update() {
-    this.querySelector("big-cart").setAttribute("items", JSON.stringify(this.items))
+    this.querySelector("big-cart").setAttribute("items", JSON.stringify(this.cart.items))
+    this.querySelector("cart-summary").setAttribute("cart", JSON.stringify(this.cart))
   }
 
   async handleItemRemoved(productId) {
     await this.cartApi.removeProduct(productId);
     publishEvent("removeItem", productId)
     
-    this.items = this.items.filter(item => item.productId !== productId);
+    this.cart.items = this.cart.items.filter(item => item.productId !== productId);
     this.update();
   }
 
@@ -39,7 +40,7 @@ export class CartPage extends HTMLElement {
     await this.cartApi.updateQuantity(quantityUpdate);
     publishEvent("quantityUpdated", quantityUpdate);
 
-    const updatedItem = this.items.find(item => item.productId === quantityUpdate.productId);
+    const updatedItem = this.cart.items.find(item => item.productId === quantityUpdate.productId);
     updatedItem.quantity = quantityUpdate.quantity;
     
     this.update();

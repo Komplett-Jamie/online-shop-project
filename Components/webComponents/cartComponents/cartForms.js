@@ -20,7 +20,6 @@ export class CartForms extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
         <form>
-        <cart-summary></cart-summary>
         <billing-address></billing-address>
         <creditcard-details></creditcard-details>
         <freight-options></freight-options>

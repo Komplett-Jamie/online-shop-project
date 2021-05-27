@@ -1,67 +1,67 @@
 export class CartSummary extends HTMLElement {
-    constructor() {
-        super();
+  constructor() {
+    super();
+    
+    this.cart = {
+      items: [],
+      selectedFreightPrice: 0,
     }
+  }
 
-    connectedCallback() {
-        this.innerHTML = `
+  connectedCallback() {
+    this.render();
+  }
+
+  static get observedAttributes() {
+    return [ "cart" ];
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (name === "cart") {
+      this.cart = JSON.parse(newValue);
+      this.render()
+    }
+  }
+
+  render() {
+    this.innerHTML = `
         <div id="cart-summary">
             <span>Cart Summary</span>
             <table>
                 <tr>
                     <td class="cart-summary-description">Cart total: </td>
-                    <td><span class="cart-summary-call" id="cart-total-price"></span> ,-</td>
+                    <td>${this.cartTotal} ,-</td>
                 </tr>
                 <tr>
                     <td class="cart-summary-description">Total items: </td>
-                    <td><span class="cart-summary-call" id="cart-total-items"></span></span></td>
+                    <td>${this.totalItems}</td>
                 </tr>
                 <tr>
                     <td  class="cart-summary-description">Shipping: </td>
-                    <td><span class="cart-summary-call" id="cart-shipping"></span>,-</span></td>
+                    <td>${this.shippingPrice},-</td>
                 </tr>
                 <tr>
                     <td class="cart-summary-description">Total Price: </td>
-                    <td><span class="cart-summary-call" id="cart-total" ></span>,-</span></td>
+                    <td>${this.totalPrice},-</td>
                 </tr>
             </table>
-            </div>
-            `;
-
-        subscribeToEvent(
-            "cartStateUpdated",
-            function (cartState) {
-                let totalItemsCartPrice = this.querySelector(
-                    "#cart-total-price"
-                );
-                let totalItemsInCart = this.querySelector("#cart-total-items");
-                let cartTotal = this.querySelector("#cart-total");
-                let freightCost = this.querySelector("#cart-shipping");
-
-                totalItemsInCart.innerText = cartState.items.reduce(
-                    (total, n) => total + n.quantity,
-                    0
-                );
-                let totalItemsCartPriceSum = cartState.items.reduce(
-                    (total, n) => total + n.pricePerItem * n.quantity,
-                    0
-                );
-
-                totalItemsCartPrice.innerText = totalItemsCartPriceSum;
-
-                let freightPrice = 0;
-                for (let i = 0; i < cartState.freightOptions.length; i++) {
-                    if (
-                        cartState.freightOptions[i].name ===
-                        cartState.chosenFreightOption
-                    ) {
-                        freightCost.innerText =
-                            cartState.freightOptions[i].price;
-                        freightPrice = cartState.freightOptions[i].price;
-                    }
-                }
-                cartTotal.innerText = totalItemsCartPriceSum + freightPrice;
-            }.bind(this)
-        );
-    }
+        </div>
+    `;
+  }
+  
+  get cartTotal() {
+    return this.cart.items.reduce((sum, item) => sum + item.pricePerItem * item.quantity, 0);
+  }
+  
+  get totalItems() {
+    return this.cart.items.reduce((sum, item) => sum + item.quantity, 0);
+  }
+  
+  get shippingPrice() {
+    return this.cart.selectedFreightPrice ?? 0;
+  }
+  
+  get totalPrice() {
+    return this.cartTotal + this.shippingPrice;
+  }
 }
